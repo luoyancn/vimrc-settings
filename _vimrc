@@ -160,6 +160,7 @@ if has ("gui_running")
     set nowrap
     let g:Powerline_symbols = 'fancy'
     set guifont=Consolas\ for\ Powerline\ FixedD:h12
+    set laststatus=2
 " ############### Gui设置 结束 ##################
 else
     color desert
