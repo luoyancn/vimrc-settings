@@ -49,6 +49,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/a.vim'
 Plugin 'jstemmer/gotags'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'humiaozuzu/TabBar'
 Plugin 'mileszs/ack.vim'
@@ -187,6 +188,9 @@ if has ("gui_running")
     let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
     " 只显示文件名，不显示路径内容
     let g:airline#extensions#tabline#fnamemod = ':p:t'
+    let g:airline_theme="dark"
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline#extensions#whitespace#symbol = '!'
 " ############### Gui设置 结束 ##################
 else
     color desert
