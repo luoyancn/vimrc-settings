@@ -42,22 +42,22 @@ call vundle#begin('$VIM/bundle')
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'fholgado/minibufexpl.vim'
 Plugin 'vim-scripts/buf_it'
 Plugin 'mhinz/vim-startify'
 Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/a.vim'
 Plugin 'jstemmer/gotags'
+Plugin 'vim-airline/vim-airline'
 
 Plugin 'humiaozuzu/TabBar'
 Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/syntastic'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'kevinw/pyflakes-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -111,7 +111,7 @@ let NERDTreeShowBookmarks=1
 "let g:Powerline_symbols = 'fancy'
 
 "startify
-let g:startify_files_number = 20
+let g:startify_files_number = 40
 
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
@@ -122,6 +122,11 @@ inoremap ( ()<ESC>i
 
 autocmd FileType python set expandtab
 filetype indent off
+
+"取消持续撤销
+set noundofile
+
+
 " ############### Gui设置 开始 ##################
 if has ("gui_running")
     "新建缓冲区
@@ -156,11 +161,30 @@ if has ("gui_running")
     color Tomorrow-Night-Eighties
     set colorcolumn=80
     highlight ColorColumn guibg=#009ACD
+    "打开gui，自动最大化
     au GUIEnter * simalt ~x
+    "不进行自动折行
     set nowrap
-    let g:Powerline_symbols = 'fancy'
-    set guifont=Consolas\ for\ Powerline\ FixedD:h12
+    " 始终显示状态栏
     set laststatus=2
+    " 设置powerline使用的字体
+    set guifont=Consolas\ for\ Powerline\ FixedD:h12
+    " vim-airline
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1
+    let g:Powerline_symbols="fancy"
+    let g:airline_symbols = {}
+    let g:airline_left_sep = "\u2b80"
+    let g:airline_left_alt_sep = "\u2b81"
+    let g:airline_right_sep = "\u2b82"
+    let g:airline_right_alt_sep = "\u2b83"
+    let g:airline_symbols.branch = "\u2b60"
+    let g:airline_symbols.readonly = "\u2b64"
+    let g:airline_symbols.linenr = "\u2b61"
+
+    "设置顶部tabline栏符号显示"
+    let g:airline#extensions#tabline#left_sep = "\u2b80"
+    let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
 " ############### Gui设置 结束 ##################
 else
     color desert
