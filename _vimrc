@@ -185,6 +185,8 @@ if has ("gui_running")
     "设置顶部tabline栏符号显示"
     let g:airline#extensions#tabline#left_sep = "\u2b80"
     let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
+    " 只显示文件名，不显示路径内容
+    let g:airline#extensions#tabline#fnamemod = ':p:t'
 " ############### Gui设置 结束 ##################
 else
     color desert
