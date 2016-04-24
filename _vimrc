@@ -133,6 +133,7 @@ if has ("gui_running")
     "新建缓冲区
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
+    nnoremap <silent> <F3> :Startify<CR>
     nnoremap <silent> <F9> :NERDTreeToggle<CR>
     nnoremap <silent> <F10> :TagbarToggle<cr>
     nnoremap <silent> <F11> :AV<CR>
@@ -191,6 +192,10 @@ if has ("gui_running")
     let g:airline_theme="dark"
     let g:airline#extensions#whitespace#enabled = 0
     let g:airline#extensions#whitespace#symbol = '!'
+
+    let g:startify_bookmarks = [
+        \ 'F:\个人\新建 文本文档.txt'
+    \]
 " ############### Gui设置 结束 ##################
 else
     color desert
