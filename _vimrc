@@ -95,14 +95,14 @@ hi Tb_VisibleNormal ctermbg=252 ctermfg=235
 hi Tb_VisibleChanged guifg=green ctermbg=252 ctermfg=white
 
 " Tagbar
-let g:tagbar_width=30
+let g:tagbar_width=40
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
 
 " Nerd Tree
 let NERDChristmasTree=0
-let NERDTreeWinSize=30
+let NERDTreeWinSize=40
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 " let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
@@ -126,6 +126,8 @@ filetype indent off
 
 "取消持续撤销
 set noundofile
+"补全时不显示方法预览
+set completeopt-=preview
 
 
 " ############### Gui设置 开始 ##################
@@ -183,6 +185,7 @@ if has ("gui_running")
     let g:airline_symbols.branch = "\u2b60"
     let g:airline_symbols.readonly = "\u2b64"
     let g:airline_symbols.linenr = "\u2b61"
+    let g:airline_symbols.maxlinenr= ""
 
     "设置顶部tabline栏符号显示"
     let g:airline#extensions#tabline#left_sep = "\u2b80"
