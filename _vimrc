@@ -75,6 +75,8 @@ let $LANG = 'zh_CN.UTF-8'
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
+set autoread
+
 "设定制表符宽度
 set tabstop=4
 set softtabstop=4
@@ -129,7 +131,7 @@ set noundofile
 "补全时不显示方法预览
 set completeopt-=preview
 
-
+nnoremap <silent> <F4> :Git branch<CR>
 " ############### Gui设置 开始 ##################
 if has ("gui_running")
     "新建缓冲区
