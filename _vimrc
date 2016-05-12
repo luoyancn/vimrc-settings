@@ -41,23 +41,32 @@ call vundle#begin('$VIM/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/buf_it'
 Plugin 'mhinz/vim-startify'
-Plugin 'fatih/vim-go'
 Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/a.vim'
-Plugin 'jstemmer/gotags'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
-Plugin 'humiaozuzu/TabBar'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'humiaozuzu/TabBar'
+
+" Programe language support
 Plugin 'scrooloose/syntastic'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'terryma/vim-multiple-cursors'
+
+" C and C++
+Plugin 'vim-scripts/a.vim'
+
+" Golang
+Plugin 'jstemmer/gotags'
+Plugin 'fatih/vim-go'
+Plugin 'dgryski/vim-godef'
+
+" Python
 Plugin 'kevinw/pyflakes-vim'
 
 " All of your Plugins must be added before the following line
@@ -122,6 +131,34 @@ inoremap < <><ESC>i
 inoremap " ""<ESC>i
 inoremap ' ''<ESC>i
 inoremap ( ()<ESC>i
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 
 autocmd FileType python set expandtab
 filetype indent off
