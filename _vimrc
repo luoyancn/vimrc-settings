@@ -131,6 +131,11 @@ inoremap " ""<ESC>i
 inoremap ' ''<ESC>i
 inoremap ( ()<ESC>i
 
+noremap <C-Tab> <C-W>w
+inoremap <C-Tab> <C-O><C-W>w
+cnoremap <C-Tab> <C-C><C-W>w
+onoremap <C-Tab> <C-C><C-W>w
+
 " Go tags
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
