@@ -119,9 +119,6 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 " let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 
-" powerline
-"let g:Powerline_symbols = 'fancy'
-
 "startify
 let g:startify_files_number = 40
 
