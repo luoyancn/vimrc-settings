@@ -176,6 +176,8 @@ let g:jedi#completions_command = "<C-x><C-o>"
 let g:jedi#goto_assignments_command = "<A-g>"
 let g:jedi#goto_command = "<A-d>"
 let g:jedi#goto_definitions_command = "<A-r>"
+let g:jedi#documentation_command = "<A-k>"
+let g:jedi#popup_select_first = 0
 
 let g:pyflakes_use_quickfix = 0
 
