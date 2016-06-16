@@ -40,7 +40,7 @@ set rtp+=$VIM/bundle/Vundle.vim
 call vundle#begin('$VIM/bundle')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/buf_it'
@@ -62,12 +62,11 @@ Plugin 'scrooloose/syntastic'
 Plugin 'vim-scripts/a.vim'
 
 " Golang
-Plugin 'jstemmer/gotags'
 Plugin 'fatih/vim-go'
-Plugin 'dgryski/vim-godef'
 
 " Python
 Plugin 'kevinw/pyflakes-vim'
+Plugin 'davidhalter/jedi-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -171,6 +170,14 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = "<C-x><C-o>"
+let g:jedi#goto_assignments_command = "<A-g>"
+let g:jedi#goto_command = "<A-d>"
+let g:jedi#goto_definitions_command = "<A-r>"
+
+let g:pyflakes_use_quickfix = 0
 
 autocmd FileType python set expandtab
 filetype indent off
