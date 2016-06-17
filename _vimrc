@@ -117,6 +117,7 @@ let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 " let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
+let g:NERDTreeCopyCmd= 'cp -r '
 
 "startify
 let g:startify_files_number = 40
@@ -176,6 +177,7 @@ let g:jedi#completions_command = "<C-x><C-o>"
 let g:jedi#goto_assignments_command = "<A-g>"
 let g:jedi#goto_command = "<A-d>"
 let g:jedi#goto_definitions_command = "<A-r>"
+let g:jedi#usages_command = "<A-n>"
 let g:jedi#documentation_command = "<A-k>"
 let g:jedi#popup_select_first = 0
 
