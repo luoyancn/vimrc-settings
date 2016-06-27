@@ -65,8 +65,10 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'fatih/vim-go'
 
 " Python
-Plugin 'kevinw/pyflakes-vim'
 Plugin 'davidhalter/jedi-vim'
+
+" Darcular theme
+Plugin 'cohlin/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -180,6 +182,7 @@ let g:jedi#goto_definitions_command = "<A-r>"
 let g:jedi#usages_command = "<A-n>"
 let g:jedi#documentation_command = "<A-k>"
 let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = "2"
 
 let g:pyflakes_use_quickfix = 0
 
@@ -224,7 +227,9 @@ if has ("gui_running")
     let g:Tb_MoreThanOne = 1
     "始终显示标签页：
     set showtabline=2
-    color Tomorrow-Night-Eighties
+    "color Tomorrow-Night-Eighties
+    "color py-darcula
+    colorscheme py-darcula
     set colorcolumn=80
     highlight ColorColumn guibg=#009ACD
     "打开gui，自动最大化
