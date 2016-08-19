@@ -66,7 +66,7 @@ Plugin 'fatih/vim-go'
 
 " Python
 Plugin 'davidhalter/jedi-vim'
-Plugin 'kevinw/pyflakes-vim'
+Plugin 'luoyancn/pyflakes-vim'
 
 " Darcular theme
 Plugin 'cohlin/vim-colorschemes'
