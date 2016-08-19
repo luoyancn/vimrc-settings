@@ -66,15 +66,18 @@ Plugin 'fatih/vim-go'
 
 " Python
 Plugin 'davidhalter/jedi-vim'
+Plugin 'kevinw/pyflakes-vim'
 
 " Darcular theme
 Plugin 'cohlin/vim-colorschemes'
+
+Plugin 'Raimondi/delimitMate'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on
 
-let &termencoding=&encoding
+set termencoding=utf-8
 set fileformat=unix
 set fileformats=unix
 set encoding=utf-8
@@ -123,12 +126,6 @@ let g:NERDTreeCopyCmd= 'cp -r '
 
 "startify
 let g:startify_files_number = 40
-
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
-inoremap " ""<ESC>i
-inoremap ' ''<ESC>i
-inoremap ( ()<ESC>i
 
 noremap <C-Tab> <C-W>w
 inoremap <C-Tab> <C-O><C-W>w
@@ -184,6 +181,8 @@ let g:jedi#documentation_command = "<A-k>"
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = "2"
 
+"let g:syntastic_python_checkers = ['pyflakes']
+"let g:syntastic_check_on_wq = 1
 let g:pyflakes_use_quickfix = 0
 
 autocmd FileType python set expandtab
@@ -268,7 +267,7 @@ if has ("gui_running")
     \]
 " ############### Gui设置 结束 ##################
 else
-    color desert
-    "Linux 终端的配色设置
+    "终端的配色设置
     set t_Co=256
+    color desert
 endif
