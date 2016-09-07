@@ -170,6 +170,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_gocode_socket_type = 'tcp'
 
 let g:jedi#popup_on_dot = 0
 let g:jedi#completions_command = "<C-x><C-o>"
@@ -183,7 +184,7 @@ let g:jedi#show_call_signatures = "2"
 
 "let g:syntastic_python_checkers = ['pyflakes']
 "let g:syntastic_check_on_wq = 1
-let g:pyflakes_use_quickfix = 0
+let g:pyflakes_use_quickfix = 1
 
 autocmd FileType python set expandtab
 filetype indent off
@@ -263,7 +264,9 @@ if has ("gui_running")
     let g:airline#extensions#whitespace#symbol = '!'
 
     let g:startify_bookmarks = [
-        \ 'F:\个人\新建 文本文档.txt'
+        \ 'F:\个人\新建 文本文档.txt',
+        \ 'C:\Program Files\Vim\_vimrc',
+        \ 'E:\github.com\01org\ciao'
     \]
 " ############### Gui设置 结束 ##################
 else
