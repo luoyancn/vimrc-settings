@@ -73,6 +73,8 @@ Plugin 'cohlin/vim-colorschemes'
 
 Plugin 'Raimondi/delimitMate'
 
+Plugin 'Yggdroot/indentLine'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on
@@ -171,6 +173,7 @@ let g:go_highlight_build_constraints = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_gocode_socket_type = 'tcp'
+au FileType go nmap <A-r> :GoDef<cr>
 
 let g:jedi#popup_on_dot = 0
 let g:jedi#completions_command = "<C-x><C-o>"
@@ -193,6 +196,9 @@ filetype indent off
 set noundofile
 "补全时不显示方法预览
 set completeopt-=preview
+
+let g:indentLine_char='┆'
+let g:indentLine_enabled = 1
 
 nnoremap <silent> <F4> :Git branch<CR>
 " ############### Gui设置 开始 ##################
@@ -239,7 +245,8 @@ if has ("gui_running")
     " 始终显示状态栏
     set laststatus=2
     " 设置powerline使用的字体
-    set guifont=Consolas\ for\ Powerline\ FixedD:h12
+    set guifont=Consolas\ for\ Powerline\ FixedD:h14
+    "set guifont=DroidSansMonoPLNerd:h12
     " vim-airline
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
@@ -264,7 +271,7 @@ if has ("gui_running")
     let g:airline#extensions#whitespace#symbol = '!'
 
     let g:startify_bookmarks = [
-        \ 'F:\个人\新建 文本文档.txt',
+        \ 'F:\个人\新建文本文档.txt',
         \ 'C:\Program Files\Vim\_vimrc',
         \ 'E:\github.com\01org\ciao'
     \]
