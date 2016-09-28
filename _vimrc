@@ -184,10 +184,11 @@ let g:jedi#usages_command = "<A-n>"
 let g:jedi#documentation_command = "<A-k>"
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = "2"
+let g:jedi#use_tabs_not_buffers = 1
 
 "let g:syntastic_python_checkers = ['pyflakes']
 "let g:syntastic_check_on_wq = 1
-let g:pyflakes_use_quickfix = 1
+"let g:pyflakes_use_quickfix = 1
 
 autocmd FileType python set expandtab
 filetype indent off
@@ -199,6 +200,7 @@ set completeopt-=preview
 
 let g:indentLine_char='┆'
 let g:indentLine_enabled = 1
+
 
 nnoremap <silent> <F4> :Git branch<CR>
 " ############### Gui设置 开始 ##################
