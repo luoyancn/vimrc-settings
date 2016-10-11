@@ -1,6 +1,5 @@
-set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
-"source $VIMRUNTIME/mswin.vim
+source $VIMRUNTIME/mswin.vim
 behave mswin
 
 set diffexpr=MyDiff()
@@ -33,31 +32,25 @@ function MyDiff()
   endif
 endfunction
 
-" 安装插件
-" set the runtime path to include Vundle and initialize
 filetype off
 set rtp+=$VIM/bundle/Vundle.vim
 call vundle#begin('$VIM/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/buf_it'
 Plugin 'mhinz/vim-startify'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'humiaozuzu/TabBar'
 
 " Programe language support
 Plugin 'scrooloose/syntastic'
-
 " C and C++
 Plugin 'vim-scripts/a.vim'
 
@@ -84,15 +77,13 @@ set fileformat=unix
 set fileformats=unix
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set fileencoding=utf-8 " 新建文件使用的编码
+set fileencoding=utf-8
 set langmenu=zh_CN
 let $LANG = 'zh_CN.UTF-8'
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
 set autoread
-
-"设定制表符宽度
 set tabstop=4
 set softtabstop=4
 
@@ -102,15 +93,14 @@ set nofoldenable
 set cursorline
 set autochdir
 
-" tabbar
-let g:Tb_MaxSize = 2
-let g:Tb_TabWrap = 1
+autocmd FileType python set expandtab
+filetype indent off
 
-hi Tb_Normal guifg=white ctermfg=white
-hi Tb_Changed guifg=green ctermfg=green
-hi Tb_VisibleNormal ctermbg=252 ctermfg=235
-hi Tb_VisibleChanged guifg=green ctermbg=252 ctermfg=white
+set noundofile
+set completeopt-=preview
 
+let g:indentLine_char='┆'
+let g:indentLine_enabled = 1
 " Tagbar
 let g:tagbar_width=40
 let g:tagbar_autofocus = 1
@@ -184,22 +174,9 @@ let g:jedi#usages_command = "<A-n>"
 let g:jedi#documentation_command = "<A-k>"
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = "2"
-let g:jedi#use_tabs_not_buffers = 1
-
+let g:pyflakes_use_quickfix = 0
 "let g:syntastic_python_checkers = ['pyflakes']
 "let g:syntastic_check_on_wq = 1
-"let g:pyflakes_use_quickfix = 1
-
-autocmd FileType python set expandtab
-filetype indent off
-
-"取消持续撤销
-set noundofile
-"补全时不显示方法预览
-set completeopt-=preview
-
-let g:indentLine_char='┆'
-let g:indentLine_enabled = 1
 
 
 nnoremap <silent> <F4> :Git branch<CR>
@@ -274,8 +251,9 @@ if has ("gui_running")
 
     let g:startify_bookmarks = [
         \ 'F:\个人\新建文本文档.txt',
-        \ 'C:\Program Files\Vim\_vimrc',
-        \ 'E:\github.com\01org\ciao'
+        \ 'C:\Vim\_vimrc',
+        \ 'E:\github.com\01org\ciao',
+        \ 'E:\github.com\docs'
     \]
 " ############### Gui设置 结束 ##################
 else
