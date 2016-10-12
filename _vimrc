@@ -94,6 +94,8 @@ set cursorline
 set autochdir
 
 autocmd FileType python set expandtab
+autocmd FileType make set noexpandtab
+autocmd FileType c set noexpandtab
 filetype indent off
 
 set noundofile
