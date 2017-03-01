@@ -50,7 +50,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 
 " Programe language support
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 " C and C++
 Plugin 'vim-scripts/a.vim'
 
@@ -63,10 +63,15 @@ Plugin 'luoyancn/pyflakes-vim'
 
 " Darcular theme
 Plugin 'cohlin/vim-colorschemes'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'morhetz/gruvbox'
+Plugin 'chriskempson/vim-tomorrow-theme'
 
 Plugin 'Raimondi/delimitMate'
 
 Plugin 'Yggdroot/indentLine'
+
+Plugin 'iamcco/markdown-preview.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,8 +99,9 @@ set cursorline
 set autochdir
 
 autocmd FileType python set expandtab
+autocmd FileType tex set expandtab
+autocmd FileType c set expandtab
 autocmd FileType make set noexpandtab
-autocmd FileType c set noexpandtab
 filetype indent off
 
 set noundofile
@@ -178,8 +184,9 @@ let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = "2"
 let g:pyflakes_use_quickfix = 0
 "let g:syntastic_python_checkers = ['pyflakes']
-"let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_wq = 0
 
+set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 
 nnoremap <silent> <F4> :Git branch<CR>
 " ############### Gui设置 开始 ##################
@@ -214,9 +221,10 @@ if has ("gui_running")
     let g:Tb_MoreThanOne = 1
     "始终显示标签页：
     set showtabline=2
-    "color Tomorrow-Night-Eighties
-    "color py-darcula
     colorscheme py-darcula
+    "colorscheme PaperColor
+    "colorscheme gruvbox
+    "colorscheme Tomorrow-Night-Eighties
     set colorcolumn=80
     highlight ColorColumn guibg=#009ACD
     "打开gui，自动最大化
@@ -225,18 +233,18 @@ if has ("gui_running")
     set nowrap
     " 始终显示状态栏
     set laststatus=2
-    " 设置powerline使用的字体
-    set guifont=Consolas\ for\ Powerline\ FixedD:h14
-    "set guifont=DroidSansMonoPLNerd:h12
     " vim-airline
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
     let g:Powerline_symbols="fancy"
+
+    " 设置powerline使用的字体
+    set guifont=Consolas\ for\ Powerline\ FixedD:h16
+    let g:airline_right_alt_sep = "\u2b83"
+    let g:airline_left_alt_sep = "\u2b81"
     let g:airline_symbols = {}
     let g:airline_left_sep = "\u2b80"
-    let g:airline_left_alt_sep = "\u2b81"
     let g:airline_right_sep = "\u2b82"
-    let g:airline_right_alt_sep = "\u2b83"
     let g:airline_symbols.branch = "\u2b60"
     let g:airline_symbols.readonly = "\u2b64"
     let g:airline_symbols.linenr = "\u2b61"
@@ -254,12 +262,12 @@ if has ("gui_running")
     let g:startify_bookmarks = [
         \ 'F:\个人\新建文本文档.txt',
         \ 'C:\Vim\_vimrc',
-        \ 'E:\github.com\01org\ciao',
-        \ 'E:\github.com\docs'
+        \ 'E:\github.com',
+        \ 'E:\workspaces\openstack',
+        \ 'E:\workspaces\cprojects\nginx-1.10.2'
     \]
 " ############### Gui设置 结束 ##################
 else
     "终端的配色设置
     set t_Co=256
-    color desert
 endif
