@@ -46,8 +46,9 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mileszs/ack.vim'
-Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
+
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Programe language support
 "Plugin 'scrooloose/syntastic'
@@ -72,6 +73,9 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Yggdroot/indentLine'
 
 Plugin 'iamcco/markdown-preview.vim'
+
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'ryanoasis/vim-devicons'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -119,13 +123,14 @@ let g:tagbar_compact = 1
 let NERDChristmasTree=0
 let NERDTreeWinSize=40
 let NERDTreeChDirMode=2
+let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 " let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 let g:NERDTreeCopyCmd= 'cp -r '
 
 "startify
-let g:startify_files_number = 40
+let g:startify_files_number = 100
 
 noremap <C-Tab> <C-W>w
 inoremap <C-Tab> <C-O><C-W>w
@@ -168,9 +173,14 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_highlight_types = 1
+let g:go_highlight_extra_types = 1
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
 let g:go_gocode_socket_type = 'tcp'
+let g:go_gocode_autobuild = 1
+let g:go_gocode_propose_builtins = 1
+let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
 au FileType go nmap <A-r> :GoDef<cr>
 
 let g:jedi#popup_on_dot = 0
@@ -187,6 +197,56 @@ let g:pyflakes_use_quickfix = 0
 let g:syntastic_check_on_wq = 0
 
 set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+
+let g:webdevicons_enable_ctrlp = 1
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitreview'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitconfig'] = ''
+
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['conf'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['cfg'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['yml'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['xml'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['go'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pdf'] = ''
+
+let s:brown = "905532"
+let s:aqua =  "3AFFDB"
+let s:blue = "689FB6"
+"let s:darkBlue = "009ACD"
+let s:darkBlue = "00B2EE"
+let s:purple = "834F79"
+let s:lightPurple = "834F79"
+let s:red = "AE403F"
+let s:beige = "F5C06F"
+let s:yellow = "F09F17"
+let s:orange = "D4843E"
+let s:darkOrange = "F16529"
+let s:pink = "CB6F6F"
+let s:salmon = "EE6E73"
+let s:green = "8FAA54"
+let s:lightGreen = "31B53E"
+let s:white = "FFFFFF"
+let s:rspec_red = 'FE405F'
+let s:git_orange = 'F54D27'
+let g:NERDTreeExtensionHighlightColor = {}
+let g:NERDTreeExtensionHighlightColor['py'] = s:darkBlue
+let g:NERDTreeExtensionHighlightColor['c'] = s:darkBlue
+let g:NERDTreeExtensionHighlightColor['json'] = s:lightGreen
+let g:NERDTreeExtensionHighlightColor['ini'] = s:yellow
+let g:NERDTreeExtensionHighlightColor['go'] = s:darkBlue
+let g:NERDTreeExtensionHighlightColor['yaml'] = s:darkOrange
+let g:NERDTreeExtensionHighlightColor['yml'] = s:darkOrange
+let g:NERDTreeExtensionHighlightColor['conf'] = s:orange
+let g:NERDTreeExtensionHighlightColor['cfg'] = s:orange
+let g:NERDTreeExtensionHighlightColor['xml'] = s:lightGreen
+let g:NERDTreeExtensionHighlightColor['java'] = s:red
+let g:NERDTreeExtensionHighlightColor['tex'] = s:lightGreen
+let g:NERDTreeExtensionHighlightColor['pdf'] = s:red
 
 nnoremap <silent> <F4> :Git branch<CR>
 " ############### Gui设置 开始 ##################
@@ -221,8 +281,8 @@ if has ("gui_running")
     let g:Tb_MoreThanOne = 1
     "始终显示标签页：
     set showtabline=2
-    colorscheme py-darcula
-    "colorscheme PaperColor
+    "colorscheme py-darcula
+    colorscheme PaperColor
     "colorscheme gruvbox
     "colorscheme Tomorrow-Night-Eighties
     set colorcolumn=80
@@ -233,26 +293,28 @@ if has ("gui_running")
     set nowrap
     " 始终显示状态栏
     set laststatus=2
+    set guifont=CodeNewRoman\ Nerd\ Font:h16
+
     " vim-airline
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
     let g:Powerline_symbols="fancy"
 
     " 设置powerline使用的字体
-    set guifont=Consolas\ for\ Powerline\ FixedD:h16
-    let g:airline_right_alt_sep = "\u2b83"
-    let g:airline_left_alt_sep = "\u2b81"
+    "set guifont=Consolas\ for\ Powerline\ FixedD:h16
+    "let g:airline_right_alt_sep = "\u2b83"
+    "let g:airline_left_alt_sep = "\u2b81"
     let g:airline_symbols = {}
-    let g:airline_left_sep = "\u2b80"
-    let g:airline_right_sep = "\u2b82"
-    let g:airline_symbols.branch = "\u2b60"
-    let g:airline_symbols.readonly = "\u2b64"
-    let g:airline_symbols.linenr = "\u2b61"
+    "let g:airline_left_sep = "\u2b80"
+    "let g:airline_right_sep = "\u2b82"
+    "let g:airline_symbols.branch = "\u2b60"
+    "let g:airline_symbols.readonly = "\u2b64"
+    "let g:airline_symbols.linenr = "\u2b61"
     let g:airline_symbols.maxlinenr= ""
 
     "设置顶部tabline栏符号显示"
-    let g:airline#extensions#tabline#left_sep = "\u2b80"
-    let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
+    "let g:airline#extensions#tabline#left_sep = "\u2b80"
+    "let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
     " 只显示文件名，不显示路径内容
     let g:airline#extensions#tabline#fnamemod = ':p:t'
     let g:airline_theme="dark"
@@ -266,6 +328,7 @@ if has ("gui_running")
         \ 'E:\workspaces\openstack',
         \ 'E:\workspaces\cprojects\nginx-1.10.2'
     \]
+    autocmd guienter * call libcallnr("vimtweak64.dll", "SetAlpha", 200)
 " ############### Gui设置 结束 ##################
 else
     "终端的配色设置
