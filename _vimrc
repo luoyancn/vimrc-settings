@@ -212,7 +212,11 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['xml'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['go'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pdf'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pdf'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rst'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['crt'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['key'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['dockerfile'] = ''
 
 let s:brown = "905532"
 let s:aqua =  "3AFFDB"
@@ -247,6 +251,10 @@ let g:NERDTreeExtensionHighlightColor['xml'] = s:lightGreen
 let g:NERDTreeExtensionHighlightColor['java'] = s:red
 let g:NERDTreeExtensionHighlightColor['tex'] = s:lightGreen
 let g:NERDTreeExtensionHighlightColor['pdf'] = s:red
+let g:NERDTreeExtensionHighlightColor['rst'] = s:lightGreen
+let g:NERDTreeExtensionHighlightColor['key'] = s:red
+let g:NERDTreeExtensionHighlightColor['crt'] = s:red
+let g:NERDTreeExtensionHighlightColor['dockerfile'] = s:darkBlue
 
 nnoremap <silent> <F4> :Git branch<CR>
 " ############### Gui设置 开始 ##################
