@@ -198,7 +198,12 @@ let g:syntastic_check_on_wq = 0
 
 set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 
+let g:webdevicons_enable = 1
 let g:webdevicons_enable_ctrlp = 1
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
+
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitreview'] = ''
@@ -304,20 +309,27 @@ if has ("gui_running")
     set guifont=CodeNewRoman\ Nerd\ Font:h16
 
     " vim-airline
+
+    let g:webdevicons_enable_airline_tabline = 1
+    let g:webdevicons_enable_airline_statusline = 1
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
     let g:Powerline_symbols="fancy"
 
     " 设置powerline使用的字体
-    "set guifont=Consolas\ for\ Powerline\ FixedD:h16
-    "let g:airline_right_alt_sep = "\u2b83"
-    "let g:airline_left_alt_sep = "\u2b81"
     let g:airline_symbols = {}
+
+    "let g:airline_left_alt_sep = "\u2b81"
     "let g:airline_left_sep = "\u2b80"
+    "let g:airline_right_alt_sep = "\u2b83"
     "let g:airline_right_sep = "\u2b82"
+
     "let g:airline_symbols.branch = "\u2b60"
     "let g:airline_symbols.readonly = "\u2b64"
     "let g:airline_symbols.linenr = "\u2b61"
+    "let g:airline_symbols.readonly = ""
+
+    let g:airline_symbols.linenr = ""
     let g:airline_symbols.maxlinenr= ""
 
     "设置顶部tabline栏符号显示"
