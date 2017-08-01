@@ -268,7 +268,8 @@ if has ("gui_running")
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
     nnoremap <silent> <F3> :Startify<CR>
-    nnoremap <silent> <F9> :NERDTreeToggle<CR>
+    nnoremap <silent> <F8> :NERDTreeToggle<CR>
+    nnoremap <silent> <F9> :NERDTreeFind<CR>
     nnoremap <silent> <F10> :TagbarToggle<cr>
     nnoremap <silent> <F11> :AV<CR>
     nnoremap <silent> <F12> :A<CR>
@@ -329,16 +330,17 @@ if has ("gui_running")
     "let g:airline_symbols.linenr = "\u2b61"
     "let g:airline_symbols.readonly = ""
 
-    let g:airline_symbols.linenr = ""
-    let g:airline_symbols.maxlinenr= ""
-
     "设置顶部tabline栏符号显示"
     "let g:airline#extensions#tabline#left_sep = "\u2b80"
     "let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
+
+    let g:airline_symbols.linenr = ""
+    let g:airline_symbols.maxlinenr= ""
+
     " 只显示文件名，不显示路径内容
     let g:airline#extensions#tabline#fnamemod = ':p:t'
     let g:airline_theme="dark"
-    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline#extensions#whitespace#enabled = 1
     let g:airline#extensions#whitespace#symbol = '!'
 
     let g:startify_bookmarks = [
