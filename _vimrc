@@ -334,7 +334,16 @@ if has ("gui_running")
     "let g:airline#extensions#tabline#left_sep = "\u2b80"
     "let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
 
+    "let g:airline_symbols.linenr = ""
+    let g:airline_left_alt_sep = ""
+    let g:airline_left_sep = ""
+    let g:airline_right_alt_sep = ""
+    let g:airline_right_sep = ""
+    let g:airline_symbols.branch = ""
+    let g:airline_symbols.readonly = ""
     let g:airline_symbols.linenr = ""
+    "let g:airline#extensions#tabline#left_sep = ""
+    "let g:airline#extensions#tabline#left_alt_sep = ""
     let g:airline_symbols.maxlinenr= ""
 
     " 只显示文件名，不显示路径内容
