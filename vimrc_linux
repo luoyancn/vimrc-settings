@@ -320,6 +320,8 @@ if has("gui_running")
     nnoremap <silent> <F11> :AV<CR>
     nnoremap <silent> <F12> :A<CR>
     set showtabline=2
+    map  <silent> <S-Insert>  "+p
+    imap <silent> <S-Insert>  <Esc>"+pa
 else
     set t_Co=256
 endif
