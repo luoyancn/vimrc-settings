@@ -138,6 +138,7 @@ cnoremap <C-Tab> <C-C><C-W>w
 onoremap <C-Tab> <C-C><C-W>w
 
 " Go tags
+let g:go_autodetect_gopath = 1
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -291,6 +292,7 @@ if has ("gui_running")
     "set guifont?
     "隐藏工具栏
     set guioptions-=T
+    set guioptions-=m
     " 显示缓冲区列表
     let g:Tb_MoreThanOne = 1
     "始终显示标签页：
@@ -359,7 +361,7 @@ if has ("gui_running")
         \ 'E:\workspaces\openstack',
         \ 'E:\workspaces\cprojects\nginx-1.10.2'
     \]
-    autocmd guienter * call libcallnr("vimtweak64.dll", "SetAlpha", 200)
+    "autocmd guienter * call libcallnr("vimtweak64.dll", "SetAlpha", 200)
 " ############### Gui设置 结束 ##################
 else
     "终端的配色设置
