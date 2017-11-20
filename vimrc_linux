@@ -199,6 +199,7 @@ let g:go_gocode_autobuild = 1
 let g:go_gocode_propose_builtins = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
 au FileType go nmap <A-r> :GoDef<cr>
+au FileType go nmap <A-n> :GoReferrers<cr>
 
 let g:jedi#popup_on_dot = 0
 let g:jedi#completions_command = "<C-x><C-o>"
@@ -320,6 +321,7 @@ if has("gui_running")
     nnoremap <silent> <F10> :TagbarToggle<cr>
     nnoremap <silent> <F11> :AV<CR>
     nnoremap <silent> <F12> :A<CR>
+    au FileType go nnoremap <silent> <F5> :GoInstall<CR>
     set showtabline=2
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
