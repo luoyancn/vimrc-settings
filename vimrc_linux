@@ -7,7 +7,7 @@ set bs=indent,eol,start		" allow backspacing over everything in insert mode
 "set ai			" always set autoindenting on
 "set backup		" keep a backup file
 set viminfo='20,\"50	" read/write a .viminfo file, don't store more
-			" than 50 lines of registers
+                        " than 50 lines of registers
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 
@@ -55,8 +55,8 @@ filetype plugin on
 
 if &term=="xterm"
      set t_Co=8
-     set t_Sb=[4%dm
-     set t_Sf=[3%dm
+     set t_Sb=[4%dm
+     set t_Sf=[3%dm
 endif
 
 " Don't wake up system with blinking cursor:
@@ -121,6 +121,7 @@ set autochdir
 autocmd FileType python set expandtab
 autocmd FileType tex set expandtab
 autocmd FileType c set expandtab
+autocmd FileType cpp set expandtab
 autocmd FileType make set noexpandtab
 filetype indent off
 
@@ -280,13 +281,10 @@ let g:NERDTreeExtensionHighlightColor['crt'] = s:red
 let g:NERDTreeExtensionHighlightColor['dockerfile'] = s:darkBlue
 
 
-set background=dark
-colorscheme PaperColor
 set colorcolumn=80
 highlight ColorColumn guibg=#009ACD
 set nowrap
 set laststatus=2
-set guifont=CodeNewRoman\ Nerd\ Font\ 16
 
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
@@ -313,6 +311,9 @@ if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1
     set guioptions-=m
+    set background=dark
+    colorscheme PaperColor
+    set guifont=CodeNewRoman\ Nerd\ Font\ 16
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
     nnoremap <silent> <F3> :Startify<CR>
@@ -325,6 +326,4 @@ if has("gui_running")
     set showtabline=2
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
-else
-    set t_Co=256
 endif
