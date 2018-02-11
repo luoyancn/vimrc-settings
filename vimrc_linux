@@ -7,7 +7,7 @@ set bs=indent,eol,start		" allow backspacing over everything in insert mode
 "set ai			" always set autoindenting on
 "set backup		" keep a backup file
 set viminfo='20,\"50	" read/write a .viminfo file, don't store more
-                        " than 50 lines of registers
+			" than 50 lines of registers
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 
@@ -94,6 +94,9 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
+
+Plugin 'Valloric/YouCompleteMe'
+
 call vundle#end()            " required
 filetype plugin indent on
 
@@ -306,6 +309,22 @@ let g:airline#extensions#tabline#fnamemod = ':p:t'
 let g:airline_theme="dark"
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
+
+let g:ycm_server_python_interpreter='/usr/bin/python'
+let g:ycm_global_ycm_extra_conf='/opt/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:syntastic_ignore_files=[".*\.py$"]
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_show_diagnostics_ui = 1
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
+nnoremap <A-d> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
 
 if has("gui_running")
     set guioptions-=T
