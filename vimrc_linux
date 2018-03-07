@@ -95,7 +95,17 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
 
+Plugin 'luoyancn/vim-colorschemes'
+Plugin 'morhetz/gruvbox'
+Plugin 'notpratheek/vim-luna'
+Plugin 'bf4/vim-dark_eyes'
+Plugin 'dim13/smyck.vim'
+Plugin 'larssmit/vim-getafe'
+Plugin 'lsdr/monokai'
+Plugin 'mopp/mopkai.vim'
+
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator'
 
 call vundle#end()            " required
 filetype plugin indent on
@@ -295,10 +305,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:Powerline_symbols="fancy"
 let g:airline_symbols = {}
-let g:airline_left_alt_sep = ""
-let g:airline_left_sep = ""
-let g:airline_right_alt_sep = ""
-let g:airline_right_sep = ""
+"let g:airline_left_alt_sep = ""
+"let g:airline_left_sep = ""
+"let g:airline_right_alt_sep = ""
+"let g:airline_right_sep = ""
 let g:airline_symbols.branch = ""
 let g:airline_symbols.readonly = ""
 let g:airline_symbols.linenr = ""
@@ -311,18 +321,19 @@ let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
 
 let g:ycm_server_python_interpreter='/usr/bin/python'
-"let g:ycm_global_ycm_extra_conf='/opt/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='/opt/.ycm_extra_conf.py'
 
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:syntastic_ignore_files=[".*\.py$"]
-let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_cache_omnifunc=0
+let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
+"let g:ycm_show_diagnostics_ui = 1
 let g:ycm_show_diagnostics_ui = 0
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
 nnoremap <A-d> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
@@ -332,7 +343,10 @@ if has("gui_running")
     let g:Tb_MoreThanOne = 1
     set guioptions-=m
     set background=dark
-    colorscheme PaperColor
+    colorscheme mopkai
+    "colorscheme py-darcula
+    "let g:airline_theme = "darcula"
+    "colorscheme gruvbox
     set guifont=CodeNewRoman\ Nerd\ Font\ 16
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
@@ -343,7 +357,7 @@ if has("gui_running")
     nnoremap <silent> <F11> :AV<CR>
     nnoremap <silent> <F12> :A<CR>
     au FileType go nnoremap <silent> <F5> :GoInstall<CR>
-    set showtabline=2
+    "set showtabline=2
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
 endif
