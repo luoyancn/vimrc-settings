@@ -133,8 +133,8 @@ set autochdir
 
 autocmd FileType python set expandtab
 autocmd FileType tex set expandtab
-autocmd FileType c set expandtab
-autocmd FileType cpp set expandtab
+autocmd FileType c set expandtab softtabstop=8 tabstop=8
+autocmd FileType cpp set expandtab softtabstop=8 tabstop=8
 autocmd FileType make set noexpandtab
 filetype indent off
 
