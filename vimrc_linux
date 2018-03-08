@@ -320,23 +320,22 @@ let g:airline_theme="dark"
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
 
+set runtimepath+=/opt/bundle/YouCompleteMe
 let g:ycm_server_python_interpreter='/usr/bin/python'
 let g:ycm_global_ycm_extra_conf='/opt/.ycm_extra_conf.py'
 
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:syntastic_ignore_files=[".*\.py$"]
-let g:ycm_cache_omnifunc=0
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_complete_in_comments = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-"let g:ycm_show_diagnostics_ui = 1
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_min_num_of_chars_for_completion = 2
+let g:ycm_cache_omnifunc=0
+let g:ycm_key_invoke_completion = '<A-m>'
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
 nnoremap <A-d> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
+map <A-s> :Ack!<Space>
 
 if has("gui_running")
     set guioptions-=T

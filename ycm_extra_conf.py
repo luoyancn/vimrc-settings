@@ -46,6 +46,34 @@ flags = [
 '/usr/include',
 '-isystem',
 '/usr/local/include',
+'-isystem',
+'/usr/include/arpa',
+'-isystem',
+'/usr/include/asm',
+'-isystem',
+'/usr/include/asm-generic',
+'-isystem',
+'/usr/include/bits',
+'-isystem',
+'/usr/include/gdb',
+'-isystem',
+'/usr/include/glib-1.2',
+'-isystem',
+'/usr/include/glib-2.0',
+'-isystem',
+'/usr/include/gnu',
+'-isystem',
+'/usr/include/linux',
+'-isystem',
+'/usr/include/net',
+'-isystem',
+'/usr/include/netinet',
+'-isystem',
+'/usr/include/netipx',
+'-isystem',
+'/usr/include/rpc',
+'-isystem',
+'/usr/include/sys',
 ]
 
 
@@ -62,7 +90,7 @@ if os.path.exists( compilation_database_folder ):
 else:
   database = None
 
-SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]
+SOURCE_EXTENSIONS = ['.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]
 
 def DirectoryOfThisScript():
   return os.path.dirname( os.path.abspath( __file__ ) )
