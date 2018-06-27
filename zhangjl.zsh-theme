@@ -1,12 +1,13 @@
 if [ $UID -eq 0 ]; then
     PROMPT='%{$fg_bold[red]%}%n%F{cyan}#%{$reset_color%}%{$fg_bold[green]%}%M%{$reset_color%}%{$fg_bold[cyan]%}[%c]$(git_prompt_info)%{$reset_color%}%F{yellow}➤ %{$reset_color%}'
 else
-    PROMPT='%{$fg_bold[yellow]%}%n%F{cyan}@%{$reset_color%}%{$fg_bold[green]%}%M%{$reset_color%}%{$fg_bold[cyan]%}[%c]$(git_prompt_info)%{$reset_color%}%F{yellow}➤ %{$reset_color%}'
+    PROMPT='%{$FG[190]$terminfo[bold]%}%n%F{cyan}@%{$reset_color%}%{$fg_bold[green]%}%M%{$reset_color%}%{$fg_bold[cyan]%}[%c]$(git_prompt_info)%{$reset_color%}%F{yellow}➤ %{$reset_color%}'
 fi
 
 # Using rgb color: %{$FG[color_number]%}
 # See https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg to chose more colors
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[154]%}%{$FG[208]%}"
+#ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[154]%}%{$FG[208]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[154]%}%{$FG[208]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY="*"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
