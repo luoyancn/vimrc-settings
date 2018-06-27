@@ -6,7 +6,7 @@ fi
 
 # Using rgb color: %{$FG[color_number]%}
 # See https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg to chose more colors
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[154]%}%{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$FG[154]%}%{$FG[208]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY="*"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
