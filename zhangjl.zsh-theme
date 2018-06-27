@@ -4,7 +4,7 @@ else
     PROMPT='%{$fg_bold[yellow]%}%n%F{cyan}@%{$reset_color%}%{$fg_bold[green]%}%M%{$reset_color%}%{$fg_bold[cyan]%}[%c]$(git_prompt_info)%{$reset_color%}%F{yellow}➤ %{$reset_color%}'
 fi
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[green]%}%{$fg_bold[magenta]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_DIRTY="*"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
