@@ -110,6 +110,8 @@ Plugin 'encody/nvim'
 Plugin 'euclio/vim-nocturne'
 Plugin 'roosta/vim-srcery'
 
+Plugin 'plytophogy/vim-virtualenv'
+
 "Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()            " required
@@ -317,7 +319,7 @@ let g:airline_symbols = {}
 "let g:airline_left_sep = ""
 "let g:airline_right_alt_sep = ""
 "let g:airline_right_sep = ""
-let g:airline_symbols.branch = ""
+let g:airline_symbols.branch = ""
 let g:airline_symbols.readonly = ""
 let g:airline_symbols.linenr = ""
 "let g:airline#extensions#tabline#left_sep = ""
@@ -374,4 +376,9 @@ if has("gui_running")
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
     "au FocusGained * !wmctrl -r " - gvim" -b add,maximized_vert,maximized_horz
+else
+    set t_Co=256
+    "set background=dark
+    "colorscheme srcery
+    "colorscheme mopkai
 endif
