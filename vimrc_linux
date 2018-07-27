@@ -128,21 +128,23 @@ let $LANG = 'zh_CN.UTF-8'
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-set autoread
-set tabstop=4
-set softtabstop=4
-
 set noswapfile
 set nobackup
 set nofoldenable
 set cursorline
 set autochdir
 
+set autoread
+set tabstop=4
+set softtabstop=4
+
 autocmd FileType python set expandtab
 autocmd FileType tex set expandtab
 autocmd FileType c set expandtab softtabstop=8 tabstop=8
 autocmd FileType cpp set expandtab softtabstop=8 tabstop=8
-autocmd FileType make set noexpandtab
+autocmd FileType go set noexpandtab softtabstop=8 tabstop=8
+autocmd FileType make set noexpandtab softtabstop=8 tabstop=8
+
 filetype indent off
 
 set noundofile
@@ -250,6 +252,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitreview'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitconfig'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.git'] = ''
 
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['conf'] = ''
@@ -259,12 +262,15 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['xml'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['go'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['py'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pdf'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rst'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['crt'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['key'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['dockerfile'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['proto'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['toml'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pem'] = ''
 
 let s:brown = "905532"
 let s:aqua =  "3AFFDB"
@@ -303,7 +309,6 @@ let g:NERDTreeExtensionHighlightColor['rst'] = s:lightGreen
 let g:NERDTreeExtensionHighlightColor['key'] = s:red
 let g:NERDTreeExtensionHighlightColor['crt'] = s:red
 let g:NERDTreeExtensionHighlightColor['dockerfile'] = s:darkBlue
-
 
 set colorcolumn=80
 highlight ColorColumn guibg=#009ACD
