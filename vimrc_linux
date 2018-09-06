@@ -85,6 +85,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/a.vim'
 " Golang
 Plugin 'fatih/vim-go'
+Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
+
 " Python
 Plugin 'davidhalter/jedi-vim'
 Plugin 'luoyancn/pyflakes-vim'
@@ -109,8 +111,11 @@ Plugin 'gkjgh/cobalt'
 Plugin 'encody/nvim'
 Plugin 'euclio/vim-nocturne'
 Plugin 'roosta/vim-srcery'
+"Plugin 'kudabux/vim-srcery-drk'
 
 Plugin 'plytophogy/vim-virtualenv'
+
+Plugin 'skywind3000/vim-keysound'
 
 "Plugin 'Valloric/YouCompleteMe'
 
@@ -357,6 +362,11 @@ function Maximize_Window()
     silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 endfunction
 
+let g:keysound_enable = 1
+let g:keysound_theme = 'typewriter'
+let g:keysound_volume = 1000
+
+
 if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1
@@ -368,6 +378,7 @@ if has("gui_running")
     "let g:airline_theme = "darcula"
     "colorscheme gruvbox
     colorscheme srcery
+    let g:airline_theme = "srcery"
     set guifont=CodeNewRoman\ Nerd\ Font\ 16
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
