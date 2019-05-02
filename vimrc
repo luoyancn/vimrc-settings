@@ -1,67 +1,125 @@
-if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-   set fileencodings=ucs-bom,utf-8,latin1
+if has("unix")
+    if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+       set fileencodings=ucs-bom,utf-8,latin1
+    endif
+
+    set nocompatible	" Use Vim defaults (much better!)
+    set bs=indent,eol,start		" allow backspacing over everything in insert mode
+    "set ai			" always set autoindenting on
+    "set backup		" keep a backup file
+    set viminfo='20,\"50	" read/write a .viminfo file, don't store more
+                            " than 50 lines of registers
+    set history=50		" keep 50 lines of command line history
+    set ruler		" show the cursor position all the time
+
+    " Only do this part when compiled with support for autocommands
+    if has("autocmd")
+      augroup fedora
+      autocmd!
+      " In text files, always limit the width of text to 78 characters
+      " autocmd BufRead *.txt set tw=78
+      " When editing a file, always jump to the last cursor position
+      autocmd BufReadPost *
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal! g'\"" |
+      \ endif
+      " don't write swapfile on most commonly used directories for NFS mounts or USB sticks
+      autocmd BufNewFile,BufReadPre /media/*,/run/media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
+      " start with spec file template
+      autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
+      augroup END
+    endif
+
+    if has("cscope") && filereadable("/usr/bin/cscope")
+       set csprg=/usr/bin/cscope
+       set csto=0
+       set cst
+       set nocsverb
+       " add any database in current directory
+       if filereadable("cscope.out")
+          cs add $PWD/cscope.out
+       " else add database pointed to by environment
+       elseif $CSCOPE_DB != ""
+          cs add $CSCOPE_DB
+       endif
+       set csverb
+    endif
+
+    " Switch syntax highlighting on, when the terminal has colors
+    " Also switch on highlighting the last used search pattern.
+    if &t_Co > 2 || has("gui_running")
+      syntax on
+      set hlsearch
+    endif
+
+    filetype plugin on
+
+    if &term=="xterm"
+         set t_Co=8
+         set t_Sb=[4%dm
+         set t_Sf=[3%dm
+    endif
+
+    " Don't wake up system with blinking cursor:
+    " http://www.linuxpowertop.org/known.php
+    let &guicursor = &guicursor . ",a:blinkon0"
+
+elseif has("win32")
+    source $VIMRUNTIME/vimrc_example.vim
+    "source $VIMRUNTIME/mswin.vim
+    behave mswin
+
+    set diffexpr=MyDiff()
+    function MyDiff()
+      let opt = '-a --binary '
+      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+      let arg1 = v:fname_in
+      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+      let arg2 = v:fname_new
+      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+      let arg3 = v:fname_out
+      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+      if $VIMRUNTIME =~ ' '
+        if &sh =~ '\<cmd'
+          if empty(&shellxquote)
+            let l:shxq_sav = ''
+            set shellxquote&
+          endif
+          let cmd = '"' . $VIMRUNTIME . '\diff"'
+        else
+          let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+        endif
+      else
+        let cmd = $VIMRUNTIME . '\diff'
+      endif
+      silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+      if exists('l:shxq_sav')
+        let &shellxquote=l:shxq_sav
+      endif
+    endfunction
+    "BUG info: https://github.com/davidhalter/jedi-vim/issues/870
+    "py import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
+    "if has("pythonx")
+    " Set a preferred python version
+    "    if &pyxversion == 0
+    "        if has("python3")
+    "            set pyxversion=3
+    "        elseif has("python")
+    "            set pyxversion=2
+    "        endif
+    "    endif
+    "    let s:pyinterp = "python" . &pyxversion
+    "    if 0 && &pyxversion > 0 && executable(s:pyinterp)
+    "        " vim on Windows and Mac have broken sys.executable values which point
+    "        " to vim itself not the python interpreter.
+    "        " See https://github.com/davidhalter/jedi-vim/issues/870.
+    "        pythonx sys.executable = vim.eval("exepath(s:pyinterp)")
+    "        pythonx vim.command("VimrcDebug 'sys.executable=%s'" % (sys.executable))
+    "    endif
+    "    unlet s:pyinterp
+    "endif
 endif
-
-set nocompatible	" Use Vim defaults (much better!)
-set bs=indent,eol,start		" allow backspacing over everything in insert mode
-"set ai			" always set autoindenting on
-"set backup		" keep a backup file
-set viminfo='20,\"50	" read/write a .viminfo file, don't store more
-                        " than 50 lines of registers
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-
-" Only do this part when compiled with support for autocommands
-if has("autocmd")
-  augroup fedora
-  autocmd!
-  " In text files, always limit the width of text to 78 characters
-  " autocmd BufRead *.txt set tw=78
-  " When editing a file, always jump to the last cursor position
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal! g'\"" |
-  \ endif
-  " don't write swapfile on most commonly used directories for NFS mounts or USB sticks
-  autocmd BufNewFile,BufReadPre /media/*,/run/media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
-  " start with spec file template
-  autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
-  augroup END
-endif
-
-if has("cscope") && filereadable("/usr/bin/cscope")
-   set csprg=/usr/bin/cscope
-   set csto=0
-   set cst
-   set nocsverb
-   " add any database in current directory
-   if filereadable("cscope.out")
-      cs add $PWD/cscope.out
-   " else add database pointed to by environment
-   elseif $CSCOPE_DB != ""
-      cs add $CSCOPE_DB
-   endif
-   set csverb
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
-filetype plugin on
-
-if &term=="xterm"
-     set t_Co=8
-     set t_Sb=[4%dm
-     set t_Sf=[3%dm
-endif
-
-" Don't wake up system with blinking cursor:
-" http://www.linuxpowertop.org/known.php
-let &guicursor = &guicursor . ",a:blinkon0"
 
 filetype off
 set rtp+=$VIM/bundle/Vundle.vim
@@ -69,6 +127,7 @@ call vundle#begin('$VIM/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/buf_it'
 Plugin 'mhinz/vim-startify'
@@ -79,45 +138,31 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Yggdroot/indentLine'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'ryanoasis/vim-devicons'
 " Programe language support
 "Plugin 'scrooloose/syntastic'
 " C and C++
 Plugin 'vim-scripts/a.vim'
 " Golang
 Plugin 'fatih/vim-go'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'visualfc/gocode', {'rtp': 'vim/'}
 
 " Python
 Plugin 'davidhalter/jedi-vim'
 Plugin 'luoyancn/pyflakes-vim'
-" Darcular theme
+
+" Vim theme
 Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Yggdroot/indentLine'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'ryanoasis/vim-devicons'
 Plugin 'kadekillary/subtle_solo'
-
-Plugin 'luoyancn/vim-colorschemes'
 Plugin 'morhetz/gruvbox'
-Plugin 'notpratheek/vim-luna'
-Plugin 'bf4/vim-dark_eyes'
-Plugin 'dim13/smyck.vim'
-Plugin 'larssmit/vim-getafe'
-Plugin 'lsdr/monokai'
-Plugin 'mopp/mopkai.vim'
-Plugin 'ajmwagar/vim-deus'
-Plugin 'gkjgh/cobalt'
-Plugin 'encody/nvim'
-Plugin 'euclio/vim-nocturne'
 Plugin 'roosta/vim-srcery'
-"Plugin 'kudabux/vim-srcery-drk'
+Plugin 'srcery-colors/srcery-vim'
 
-Plugin 'plytophogy/vim-virtualenv'
-
+" Keyboard sound
 Plugin 'skywind3000/vim-keysound'
-
-"Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()            " required
 filetype plugin indent on
@@ -133,30 +178,21 @@ let $LANG = 'zh_CN.UTF-8'
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-set noswapfile
-set nobackup
-set nofoldenable
-set cursorline
-set autochdir
+set cursorline autochdir autoread
+set tabstop=8 softtabstop=8 noexpandtab
+set noswapfile nobackup nofoldenable noundofile noautoindent nocindent nosmartindent nowrap
+set colorcolumn=80 laststatus=2
+highlight ColorColumn guibg=#009ACD
 
-set autoread
-set tabstop=4
-set softtabstop=4
-
-autocmd FileType python set expandtab
-autocmd FileType tex set expandtab
-autocmd FileType c set expandtab softtabstop=8 tabstop=8
-autocmd FileType cpp set expandtab softtabstop=8 tabstop=8
-autocmd FileType go set noexpandtab softtabstop=8 tabstop=8
-autocmd FileType make set noexpandtab softtabstop=8 tabstop=8
+autocmd FileType python set tabstop=4 softtabstop=4 expandtab
+autocmd FileType tex set tabstop=4 softtabstop=4 expandtab
 
 filetype indent off
-
-set noundofile
 set completeopt-=preview
 
 let g:indentLine_char='┆'
 let g:indentLine_enabled = 1
+
 " Tagbar
 let g:tagbar_width=40
 let g:tagbar_autofocus = 1
@@ -174,7 +210,7 @@ let NERDTreeShowBookmarks=1
 let g:NERDTreeCopyCmd= 'cp -r '
 
 "startify
-let g:startify_files_number = 100
+let g:startify_files_number = 40
 
 noremap <C-Tab> <C-W>w
 inoremap <C-Tab> <C-O><C-W>w
@@ -223,7 +259,9 @@ let g:go_highlight_extra_types = 1
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gocode']
 let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'gocode']
 
-let g:go_gocode_socket_type = 'tcp'
+if has("win32")
+        let g:go_gocode_socket_type = 'tcp'
+endif
 let g:go_gocode_autobuild = 1
 let g:go_gocode_propose_builtins = 1
 let g:go_gocode_unimported_packages = 1
@@ -315,11 +353,6 @@ let g:NERDTreeExtensionHighlightColor['key'] = s:red
 let g:NERDTreeExtensionHighlightColor['crt'] = s:red
 let g:NERDTreeExtensionHighlightColor['dockerfile'] = s:darkBlue
 
-set colorcolumn=80
-highlight ColorColumn guibg=#009ACD
-set nowrap
-set laststatus=2
-
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -341,45 +374,25 @@ let g:airline#extensions#tabline#fnamemod = ':p:t'
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
 
-"set runtimepath+=/opt/bundle/YouCompleteMe
-"let g:ycm_server_python_interpreter='/usr/bin/python'
-"let g:ycm_global_ycm_extra_conf='/opt/.ycm_extra_conf.py'
-"
-"let g:ycm_collect_identifiers_from_tags_files = 1
-"let g:ycm_collect_identifiers_from_comments_and_strings = 1
-"let g:syntastic_ignore_files=[".*\.py$"]
-"let g:ycm_seed_identifiers_with_syntax = 1
-"let g:ycm_complete_in_comments = 1
-"let g:ycm_show_diagnostics_ui = 0
-"let g:ycm_min_num_of_chars_for_completion = 2
-"let g:ycm_cache_omnifunc=0
-"let g:ycm_key_invoke_completion = '<A-m>'
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |
-"nnoremap <A-d> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
 map <A-s> :Ack!<Space>
 
 function Maximize_Window()
     silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 endfunction
 
-let g:keysound_enable = 1
-let g:keysound_theme = 'typewriter'
-let g:keysound_volume = 1000
-
+if has("win32")
+    let g:keysound_enable = 1
+    let g:keysound_theme = 'typewriter'
+    let g:keysound_volume = 1000
+endif
 
 if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1
-    set guioptions-=m
+    "set guioptions-=m
     set background=dark
-    "colorscheme mopkai
-    "colorscheme PaperColor
-    "colorscheme subtle_light
-    "let g:airline_theme = "darcula"
-    "colorscheme gruvbox
     colorscheme srcery
-    let g:airline_theme = "srcery"
-    set guifont=CodeNewRoman\ Nerd\ Font\ 16
+    "let g:airline_theme = "srcery"
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
     nnoremap <silent> <F3> :Startify<CR>
@@ -392,10 +405,65 @@ if has("gui_running")
     "set showtabline=2
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
-    "au FocusGained * !wmctrl -r " - gvim" -b add,maximized_vert,maximized_horz
+
+    if has("unix")
+        set guifont=CodeNewRoman\ NF\ 16
+    elseif has("win32")
+        "打开gui，自动最大化
+        au GUIEnter * simalt ~x
+        set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
+        let g:webdevicons_enable_airline_tabline = 1
+        let g:webdevicons_enable_airline_statusline = 1
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline_powerline_fonts = 1
+        let g:Powerline_symbols="fancy"
+
+        " 设置powerline使用的字体
+        let g:airline_symbols = {}
+
+        "let g:airline_left_alt_sep = "\u2b81"
+        "let g:airline_left_sep = "\u2b80"
+        "let g:airline_right_alt_sep = "\u2b83"
+        "let g:airline_right_sep = "\u2b82"
+
+        "let g:airline_symbols.branch = "\u2b60"
+        "let g:airline_symbols.readonly = "\u2b64"
+        "let g:airline_symbols.linenr = "\u2b61"
+        "let g:airline_symbols.readonly = ""
+
+        "设置顶部tabline栏符号显示"
+        "let g:airline#extensions#tabline#left_sep = "\u2b80"
+        "let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
+
+        "let g:airline_symbols.linenr = ""
+        let g:airline_left_alt_sep = ""
+        let g:airline_left_sep = ""
+        let g:airline_right_alt_sep = ""
+        let g:airline_right_sep = ""
+        let g:airline_symbols.branch = ""
+        let g:airline_symbols.readonly = ""
+        let g:airline_symbols.linenr = ""
+        "let g:airline#extensions#tabline#left_sep = ""
+        "let g:airline#extensions#tabline#left_alt_sep = ""
+        let g:airline_symbols.maxlinenr= ""
+
+        " 只显示文件名，不显示路径内容
+        let g:airline#extensions#tabline#fnamemod = ':p:t'
+        let g:airline_theme="dark"
+        let g:airline#extensions#whitespace#enabled = 1
+        let g:airline#extensions#whitespace#symbol = '!'
+
+        let g:startify_bookmarks = [
+            \ 'F:\个人\新建文本文档.txt',
+            \ 'C:\Vim\_vimrc',
+            \ 'E:\github.com',
+            \ 'E:\workspaces\openstack',
+            \ 'E:\workspaces\cprojects\nginx-1.10.2'
+        \]
+
+    endif
+
 else
     set t_Co=256
-    "set background=dark
-    "colorscheme srcery
-    "colorscheme mopkai
+    set background=dark
 endif
