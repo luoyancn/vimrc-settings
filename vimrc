@@ -247,7 +247,7 @@ let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gocode']
 let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'gocode']
 
 if has("win32")
-        let g:go_gocode_socket_type = 'tcp'
+    let g:go_gocode_socket_type = 'tcp'
 endif
 let g:go_gocode_autobuild = 1
 let g:go_gocode_propose_builtins = 1
@@ -342,30 +342,26 @@ let g:NERDTreeExtensionHighlightColor['dockerfile'] = s:darkBlue
 
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
+
+" 只显示文件名，不显示路径内容
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':p:t'
+let g:airline_theme="dark"
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#symbol = '!'
 let g:airline_powerline_fonts = 1
 let g:Powerline_symbols="fancy"
 let g:airline_symbols = {}
-"let g:airline_left_alt_sep = ""
-"let g:airline_left_sep = ""
-"let g:airline_right_alt_sep = ""
-"let g:airline_right_sep = ""
 let g:airline_symbols.branch = " "
 let g:airline_symbols.readonly = ""
 let g:airline_symbols.linenr = ""
-"let g:airline#extensions#tabline#left_sep = ""
-"let g:airline#extensions#tabline#left_alt_sep = ""
 let g:airline_symbols.maxlinenr= ""
-let g:airline#extensions#tabline#fnamemod = ':p:t'
-"let g:airline_theme="dark"
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#whitespace#symbol = '!'
+let g:airline_left_alt_sep = ""
+let g:airline_left_sep = ""
+let g:airline_right_alt_sep = ""
+let g:airline_right_sep = ""
 
 map <A-s> :Ack!<Space>
-
-function Maximize_Window()
-    silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
-endfunction
 
 if has("win32")
     let g:keysound_enable = 1
@@ -399,47 +395,6 @@ if has("gui_running")
         "打开gui，自动最大化
         au GUIEnter * simalt ~x
         set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
-        let g:webdevicons_enable_airline_tabline = 1
-        let g:webdevicons_enable_airline_statusline = 1
-        let g:airline#extensions#tabline#enabled = 1
-        let g:airline_powerline_fonts = 1
-        let g:Powerline_symbols="fancy"
-
-        " 设置powerline使用的字体
-        let g:airline_symbols = {}
-
-        "let g:airline_left_alt_sep = "\u2b81"
-        "let g:airline_left_sep = "\u2b80"
-        "let g:airline_right_alt_sep = "\u2b83"
-        "let g:airline_right_sep = "\u2b82"
-
-        "let g:airline_symbols.branch = "\u2b60"
-        "let g:airline_symbols.readonly = "\u2b64"
-        "let g:airline_symbols.linenr = "\u2b61"
-        "let g:airline_symbols.readonly = ""
-
-        "设置顶部tabline栏符号显示"
-        "let g:airline#extensions#tabline#left_sep = "\u2b80"
-        "let g:airline#extensions#tabline#left_alt_sep = "\u2b81"
-
-        "let g:airline_symbols.linenr = ""
-        let g:airline_left_alt_sep = ""
-        let g:airline_left_sep = ""
-        let g:airline_right_alt_sep = ""
-        let g:airline_right_sep = ""
-        let g:airline_symbols.branch = ""
-        let g:airline_symbols.readonly = ""
-        let g:airline_symbols.linenr = ""
-        "let g:airline#extensions#tabline#left_sep = ""
-        "let g:airline#extensions#tabline#left_alt_sep = ""
-        let g:airline_symbols.maxlinenr= ""
-
-        " 只显示文件名，不显示路径内容
-        let g:airline#extensions#tabline#fnamemod = ':p:t'
-        let g:airline_theme="dark"
-        let g:airline#extensions#whitespace#enabled = 1
-        let g:airline#extensions#whitespace#symbol = '!'
-
         let g:startify_bookmarks = [
             \ 'F:\个人\新建文本文档.txt',
             \ 'C:\Vim\_vimrc',
@@ -447,9 +402,7 @@ if has("gui_running")
             \ 'E:\workspaces\openstack',
             \ 'E:\workspaces\cprojects\nginx-1.10.2'
         \]
-
     endif
-
 else
     set t_Co=256
     set background=dark
