@@ -165,15 +165,16 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
 set cursorline autochdir autoread
-set tabstop=8 softtabstop=8 noexpandtab
 set noswapfile nobackup nofoldenable noundofile noautoindent nocindent nosmartindent nowrap
 set colorcolumn=80 laststatus=2
 highlight ColorColumn guibg=#009ACD
 
-autocmd FileType python set tabstop=4 softtabstop=4 expandtab
-autocmd FileType tex set tabstop=4 softtabstop=4 expandtab
-
+set tabstop=4 softtabstop=4 expandtab
+autocmd FileType html,javascript set tabstop=2 softtabstop=2 expandtab
+autocmd FileType python,tex set tabstop=4 softtabstop=4 expandtab
+autocmd FileType c,h,go,cpp,make set tabstop=8 softtabstop=8 noexpandtab
 filetype indent off
+
 set completeopt-=preview
 
 let g:indentLine_char='┆'
