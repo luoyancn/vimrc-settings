@@ -100,25 +100,6 @@ elseif has("win32")
     endfunction
     "BUG info: https://github.com/davidhalter/jedi-vim/issues/870
     "py import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
-    "if has("pythonx")
-    " Set a preferred python version
-    "    if &pyxversion == 0
-    "        if has("python3")
-    "            set pyxversion=3
-    "        elseif has("python")
-    "            set pyxversion=2
-    "        endif
-    "    endif
-    "    let s:pyinterp = "python" . &pyxversion
-    "    if 0 && &pyxversion > 0 && executable(s:pyinterp)
-    "        " vim on Windows and Mac have broken sys.executable values which point
-    "        " to vim itself not the python interpreter.
-    "        " See https://github.com/davidhalter/jedi-vim/issues/870.
-    "        pythonx sys.executable = vim.eval("exepath(s:pyinterp)")
-    "        pythonx vim.command("VimrcDebug 'sys.executable=%s'" % (sys.executable))
-    "    endif
-    "    unlet s:pyinterp
-    "endif
 endif
 
 filetype off
@@ -127,7 +108,6 @@ call vundle#begin('$VIM/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/buf_it'
 Plugin 'mhinz/vim-startify'
@@ -142,17 +122,19 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
+
 " Programe language support
 "Plugin 'scrooloose/syntastic'
 " C and C++
 Plugin 'vim-scripts/a.vim'
-" Golang
-Plugin 'fatih/vim-go'
-Plugin 'visualfc/gocode', {'rtp': 'vim/'}
 
 " Python
 Plugin 'davidhalter/jedi-vim'
 Plugin 'luoyancn/pyflakes-vim'
+
+" Golang
+Plugin 'fatih/vim-go'
+Plugin 'visualfc/gocode', {'rtp': 'vim/'}
 
 " Vim theme
 Plugin 'NLKNguyen/papercolor-theme'
@@ -163,6 +145,10 @@ Plugin 'srcery-colors/srcery-vim'
 
 " Keyboard sound
 Plugin 'skywind3000/vim-keysound'
+
+if !has("gui_running")
+    Plugin 'ap/vim-buftabline'
+endif
 
 call vundle#end()            " required
 filetype plugin indent on
@@ -466,4 +452,7 @@ if has("gui_running")
 else
     set t_Co=256
     set background=dark
+    let g:ctrlp_types = ['buf', 'fil', 'mru']
+    let g:buftabline_show = 2
+    let g:buftabline_numbers = 2
 endif
