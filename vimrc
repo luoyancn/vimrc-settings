@@ -130,6 +130,8 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
+" Keyboard sound
+Plugin 'skywind3000/vim-keysound'
 
 " Programe language support
 "Plugin 'scrooloose/syntastic'
@@ -143,9 +145,6 @@ Plugin 'luoyancn/pyflakes-vim'
 " Golang
 Plugin 'fatih/vim-go'
 Plugin 'visualfc/gocode', {'rtp': 'vim/'}
-
-" Keyboard sound
-Plugin 'skywind3000/vim-keysound'
 
 if !has("gui_running")
     Plugin 'ap/vim-buftabline'
