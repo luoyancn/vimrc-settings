@@ -108,11 +108,19 @@ call vundle#begin('$VIM/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+" Vim theme
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'kadekillary/subtle_solo'
+Plugin 'morhetz/gruvbox'
+Plugin 'roosta/vim-srcery'
+Plugin 'srcery-colors/srcery-vim'
+
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/buf_it'
 Plugin 'mhinz/vim-startify'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mileszs/ack.vim'
@@ -135,13 +143,6 @@ Plugin 'luoyancn/pyflakes-vim'
 " Golang
 Plugin 'fatih/vim-go'
 Plugin 'visualfc/gocode', {'rtp': 'vim/'}
-
-" Vim theme
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'kadekillary/subtle_solo'
-Plugin 'morhetz/gruvbox'
-Plugin 'roosta/vim-srcery'
-Plugin 'srcery-colors/srcery-vim'
 
 " Keyboard sound
 Plugin 'skywind3000/vim-keysound'
@@ -344,15 +345,15 @@ let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 
 " 只显示文件名，不显示路径内容
+let g:airline_section_c = '%t'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'
-let g:airline_theme="dark"
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
 let g:airline_powerline_fonts = 1
 let g:Powerline_symbols="fancy"
 let g:airline_symbols = {}
-let g:airline_symbols.branch = " "
+let g:airline_symbols.branch = ""
 let g:airline_symbols.readonly = ""
 let g:airline_symbols.linenr = ""
 let g:airline_symbols.maxlinenr= ""
@@ -375,7 +376,9 @@ if has("gui_running")
     "set guioptions-=m
     set background=dark
     colorscheme srcery
+    let g:airline_theme="papercolor"
     "let g:airline_theme = "srcery"
+    "let g:airline_theme = "powerlineish"
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
     nnoremap <silent> <F3> :Startify<CR>
