@@ -123,7 +123,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
@@ -132,6 +131,10 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
 " Keyboard sound
 Plugin 'skywind3000/vim-keysound'
+
+if !has("win32")
+    Plugin 'mileszs/ack.vim'
+endif
 
 " Programe language support
 "Plugin 'scrooloose/syntastic'
@@ -171,9 +174,10 @@ highlight ColorColumn guibg=#009ACD
 
 set tabstop=4 softtabstop=4 expandtab
 autocmd FileType html,javascript set tabstop=2 softtabstop=2 expandtab
-autocmd FileType python,tex set tabstop=4 softtabstop=4 expandtab
+autocmd FileType python,tex,vim set tabstop=4 softtabstop=4 expandtab
 autocmd FileType c,h,go,cpp,make set tabstop=8 softtabstop=8 noexpandtab
 filetype indent off
+set noshowmode
 
 set completeopt-=preview
 
@@ -361,12 +365,12 @@ let g:airline_left_sep = ""
 let g:airline_right_alt_sep = ""
 let g:airline_right_sep = ""
 
-map <A-s> :Ack!<Space>
-
 if has("win32")
     let g:keysound_enable = 1
     let g:keysound_theme = 'typewriter'
     let g:keysound_volume = 1000
+elseif has("unix")
+    map <A-s> :Ack!<Space>
 endif
 
 if has("gui_running")
@@ -375,13 +379,13 @@ if has("gui_running")
     "set guioptions-=m
     set background=dark
     colorscheme srcery
-    let g:airline_theme="papercolor"
+    "let g:airline_theme="papercolor"
     "let g:airline_theme = "srcery"
-    "let g:airline_theme = "powerlineish"
+    let g:airline_theme = "powerlineish"
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
     nnoremap <silent> <F3> :Startify<CR>
-    nnoremap <silent> <F8> :NERDTreeToggle<CR>
+    nnoremap <silent> <F7> :NERDTreeToggle<CR>
     nnoremap <silent> <F9> :NERDTreeFind<CR>
     nnoremap <silent> <F10> :TagbarToggle<cr>
     nnoremap <silent> <F11> :AV<CR>
