@@ -249,6 +249,9 @@ let g:go_highlight_types = 1
 let g:go_highlight_extra_types = 1
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gocode']
 let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'gocode']
+" Must be go >= 1.12
+let g:go_auto_type_info = 1
+let g:go_info_mode = 'gopls'
 
 if has("win32")
     let g:go_gocode_socket_type = 'tcp'
