@@ -134,6 +134,8 @@ Plugin 'skywind3000/vim-keysound'
 
 if !has("win32")
     Plugin 'mileszs/ack.vim'
+    "Plugin 'justmao945/vim-clang'
+    Plugin 'xavierd/clang_complete'
 endif
 
 " Programe language support
@@ -375,6 +377,7 @@ if has("win32")
     let g:keysound_volume = 1000
 elseif has("unix")
     map <A-s> :Ack!<Space>
+    let g:clang_library_path='/usr/lib64/libclang.so.8'
 endif
 
 if has("gui_running")
