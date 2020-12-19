@@ -78,7 +78,7 @@ plugins=(
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 HIST_STAMPS="yyyy-mm-dd"
-bindkey ',' autosuggest-accept
+#bindkey ',' autosuggest-accept
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
