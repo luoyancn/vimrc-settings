@@ -384,11 +384,13 @@ if has("win32")
 elseif has("unix")
     map <A-s> :Ack!<Space>
     let g:clang_library_path='/usr/lib64/libclang.so.8'
-    let g:racer_cmd = "/mnt/c/cargo/bin/racer"
+    let g:racer_cmd = "/opt/cargo/bin/racer"
+    let g:completor_racer_binary = '/opt/cargo/bin/racer'
 endif
 
-let g:completor_filetype_map = {}
-let g:completor_filetype_map.rust = {'ft': 'lsp', 'cmd': 'rls'}
+" Delete the rls mod for rust, to avoid racer daemon cannot startup under WSL
+"let g:completor_filetype_map = {}
+"let g:completor_filetype_map.rust = {'ft': 'lsp', 'cmd': 'rls'}
 let g:rustfmt_autosave = 1
 let g:racer_experimental_completer = 1
 let g:racer_insert_paren = 1
