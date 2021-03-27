@@ -163,6 +163,7 @@ endif
 call vundle#end()            " required
 filetype plugin indent on
 
+set mouse=""
 set termencoding=utf-8
 set fileformat=unix
 set fileformats=unix
@@ -176,8 +177,8 @@ source $VIMRUNTIME/menu.vim
 
 set cursorline autochdir autoread
 set noswapfile nobackup nofoldenable noundofile noautoindent nocindent nosmartindent nowrap
-set colorcolumn=80 laststatus=2
-highlight ColorColumn guibg=#009ACD
+set colorcolumn=80,80 laststatus=2
+highlight ColorColumn guibg=#009ACD ctermbg=None
 
 set tabstop=4 softtabstop=4 expandtab
 autocmd FileType html,javascript set tabstop=2 softtabstop=2 expandtab
@@ -316,6 +317,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['dockerfile'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['proto'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['toml'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pem'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rs'] = '🦀️'
 
 let s:brown = "905532"
 let s:aqua =  "3AFFDB"
@@ -371,26 +373,23 @@ let g:airline_symbols.branch = ""
 let g:airline_symbols.readonly = ""
 let g:airline_symbols.linenr = ""
 let g:airline_symbols.maxlinenr= ""
-let g:airline_left_alt_sep = ""
-let g:airline_left_sep = ""
-let g:airline_right_alt_sep = ""
-let g:airline_right_sep = ""
+let g:airline_left_alt_sep = ""
+let g:airline_left_sep = ""
+let g:airline_right_alt_sep = ""
+let g:airline_right_sep = ""
 
 if has("win32")
     let g:keysound_enable = 1
     let g:keysound_theme = 'typewriter'
     let g:keysound_volume = 1000
     let g:racer_cmd = 'C:\rust\cargo\bin\racer'
-elseif has("unix")
+else
     map <A-s> :Ack!<Space>
     let g:clang_library_path='/usr/lib64/libclang.so.8'
     let g:racer_cmd = "/opt/cargo/bin/racer"
     let g:completor_racer_binary = '/opt/cargo/bin/racer'
 endif
 
-" Delete the rls mod for rust, to avoid racer daemon cannot startup under WSL
-"let g:completor_filetype_map = {}
-"let g:completor_filetype_map.rust = {'ft': 'lsp', 'cmd': 'rls'}
 let g:rustfmt_autosave = 1
 let g:racer_experimental_completer = 1
 let g:racer_insert_paren = 1
@@ -437,4 +436,6 @@ else
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2
     let g:buftabline_numbers = 2
+    let g:tagbar_left = 1
+    let NERDTreeWinPos = "right"
 endif
