@@ -98,9 +98,9 @@ prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
     if [[ "$(python --version 2>&1 | tr '\n' ' ')" == "Python 3"* ]]; then
-      prompt_segment 25 white "³ `basename $virtualenv_path`  "
+      prompt_segment 25 white " ³ `basename $virtualenv_path`  "
     else
-      prompt_segment 25 white "² `basename $virtualenv_path`  "
+      prompt_segment 25 white " ² `basename $virtualenv_path`  "
     fi
   fi
 }
