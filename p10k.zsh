@@ -32,6 +32,7 @@
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     os_icon                 # os identifier
+    context                 # user@hostname
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     dir                     # current directory
     vcs                     # git status
@@ -836,17 +837,21 @@
 
   ##################################[ context: user@hostname ]##################################
   # Context color when running with privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=1
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=033
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=250
   # Context color in SSH without privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=3
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=033
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=250
   # Default context color (no privileges, no SSH).
-  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=3
-  typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=0
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=033
+  typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=250
 
   # Context format when running with privileges: user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n@%m'
+  if [[ -z $SSH_CLIENT ]]; then
+      typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE=''
+  else
+      typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n%m'
+  fi
   # Context format when in SSH without privileges: user@hostname.
   typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
   # Default context format (no privileges, no SSH): user@hostname.
@@ -859,7 +864,7 @@
   # Custom icon.
   # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
-  typeset -g POWERLEVEL9K_CONTEXT_PREFIX='with '
+  typeset -g POWERLEVEL9K_CONTEXT_PREFIX=''
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
