@@ -847,7 +847,7 @@
   typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=250
 
   # Context format when running with privileges: user@hostname.
-  if [[ -z $SSH_CLIENT ]]; then
+  if [[ -z $SSH_CLIENT && -z $SUDO_USER ]]; then
       typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE=''
   else
       typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n%m'
