@@ -132,14 +132,24 @@ Plugin 'ryanoasis/vim-devicons'
 " Keyboard sound
 Plugin 'skywind3000/vim-keysound'
 
+" Rust
+"Plugin 'racer-rust/vim-racer'
+"Plugin 'maralla/completor.vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+Plugin 'mattn/vim-lsp-settings'
+Plugin 'keremc/asyncomplete-racer.vim'
+
 if !has("win32")
     Plugin 'mileszs/ack.vim'
-    "Plugin 'justmao945/vim-clang'
     Plugin 'xavierd/clang_complete'
 endif
 
 " Programe language support
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 " C and C++
 Plugin 'vim-scripts/a.vim'
 
@@ -150,11 +160,6 @@ Plugin 'luoyancn/pyflakes-vim'
 " Golang
 Plugin 'fatih/vim-go'
 Plugin 'visualfc/gocode', {'rtp': 'vim/'}
-
-" Rust
-Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer'
-Plugin 'maralla/completor.vim'
 
 if !has("gui_running")
     Plugin 'ap/vim-buftabline'
@@ -382,17 +387,30 @@ if has("win32")
     let g:keysound_enable = 1
     let g:keysound_theme = 'typewriter'
     let g:keysound_volume = 1000
-    let g:racer_cmd = 'C:\rust\cargo\bin\racer'
 else
     map <A-s> :Ack!<Space>
     let g:clang_library_path='/usr/lib64/libclang.so.8'
-    let g:racer_cmd = "/opt/cargo/bin/racer"
-    let g:completor_racer_binary = '/opt/cargo/bin/racer'
 endif
 
 let g:rustfmt_autosave = 1
-let g:racer_experimental_completer = 1
-let g:racer_insert_paren = 1
+let g:lsp_fold_enabled = 0
+let g:lsp_diagnostics_signs_enabled = 0
+
+if executable('rust-analyzer')
+  au User lsp_setup call lsp#register_server({
+        \   'name': 'Rust Language Server',
+        \   'cmd': {server_info->['rust-analyzer']},
+        \   'whitelist': ['rust'],
+        \   'initialization_options': {
+        \     'cargo': {
+        \       'loadOutDirsFromCheck': v:true,
+        \     },
+        \     'procMacro': {
+        \       'enable': v:true,
+        \     },
+        \   },
+        \ })
+endif
 
 if has("gui_running")
     set guioptions-=T
