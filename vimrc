@@ -449,8 +449,11 @@ if has("gui_running")
         \]
     endif
 else
+    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
     set t_Co=256
     set background=dark
+    "colorscheme srcery
+    colorscheme gruvbox
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2
     let g:buftabline_numbers = 2
