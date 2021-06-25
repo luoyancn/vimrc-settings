@@ -142,20 +142,21 @@ Plugin 'prabirshrestha/asyncomplete.vim'
 Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 Plugin 'mattn/vim-lsp-settings'
 Plugin 'keremc/asyncomplete-racer.vim'
+Plugin 'keremc/asyncomplete-clang.vim'
 
 if !has("win32")
     Plugin 'mileszs/ack.vim'
-    Plugin 'xavierd/clang_complete'
+    "Plugin 'xavierd/clang_complete'
 endif
 
 " Programe language support
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 " C and C++
-Plugin 'vim-scripts/a.vim'
+"Plugin 'vim-scripts/a.vim'
 
 " Python
-Plugin 'davidhalter/jedi-vim'
-Plugin 'luoyancn/pyflakes-vim'
+"Plugin 'davidhalter/jedi-vim'
+"Plugin 'luoyancn/pyflakes-vim'
 
 " Golang
 Plugin 'fatih/vim-go'
@@ -395,7 +396,7 @@ if has("win32")
     let g:keysound_volume = 1000
 else
     map <A-s> :Ack!<Space>
-    let g:clang_library_path='/usr/lib64/libclang.so.8'
+    "let g:clang_library_path='/usr/lib64/libclang.so.8'
 endif
 
 let g:rustfmt_autosave = 1
@@ -416,6 +417,14 @@ if executable('rust-analyzer')
         \       'enable': v:true,
         \     },
         \   },
+        \ })
+endif
+
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
         \ })
 endif
 
