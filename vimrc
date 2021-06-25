@@ -181,6 +181,12 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
 set cursorline autochdir autoread
+augroup cursorline
+  au!
+  au ColorScheme * hi clear CursorLine
+               \ | hi CursorLine gui=underline cterm=underline
+augroup END
+
 set noswapfile nobackup nofoldenable noundofile noautoindent nocindent nosmartindent nowrap
 set colorcolumn=80,80 laststatus=2
 highlight ColorColumn guibg=#009ACD ctermbg=None
@@ -395,6 +401,7 @@ endif
 let g:rustfmt_autosave = 1
 let g:lsp_fold_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
 
 if executable('rust-analyzer')
   au User lsp_setup call lsp#register_server({
