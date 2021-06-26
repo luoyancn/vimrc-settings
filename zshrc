@@ -109,4 +109,12 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi="/usr/bin/vi"
 
-source ~/.p10k.zsh
+#source ~/.p10k.zsh
+
+N=2
+(( N = (RANDOM%N) + 1 ))
+if [ $N -eq 1 ]; then
+    source ~/.p10k.zsh
+else
+    source ~/.p10k_dark.zsh
+fi
