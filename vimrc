@@ -404,21 +404,21 @@ let g:lsp_fold_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 
-if executable('rust-analyzer')
-  au User lsp_setup call lsp#register_server({
-        \   'name': 'Rust Language Server',
-        \   'cmd': {server_info->['rust-analyzer']},
-        \   'whitelist': ['rust'],
-        \   'initialization_options': {
-        \     'cargo': {
-        \       'loadOutDirsFromCheck': v:true,
-        \     },
-        \     'procMacro': {
-        \       'enable': v:true,
-        \     },
-        \   },
-        \ })
-endif
+"if executable('rust-analyzer')
+"  au User lsp_setup call lsp#register_server({
+"        \   'name': 'Rust Language Server',
+"        \   'cmd': {server_info->['rust-analyzer']},
+"        \   'whitelist': ['rust'],
+"        \   'initialization_options': {
+"        \     'cargo': {
+"        \       'loadOutDirsFromCheck': v:true,
+"        \     },
+"        \     'procMacro': {
+"        \       'enable': v:true,
+"        \     },
+"        \   },
+"        \ })
+"endif
 
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
@@ -465,11 +465,11 @@ if has("gui_running")
         \]
     endif
 else
-    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
     set t_Co=256
     set background=dark
     "colorscheme srcery
     colorscheme gruvbox
+    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2
     let g:buftabline_numbers = 2
