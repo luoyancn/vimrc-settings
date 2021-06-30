@@ -473,7 +473,7 @@ else
     "colorscheme srcery
     colorscheme gruvbox
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-    nmap <C-f> :LspReferences<cr>
+    nmap <S-f> :LspReferences<cr>
     nmap <C-d> :LspDeclaration<cr>
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2
