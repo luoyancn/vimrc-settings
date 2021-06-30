@@ -404,6 +404,8 @@ let g:lsp_fold_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = '/tmp/vim-lsp.log'
 
 "if executable('rust-analyzer')
 "  au User lsp_setup call lsp#register_server({
@@ -421,6 +423,9 @@ let g:lsp_document_code_action_signs_enabled = 0
 "        \ })
 "endif
 
+" For Python, Must execute the commands like follows:
+" dnf install python3-language-server python3-autopep8 python3-mccabe
+" python3-pyflakes python3-pylint python3-pydocstyle python3-rope -y
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
@@ -474,7 +479,7 @@ else
     colorscheme gruvbox
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
     nmap <S-f> :LspReferences<cr>
-    nmap <C-d> :LspDeclaration<cr>
+    nmap <C-d> :LspDefinition<cr>
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2
     let g:buftabline_numbers = 2
