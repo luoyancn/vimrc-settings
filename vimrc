@@ -142,25 +142,25 @@ Plugin 'prabirshrestha/asyncomplete.vim'
 Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 Plugin 'mattn/vim-lsp-settings'
 Plugin 'keremc/asyncomplete-racer.vim'
-Plugin 'keremc/asyncomplete-clang.vim'
 
 if !has("win32")
     Plugin 'mileszs/ack.vim'
     "Plugin 'xavierd/clang_complete'
+    Plugin 'keremc/asyncomplete-clang.vim'
 endif
 
 " Programe language support
 "Plugin 'scrooloose/syntastic'
 " C and C++
-"Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/a.vim'
 
 " Python
 "Plugin 'davidhalter/jedi-vim'
 "Plugin 'luoyancn/pyflakes-vim'
 
 " Golang
-Plugin 'fatih/vim-go'
-Plugin 'visualfc/gocode', {'rtp': 'vim/'}
+"Plugin 'fatih/vim-go'
+"Plugin 'visualfc/gocode', {'rtp': 'vim/'}
 
 if !has("gui_running")
     Plugin 'ap/vim-buftabline'
@@ -229,74 +229,74 @@ cnoremap <C-Tab> <C-C><C-W>w
 onoremap <C-Tab> <C-C><C-W>w
 
 " Go tags
-let g:go_autodetect_gopath = 1
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-
-let g:go_fmt_command = "goimports"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_types = 1
-let g:go_highlight_extra_types = 1
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gocode']
-let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'gocode']
-" Must be go >= 1.12
-let g:go_auto_type_info = 1
-let g:go_info_mode = 'gopls'
-
-if has("win32")
-    let g:go_gocode_socket_type = 'tcp'
-endif
-let g:go_gocode_autobuild = 1
-let g:go_gocode_propose_builtins = 1
-let g:go_gocode_unimported_packages = 1
-
-let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter', 'gocode']
-au FileType go nmap <A-r> :GoDef<cr>
-au FileType go nmap <A-n> :GoReferrers<cr>
-
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = "<C-x><C-o>"
-let g:jedi#goto_assignments_command = "<A-g>"
-let g:jedi#goto_command = "<A-d>"
-let g:jedi#goto_definitions_command = "<A-r>"
-let g:jedi#usages_command = "<A-n>"
-let g:jedi#documentation_command = "<A-k>"
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = 1
-let g:jedi#smart_auto_mappings = 1
-let g:pyflakes_use_quickfix = 0
-"let g:syntastic_python_checkers = ['pyflakes']
-let g:syntastic_check_on_wq = 0
+"let g:go_autodetect_gopath = 1
+"let g:tagbar_type_go = {
+"    \ 'ctagstype' : 'go',
+"    \ 'kinds'     : [
+"        \ 'p:package',
+"        \ 'i:imports:1',
+"        \ 'c:constants',
+"        \ 'v:variables',
+"        \ 't:types',
+"        \ 'n:interfaces',
+"        \ 'w:fields',
+"        \ 'e:embedded',
+"        \ 'm:methods',
+"        \ 'r:constructor',
+"        \ 'f:functions'
+"    \ ],
+"    \ 'sro' : '.',
+"    \ 'kind2scope' : {
+"        \ 't' : 'ctype',
+"        \ 'n' : 'ntype'
+"    \ },
+"    \ 'scope2kind' : {
+"        \ 'ctype' : 't',
+"        \ 'ntype' : 'n'
+"    \ },
+"    \ 'ctagsbin'  : 'gotags',
+"    \ 'ctagsargs' : '-sort -silent'
+"\ }
+"
+"let g:go_fmt_command = "goimports"
+"let g:go_highlight_functions = 1
+"let g:go_highlight_methods = 1
+"let g:go_highlight_structs = 1
+"let g:go_highlight_interfaces = 1
+"let g:go_highlight_operators = 1
+"let g:go_highlight_build_constraints = 1
+"let g:go_highlight_types = 1
+"let g:go_highlight_extra_types = 1
+"let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gocode']
+"let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'gocode']
+"" Must be go >= 1.12
+"let g:go_auto_type_info = 1
+"let g:go_info_mode = 'gopls'
+"
+"if has("win32")
+"    let g:go_gocode_socket_type = 'tcp'
+"endif
+"let g:go_gocode_autobuild = 1
+"let g:go_gocode_propose_builtins = 1
+"let g:go_gocode_unimported_packages = 1
+"
+"let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter', 'gocode']
+"au FileType go nmap <A-r> :GoDef<cr>
+"au FileType go nmap <A-n> :GoReferrers<cr>
+"
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#completions_command = "<C-x><C-o>"
+"let g:jedi#goto_assignments_command = "<A-g>"
+"let g:jedi#goto_command = "<A-d>"
+"let g:jedi#goto_definitions_command = "<A-r>"
+"let g:jedi#usages_command = "<A-n>"
+"let g:jedi#documentation_command = "<A-k>"
+"let g:jedi#popup_select_first = 0
+"let g:jedi#show_call_signatures = 1
+"let g:jedi#smart_auto_mappings = 1
+"let g:pyflakes_use_quickfix = 0
+""let g:syntastic_python_checkers = ['pyflakes']
+"let g:syntastic_check_on_wq = 0
 
 set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 
@@ -402,6 +402,7 @@ endif
 let g:rustfmt_autosave = 1
 let g:lsp_fold_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
 
 "if executable('rust-analyzer')
@@ -445,7 +446,9 @@ if has("gui_running")
     nnoremap <silent> <F10> :TagbarToggle<cr>
     nnoremap <silent> <F11> :AV<CR>
     nnoremap <silent> <F12> :A<CR>
-    au FileType go nnoremap <silent> <F5> :GoInstall<CR>
+    "au FileType go nnoremap <silent> <F5> :GoInstall<CR>
+    nmap <A-r> :LspReferences<cr>
+    nmap <A-d> :LspDeclaration<cr>
     "set showtabline=2
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
@@ -470,6 +473,8 @@ else
     "colorscheme srcery
     colorscheme gruvbox
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+    nmap <C-f> :LspReferences<cr>
+    nmap <C-d> :LspDeclaration<cr>
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2
     let g:buftabline_numbers = 2
