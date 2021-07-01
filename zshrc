@@ -108,6 +108,7 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi="/usr/bin/vi"
+alias cp="rsync -ra --progress"
 
 #source ~/.p10k.zsh
 

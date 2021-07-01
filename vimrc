@@ -405,7 +405,7 @@ let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
 "let g:lsp_log_verbose = 1
-"let g:lsp_log_file = '/tmp/vim-lsp.log'
+"let g:lsp_log_file = 'vim-lsp.log'
 
 "if executable('rust-analyzer')
 "  au User lsp_setup call lsp#register_server({
@@ -425,7 +425,8 @@ let g:lsp_document_code_action_signs_enabled = 0
 
 " For Python, Must execute the commands like follows:
 " dnf install python3-language-server python3-autopep8 python3-mccabe
-" python3-pyflakes python3-pylint python3-pydocstyle python3-rope -y
+" python3-pyflakes python3-pylint python3-pydocstyle python3-rope python3-yapf -y
+" or pip install autopep8 mccabe pyflakes pylint pydocstyle rope yapf
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
