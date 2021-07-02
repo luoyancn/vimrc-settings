@@ -132,6 +132,10 @@ Plugin 'ryanoasis/vim-devicons'
 " Keyboard sound
 Plugin 'skywind3000/vim-keysound'
 
+" Python
+Plugin 'davidhalter/jedi-vim'
+Plugin 'luoyancn/pyflakes-vim'
+
 " Rust
 "Plugin 'racer-rust/vim-racer'
 "Plugin 'maralla/completor.vim'
@@ -153,10 +157,6 @@ endif
 "Plugin 'scrooloose/syntastic'
 " C and C++
 Plugin 'vim-scripts/a.vim'
-
-" Python
-"Plugin 'davidhalter/jedi-vim'
-"Plugin 'luoyancn/pyflakes-vim'
 
 " Golang
 "Plugin 'fatih/vim-go'
@@ -284,19 +284,14 @@ onoremap <C-Tab> <C-C><C-W>w
 "au FileType go nmap <A-r> :GoDef<cr>
 "au FileType go nmap <A-n> :GoReferrers<cr>
 "
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#completions_command = "<C-x><C-o>"
-"let g:jedi#goto_assignments_command = "<A-g>"
-"let g:jedi#goto_command = "<A-d>"
-"let g:jedi#goto_definitions_command = "<A-r>"
-"let g:jedi#usages_command = "<A-n>"
-"let g:jedi#documentation_command = "<A-k>"
-"let g:jedi#popup_select_first = 0
-"let g:jedi#show_call_signatures = 1
-"let g:jedi#smart_auto_mappings = 1
-"let g:pyflakes_use_quickfix = 0
-""let g:syntastic_python_checkers = ['pyflakes']
-"let g:syntastic_check_on_wq = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = "<C-x><C-o>"
+let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = 1
+let g:jedi#smart_auto_mappings = 1
+let g:pyflakes_use_quickfix = 0
+let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_check_on_wq = 0
 
 set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 
@@ -453,6 +448,10 @@ if has("gui_running")
     nnoremap <silent> <F11> :AV<CR>
     nnoremap <silent> <F12> :A<CR>
     "au FileType go nnoremap <silent> <F5> :GoInstall<CR>
+    let g:jedi#goto_assignments_command = "<A-g>"
+    let g:jedi#goto_command = "<A-d>"
+    let g:jedi#goto_definitions_command = "<A-m>"
+    let g:jedi#usages_command = "<A-r>"
     nmap <A-r> :LspReferences<cr>
     nmap <A-d> :LspDeclaration<cr>
     "set showtabline=2
@@ -479,6 +478,10 @@ else
     "colorscheme srcery
     colorscheme gruvbox
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+    let g:jedi#goto_assignments_command = "<C-g>"
+    let g:jedi#goto_command = "<C-d>"
+    let g:jedi#goto_definitions_command = "<C-m>"
+    let g:jedi#usages_command = "<S-f>"
     nmap <S-f> :LspReferences<cr>
     nmap <C-d> :LspDefinition<cr>
     let g:ctrlp_types = ['buf', 'fil', 'mru']
