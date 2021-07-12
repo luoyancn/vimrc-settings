@@ -112,7 +112,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'kadekillary/subtle_solo'
 Plugin 'morhetz/gruvbox'
-Plugin 'roosta/vim-srcery'
 Plugin 'srcery-colors/srcery-vim'
 
 Plugin 'scrooloose/nerdtree'
@@ -227,6 +226,8 @@ noremap <C-Tab> <C-W>w
 inoremap <C-Tab> <C-O><C-W>w
 cnoremap <C-Tab> <C-C><C-W>w
 onoremap <C-Tab> <C-C><C-W>w
+" Open the terminal in VIM at the bottom, Only for VIM >= 8.1
+nmap <C-\> :bot :ter<cr>
 
 " Go tags
 "let g:go_autodetect_gopath = 1
@@ -477,6 +478,10 @@ else
     set background=dark
     "colorscheme srcery
     colorscheme gruvbox
+    "colorscheme PaperColor
+    let g:airline_theme="papercolor"
+    "let g:airline_theme = "powerlineish"
+    "let g:airline_theme = "srcery"
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
     let g:jedi#goto_assignments_command = "<C-g>"
     let g:jedi#goto_command = "<C-d>"
