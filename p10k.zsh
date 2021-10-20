@@ -33,9 +33,9 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     os_icon                 # os identifier
     context                 # user@hostname
+    rust_version            # rustc version (https://www.rust-lang.org)
     anaconda                # conda environment (https://conda.io/)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    rust_version            # rustc version (https://www.rust-lang.org)
     dir                     # current directory
     vcs                     # git status
     # prompt_char           # prompt symbol
@@ -870,8 +870,8 @@
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
-  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=255
-  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=022
+  typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=014
+  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=024
   # Don't show Python version next to the virtual environment name.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
   # If set to "false", won't show virtualenv if pyenv is already shown.
@@ -884,8 +884,8 @@
 
   #####################[ anaconda: conda environment (https://conda.io/) ]######################
   # Anaconda environment color.
-  typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=253
-  typeset -g POWERLEVEL9K_ANACONDA_BACKGROUND=064
+  typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=247
+  typeset -g POWERLEVEL9K_ANACONDA_BACKGROUND=023
 
   # Anaconda segment format. The following parameters are available within the expansion.
   #
@@ -1009,12 +1009,12 @@
 
   #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
   # Rust version color.
-  typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=0
-  typeset -g POWERLEVEL9K_RUST_VERSION_BACKGROUND=253
+  typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=245
+  typeset -g POWERLEVEL9K_RUST_VERSION_BACKGROUND=017
   # Show rust version only when in a rust project subdirectory.
   typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
   # Custom icon.
-  typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='🦀'
+  #typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='\uE07a'
 
   ###############[ dotnet_version: .NET version (https://dotnet.microsoft.com) ]################
   # .NET version color.
