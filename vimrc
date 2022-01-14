@@ -139,12 +139,13 @@ Plugin 'luoyancn/pyflakes-vim'
 "Plugin 'racer-rust/vim-racer'
 "Plugin 'maralla/completor.vim'
 Plugin 'rust-lang/rust.vim'
+Plugin 'dense-analysis/ale'
 Plugin 'prabirshrestha/vim-lsp'
 Plugin 'prabirshrestha/async.vim'
 Plugin 'prabirshrestha/asyncomplete.vim'
 Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 Plugin 'mattn/vim-lsp-settings'
-Plugin 'keremc/asyncomplete-racer.vim'
+"Plugin 'keremc/asyncomplete-racer.vim'
 
 if !has("win32")
     Plugin 'mileszs/ack.vim'
@@ -181,6 +182,8 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
 set cursorline autochdir autoread
+au FocusGained,BufEnter * :checktime
+au CursorHold,CursorHoldI * checktime
 augroup cursorline
   au!
   au ColorScheme * hi clear CursorLine
@@ -387,9 +390,9 @@ let g:airline_right_alt_sep = ""
 let g:airline_right_sep = ""
 
 if has("win32")
-    let g:keysound_enable = 1
-    let g:keysound_theme = 'typewriter'
-    let g:keysound_volume = 1000
+    "let g:keysound_enable = 1
+    "let g:keysound_theme = 'typewriter'
+    "let g:keysound_volume = 1000
 else
     map <A-s> :Ack!<Space>
     "let g:clang_library_path='/usr/lib64/libclang.so.8'
@@ -402,6 +405,12 @@ let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
 "let g:lsp_log_verbose = 1
 "let g:lsp_log_file = 'vim-lsp.log'
+
+let g:ale_rust_cargo_use_clippy=1
+let g:ale_rust_cargo_use_check=0
+let g:ale_rust_cargo_check_tests=1
+let g:ale_rust_cargo_check_examples=1
+let g:ale_rust_cargo_default_feature_behavior=('all')
 
 "if executable('rust-analyzer')
 "  au User lsp_setup call lsp#register_server({
@@ -418,6 +427,20 @@ let g:lsp_document_code_action_signs_enabled = 0
 "        \   },
 "        \ })
 "endif
+
+ let g:lsp_settings = {
+ \  'rust-analyzer': {
+ \   'initialization_options': {
+ \     'cargo': {
+ \       'loadOutDirsFromCheck': v:true,
+ \       'autoreload': v:true,
+ \     },
+ \     'procMacro': {
+ \       'enable': v:true,
+ \     },
+ \   },
+ \  },
+ \}
 
 " For Python, Must execute the commands like follows:
 " dnf install python3-language-server python3-autopep8 python3-mccabe
@@ -480,9 +503,9 @@ else
     "colorscheme srcery
     colorscheme gruvbox
     "colorscheme PaperColor
-    let g:airline_theme="papercolor"
+    "let g:airline_theme="papercolor"
     "let g:airline_theme = "powerlineish"
-    "let g:airline_theme = "srcery"
+    let g:airline_theme = "gruvbox"
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
     let g:jedi#goto_assignments_command = "<C-g>"
     let g:jedi#goto_command = "<C-d>"

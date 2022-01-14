@@ -74,8 +74,9 @@ plugins=(
     git
     zsh-autosuggestions
     zsh-syntax-highlighting
+    zsh-completions
 )
-
+autoload -U compinit && compinit
 ZSH_DISABLE_COMPFIX=true
 source $ZSH/oh-my-zsh.sh
 HIST_STAMPS="yyyy-mm-dd"
@@ -107,7 +108,7 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vi="/usr/bin/vi"
+alias vi="/usr/libexec/vi"
 alias cp="rsync -ra --progress"
 
 #source ~/.p10k.zsh
