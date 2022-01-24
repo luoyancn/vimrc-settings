@@ -129,7 +129,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
 " Keyboard sound
-Plugin 'skywind3000/vim-keysound'
+" Plugin 'skywind3000/vim-keysound'
 
 " Python
 Plugin 'davidhalter/jedi-vim'
@@ -151,6 +151,13 @@ if !has("win32")
     Plugin 'mileszs/ack.vim'
     "Plugin 'xavierd/clang_complete'
     Plugin 'keremc/asyncomplete-clang.vim'
+    " For C/C++, clangd must be installed
+    " On Fedora
+    " dnf/yum install clang-tools-extra -y
+    " On CentOS/Redhat
+    " yum install clang -y
+    " On Manjaro
+    " pacman -Syu clang
 endif
 
 " Programe language support
@@ -231,6 +238,7 @@ cnoremap <C-Tab> <C-C><C-W>w
 onoremap <C-Tab> <C-C><C-W>w
 " Open the terminal in VIM at the bottom, Only for VIM >= 8.1
 nmap <C-\> :bot :ter ++rows=12<cr>
+nmap <C-s> :FixWhitespace<cr>
 
 " Go tags
 "let g:go_autodetect_gopath = 1
@@ -395,7 +403,7 @@ if has("win32")
     "let g:keysound_volume = 1000
 else
     map <A-s> :Ack!<Space>
-    "let g:clang_library_path='/usr/lib64/libclang.so.8'
+    "let g:clang_library_path='/usr/lib64/libclang.so.13'
 endif
 
 let g:rustfmt_autosave = 1
@@ -411,6 +419,8 @@ let g:ale_rust_cargo_use_check=0
 let g:ale_rust_cargo_check_tests=1
 let g:ale_rust_cargo_check_examples=1
 let g:ale_rust_cargo_default_feature_behavior=('all')
+
+let g:ale_python_flake8_options = '--ignore=I201'
 
 "if executable('rust-analyzer')
 "  au User lsp_setup call lsp#register_server({
@@ -442,17 +452,22 @@ let g:ale_rust_cargo_default_feature_behavior=('all')
  \  },
  \}
 
+"autocmd User asyncomplete_setup call asyncomplete#register_source(
+"    \ asyncomplete#sources#clang#get_source_options())
+
 " For Python, Must execute the commands like follows:
-" dnf install python3-language-server python3-autopep8 python3-mccabe
+" dnf install python3-language-server python3-autopep8 python3-mccabe \
+" python3-flake8 python3-flake8-import-order python3-flake8-polyfill \
 " python3-pyflakes python3-pylint python3-pydocstyle python3-rope python3-yapf -y
-" or pip install autopep8 mccabe pyflakes pylint pydocstyle rope yapf
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
+" or pip install autopep8 mccabe pyflakes pylint pydocstyle rope yapf \
+" flake8 flake8-import-order flake8-polyfill
+"if executable('pyls')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'pyls',
+"        \ 'cmd': {server_info->['pyls']},
+"        \ 'allowlist': ['python'],
+"        \ })
+"endif
 
 if has("gui_running")
     set guioptions-=T
