@@ -421,6 +421,7 @@ let g:ale_rust_cargo_check_examples=1
 let g:ale_rust_cargo_default_feature_behavior=('all')
 
 let g:ale_python_flake8_options = '--ignore=I201'
+let g:ale_python_pylint_options = '--disable=C0114,C0115,C0116'
 
 "if executable('rust-analyzer')
 "  au User lsp_setup call lsp#register_server({
