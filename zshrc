@@ -120,3 +120,7 @@ if [ $N -eq 1 ]; then
 else
     source ~/.p10k_dark.zsh
 fi
+
+if [[ $TERM = screen ]]; then
+    export TERM=xterm-256color
+fi
