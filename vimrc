@@ -414,14 +414,32 @@ let g:lsp_document_code_action_signs_enabled = 0
 "let g:lsp_log_verbose = 1
 "let g:lsp_log_file = 'vim-lsp.log'
 
-let g:ale_rust_cargo_use_clippy=1
 let g:ale_rust_cargo_use_check=0
 let g:ale_rust_cargo_check_tests=1
 let g:ale_rust_cargo_check_examples=1
 let g:ale_rust_cargo_default_feature_behavior=('all')
+let g:ale_rust_cargo_use_clippy=1
+let g:ale_rust_cargo_clippy_options = '--allow clippy::too_many_arguments --allow clippy::single_component_path_imports'
 
-let g:ale_python_flake8_options = '--ignore=I201'
-let g:ale_python_pylint_options = '--disable=C0114,C0115,C0116'
+let g:ale_python_flake8_options = '--ignore=I201 --import-order-style edited'
+let g:ale_python_pylint_options = '--disable=C0103,C0114,C0115,C0116,C0123,C0302,R0201,R0902,R0904,R0911,R0912,R0913,R0914,R0915,R1702,R1710,W0212,W0511,W0603,W0621,W0703,W0706'
+let g:ale_python_auto_pipenv = 1
+let g:ale_python_bandit_auto_pipenv = 1
+let g:ale_python_black_auto_pipenv = 1
+let g:ale_python_flake8_auto_pipenv = 1
+let g:ale_python_flakehell_auto_pipenv = 1
+let g:ale_python_isort_auto_pipenv = 1
+let g:ale_python_mypy_auto_pipenv = 1
+let g:ale_python_prospector_auto_pipenv = 1
+let g:ale_python_pycodestyle_auto_pipenv = 1
+let g:ale_python_pydocstyle_auto_pipenv = 1
+let g:ale_python_pyflakes_auto_pipenv = 1
+let g:ale_python_pylama_auto_pipenv = 1
+let g:ale_python_pylsp_auto_pipenv = 1
+let g:ale_python_pyre_auto_pipenv = 1
+let g:ale_python_pylint_auto_pipenv = 1
+let g:ale_python_pylint_change_directory = 1
+let g:ale_python_pylint_auto_poetry = 1
 
 "if executable('rust-analyzer')
 "  au User lsp_setup call lsp#register_server({
