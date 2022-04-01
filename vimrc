@@ -480,6 +480,9 @@ let g:ale_python_pylint_auto_poetry = 1
 " python3-pyflakes python3-pylint python3-pydocstyle python3-rope python3-yapf -y
 " or pip install autopep8 mccabe pyflakes pylint pydocstyle rope yapf \
 " flake8 flake8-import-order flake8-polyfill
+" For Debian
+" apt install python3-pyls python3-autopep8 python3-mccabe \
+" python3-flake8 python3-rope python3-yapf python3-flake8-polyfill python3-pyflakes -y
 "if executable('pyls')
 "    au User lsp_setup call lsp#register_server({
 "        \ 'name': 'pyls',
@@ -495,8 +498,8 @@ if has("gui_running")
     set background=dark
     colorscheme srcery
     "let g:airline_theme="papercolor"
-    "let g:airline_theme = "srcery"
-    let g:airline_theme = "powerlineish"
+    let g:airline_theme = "srcery"
+    "let g:airline_theme = "powerlineish"
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
     nnoremap <silent> <F3> :Startify<CR>
@@ -524,22 +527,26 @@ if has("gui_running")
         au GUIEnter * simalt ~x
         set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
         let g:startify_bookmarks = [
-            \ 'F:\个人\新建文本文档.txt',
             \ 'C:\Vim\_vimrc',
-            \ 'E:\github.com',
-            \ 'E:\workspaces\openstack',
-            \ 'E:\workspaces\cprojects\nginx-1.10.2'
         \]
     endif
 else
     set t_Co=256
     set background=dark
-    "colorscheme srcery
-    colorscheme gruvbox
+    let g:srcery_bg_passthrough=1
+    let g:srcery_hard_black_terminal_bg=1
+    let g:srcery_bold = 1
+    let g:srcery_italic = 1
+    let g:srcery_inverse_matches = 1
+    let g:srcery_inverse_match_paren = 1
+    let g:srcery_italic_types = 1
+    colorscheme srcery
+    "colorscheme gruvbox
     "colorscheme PaperColor
     "let g:airline_theme="papercolor"
     "let g:airline_theme = "powerlineish"
-    let g:airline_theme = "gruvbox"
+    "let g:airline_theme = "gruvbox"
+    let g:airline_theme = "srcery"
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
     let g:jedi#goto_assignments_command = "<C-g>"
     let g:jedi#goto_command = "<C-d>"
