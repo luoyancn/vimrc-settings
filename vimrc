@@ -414,12 +414,13 @@ let g:lsp_document_code_action_signs_enabled = 0
 "let g:lsp_log_verbose = 1
 "let g:lsp_log_file = 'vim-lsp.log'
 
+let g:ale_linters = {'rust': ['cargo']}
 let g:ale_rust_cargo_use_check=0
 let g:ale_rust_cargo_check_tests=1
 let g:ale_rust_cargo_check_examples=1
 let g:ale_rust_cargo_default_feature_behavior=('all')
 let g:ale_rust_cargo_use_clippy=1
-let g:ale_rust_cargo_clippy_options = '--allow clippy::too_many_arguments --allow clippy::single_component_path_imports'
+let g:ale_rust_cargo_clippy_options = '--allow clippy::too_many_arguments --allow clippy::single_component_path_imports --allow clippy::redundant_field_names'
 
 let g:ale_python_flake8_options = '--ignore=I201 --import-order-style edited'
 let g:ale_python_pylint_options = '--disable=C0103,C0114,C0115,C0116,C0123,C0302,R0201,R0902,R0904,R0911,R0912,R0913,R0914,R0915,R1702,R1710,W0212,W0511,W0603,W0621,W0703,W0706'
