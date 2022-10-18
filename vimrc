@@ -113,6 +113,7 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'kadekillary/subtle_solo'
 Plugin 'morhetz/gruvbox'
 Plugin 'srcery-colors/srcery-vim'
+Plugin 'frazrepo/vim-rainbow'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/buf_it'
@@ -309,6 +310,10 @@ set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_ctrlp = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_startify = 1
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
 let g:webdevicons_conceal_nerdtree_brackets = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
@@ -336,7 +341,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['dockerfile'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['proto'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['toml'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pem'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rs'] = '🦀️'
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rs'] = ''
 
 let s:brown = "905532"
 let s:aqua =  "3AFFDB"
@@ -411,10 +416,18 @@ let g:lsp_fold_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
-"let g:lsp_log_verbose = 1
-"let g:lsp_log_file = 'vim-lsp.log'
+let g:lsp_log_verbose = 1
+"let g:lsp_log_file = '/var/log/vim-lsp.log'
+
+let g:ale_sign_error = ""
+let g:ale_sign_warning = ""
+let g:ale_echo_msg_error_str = ''
+let g:ale_echo_msg_warning_str = ''
+"let g:ale_echo_msg_format = '[%linter%][%severity%]%s'
+let g:ale_echo_msg_format = '[%severity%] - %s'
 
 let g:ale_linters = {'rust': ['cargo']}
+
 let g:ale_rust_cargo_use_check=0
 let g:ale_rust_cargo_check_tests=1
 let g:ale_rust_cargo_check_examples=1
@@ -491,6 +504,16 @@ let g:ale_python_pylint_auto_poetry = 1
 "        \ 'allowlist': ['python'],
 "        \ })
 "endif
+"
+
+set omnifunc=lsp#complete
+
+let g:WebDevIconsOS='Darwin'
+let g:tagbar_show_tag_linenumbers = 1
+let g:tagbar_show_data_type = 1
+
+let g:rainbow_active = 1
+let NERDTreeWinSize = 25
 
 if has("gui_running")
     set guioptions-=T
@@ -527,9 +550,6 @@ if has("gui_running")
         "打开gui，自动最大化
         au GUIEnter * simalt ~x
         set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
-        let g:startify_bookmarks = [
-            \ 'C:\Vim\_vimrc',
-        \]
     endif
 else
     set t_Co=256
@@ -560,5 +580,6 @@ else
     let g:buftabline_show = 2
     let g:buftabline_numbers = 2
     let g:tagbar_left = 1
+    let g:tagbar_width = 30
     let NERDTreeWinPos = "right"
 endif
