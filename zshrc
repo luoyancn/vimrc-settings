@@ -111,15 +111,15 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 alias vi="/usr/libexec/vi"
 alias cp="rsync -ra --progress"
 
-#source ~/.p10k.zsh
+source ~/.p10k_transparent.zsh
 
-N=2
-(( N = (RANDOM%N) + 1 ))
-if [ $N -eq 1 ]; then
-    source ~/.p10k.zsh
-else
-    source ~/.p10k_dark.zsh
-fi
+#N=2
+#(( N = (RANDOM%N) + 1 ))
+#if [ $N -eq 1 ]; then
+#    source ~/.p10k.zsh
+#else
+#    source ~/.p10k_dark.zsh
+#fi
 
 if [[ $TERM = screen ]]; then
     export TERM=xterm-256color

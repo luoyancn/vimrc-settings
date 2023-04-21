@@ -148,6 +148,12 @@ Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 Plugin 'mattn/vim-lsp-settings'
 "Plugin 'keremc/asyncomplete-racer.vim'
 
+if has('python3')
+    Plugin 'SirVer/ultisnips'
+    Plugin 'honza/vim-snippets'
+    Plugin 'prabirshrestha/asyncomplete-ultisnips.vim'
+endif
+
 if !has("win32")
     Plugin 'mileszs/ack.vim'
     "Plugin 'xavierd/clang_complete'
@@ -171,7 +177,7 @@ Plugin 'vim-scripts/a.vim'
 "Plugin 'visualfc/gocode', {'rtp': 'vim/'}
 
 if !has("gui_running")
-    Plugin 'ap/vim-buftabline'
+    "Plugin 'ap/vim-buftabline'
 endif
 
 call vundle#end()            " required
@@ -323,6 +329,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitreview'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitconfig'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.git'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.lock'] = ''
 
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['conf'] = ''
@@ -342,6 +349,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['proto'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['toml'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pem'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rs'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['lock'] = ''
 
 let s:brown = "905532"
 let s:aqua =  "3AFFDB"
@@ -396,11 +404,12 @@ let g:airline_symbols = {}
 let g:airline_symbols.branch = ""
 let g:airline_symbols.readonly = ""
 let g:airline_symbols.linenr = ""
+let g:airline_symbols.colnr = ""
 let g:airline_symbols.maxlinenr= ""
-let g:airline_left_alt_sep = ""
 let g:airline_left_sep = ""
-let g:airline_right_alt_sep = ""
+let g:airline_left_alt_sep = ""
 let g:airline_right_sep = ""
+let g:airline_right_alt_sep = ""
 
 if has("win32")
     "let g:keysound_enable = 1
@@ -411,20 +420,42 @@ else
     "let g:clang_library_path='/usr/lib64/libclang.so.13'
 endif
 
+let g:lsp_settings = {
+\  'rust-analyzer': {
+\   'initialization_options': {
+\     'cargo': {
+\       'loadOutDirsFromCheck': v:true,
+\       'autoreload': v:true,
+\     },
+\     'procMacro': {
+\       'enable': v:true,
+\     },
+\   },
+\  },
+\}
+
 let g:rustfmt_autosave = 1
+let g:rustfmt_options = '--config max_width=80'
 let g:lsp_fold_enabled = 0
+let g:lsp_diagnostics_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_log_verbose = 1
+"let g:lsp_log_verbose = 1
 "let g:lsp_log_file = '/var/log/vim-lsp.log'
 
+let g:ale_virtualtext_cursor = '0'
+let g:ale_virtualtext_prefix = ' '
 let g:ale_sign_error = ""
 let g:ale_sign_warning = ""
 let g:ale_echo_msg_error_str = ''
 let g:ale_echo_msg_warning_str = ''
-"let g:ale_echo_msg_format = '[%linter%][%severity%]%s'
-let g:ale_echo_msg_format = '[%severity%] - %s'
+let g:ale_echo_cursor = 0
+let g:ale_echo_msg_format = '%severity% - %s'
+let g:ale_detail_to_floating_preview = 1
+let g:ale_cursor_detail = 1
+let g:ale_close_preview_on_insert = 1
+"let g:ale_echo_msg_format = '[%severity%] - %s'
 
 let g:ale_linters = {'rust': ['cargo']}
 
@@ -433,7 +464,7 @@ let g:ale_rust_cargo_check_tests=1
 let g:ale_rust_cargo_check_examples=1
 let g:ale_rust_cargo_default_feature_behavior=('all')
 let g:ale_rust_cargo_use_clippy=1
-let g:ale_rust_cargo_clippy_options = '--allow clippy::too_many_arguments --allow clippy::single_component_path_imports --allow clippy::redundant_field_names'
+let g:ale_rust_cargo_clippy_options = '--allow clippy::too_many_arguments --allow clippy::single_component_path_imports --allow clippy::redundant_field_names --allow clippy::enum_variant_names'
 
 let g:ale_python_flake8_options = '--ignore=I201 --import-order-style edited'
 let g:ale_python_pylint_options = '--disable=C0103,C0114,C0115,C0116,C0123,C0302,R0201,R0902,R0904,R0911,R0912,R0913,R0914,R0915,R1702,R1710,W0212,W0511,W0603,W0621,W0703,W0706'
@@ -470,21 +501,6 @@ let g:ale_python_pylint_auto_poetry = 1
 "        \   },
 "        \ })
 "endif
-
- let g:lsp_settings = {
- \  'rust-analyzer': {
- \   'initialization_options': {
- \     'cargo': {
- \       'loadOutDirsFromCheck': v:true,
- \       'autoreload': v:true,
- \     },
- \     'procMacro': {
- \       'enable': v:true,
- \     },
- \   },
- \  },
- \}
-
 "autocmd User asyncomplete_setup call asyncomplete#register_source(
 "    \ asyncomplete#sources#clang#get_source_options())
 
@@ -507,6 +523,15 @@ let g:ale_python_pylint_auto_poetry = 1
 "
 
 set omnifunc=lsp#complete
+
+if has('python3')
+    let g:UltiSnipsExpandTrigger="<tab>"
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'allowlist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+endif
 
 let g:WebDevIconsOS='Darwin'
 let g:tagbar_show_tag_linenumbers = 1
@@ -539,7 +564,7 @@ if has("gui_running")
     let g:jedi#usages_command = "<A-r>"
     nmap <A-r> :LspReferences<cr>
     nmap <A-d> :LspDeclaration<cr>
-    nmap <C-/> :LspCargoReload<cr>
+    nmap <S-F1> :LspCargoReload<cr>
     "set showtabline=2
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
@@ -575,7 +600,7 @@ else
     let g:jedi#usages_command = "<S-f>"
     nmap <S-f> :LspReferences<cr>
     nmap <C-d> :LspDefinition<cr>
-    nmap <C-/> :LspCargoReload<cr>
+    nmap <S-F1> :LspCargoReload<cr>
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2
     let g:buftabline_numbers = 2
