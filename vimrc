@@ -102,10 +102,14 @@ elseif has("win32")
     "py import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
 endif
 
+" if using neovim, the init.vim should be placed under follows:
+" /etc/xdg/nvim/init.vim
+" ~/.config/nvim/init.vim
+
 filetype off
 if has('nvim')
-  set rtp+=/opt/zhangjl/vimbundle/bundle/Vundle.vim
-  call vundle#begin('/opt/zhangjl/vimbundle/bundle')
+  set rtp+=/usr/share/vim/bundle/Vundle.vim
+  call vundle#begin('/usr/share/vim/bundle')
 else
   set rtp+=$VIM/bundle/Vundle.vim
   call vundle#begin('$VIM/bundle')
