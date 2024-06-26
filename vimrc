@@ -103,8 +103,13 @@ elseif has("win32")
 endif
 
 filetype off
-set rtp+=$VIM/bundle/Vundle.vim
-call vundle#begin('$VIM/bundle')
+if has('nvim')
+  set rtp+=/opt/zhangjl/vimbundle/bundle/Vundle.vim
+  call vundle#begin('/opt/zhangjl/vimbundle/bundle')
+else
+  set rtp+=$VIM/bundle/Vundle.vim
+  call vundle#begin('$VIM/bundle')
+endif
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -114,6 +119,7 @@ Plugin 'kadekillary/subtle_solo'
 Plugin 'morhetz/gruvbox'
 Plugin 'srcery-colors/srcery-vim'
 Plugin 'frazrepo/vim-rainbow'
+Plugin 'vim-scripts/LargeFile'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/buf_it'
@@ -312,7 +318,9 @@ let g:pyflakes_use_quickfix = 0
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_check_on_wq = 0
 
-set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+if !has('nvim')
+  set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+endif
 
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_ctrlp = 1
@@ -410,6 +418,8 @@ let g:airline_left_sep = ""
 let g:airline_left_alt_sep = ""
 let g:airline_right_sep = ""
 let g:airline_right_alt_sep = ""
+let g:airline#extensions#ale#error_symbol = ""
+let g:airline#extensions#ale#warning_symbol = ""
 
 if has("win32")
     "let g:keysound_enable = 1
@@ -441,21 +451,28 @@ let g:lsp_diagnostics_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
-"let g:lsp_log_verbose = 1
-"let g:lsp_log_file = '/var/log/vim-lsp.log'
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = '/var/log/vim-lsp.log'
+
+if has('nvim')
+  let g:ale_use_neovim_diagnostics_api = 0
+endif
 
 let g:ale_virtualtext_cursor = '0'
 let g:ale_virtualtext_prefix = ' '
 let g:ale_sign_error = ""
 let g:ale_sign_warning = ""
+let g:ale_sign_style_error = ""
+let g:ale_sign_style_warning = ""
+let g:ale_echo_msg_format = '%severity% - %s'
 let g:ale_echo_msg_error_str = ''
 let g:ale_echo_msg_warning_str = ''
 let g:ale_echo_cursor = 0
-let g:ale_echo_msg_format = '%severity% - %s'
 let g:ale_detail_to_floating_preview = 1
 let g:ale_cursor_detail = 1
 let g:ale_close_preview_on_insert = 1
 "let g:ale_echo_msg_format = '[%severity%] - %s'
+" let g:ale_lsp_suggestions = 1
 
 let g:ale_linters = {'rust': ['cargo']}
 
@@ -478,10 +495,10 @@ let g:ale_rust_cargo_check_tests=1
 let g:ale_rust_cargo_check_examples=1
 let g:ale_rust_cargo_default_feature_behavior=('all')
 let g:ale_rust_cargo_use_clippy=1
-let g:ale_rust_cargo_clippy_options = '--allow clippy::too_many_arguments --allow clippy::single_component_path_imports --allow clippy::redundant_field_names --allow clippy::enum_variant_names'
+let g:ale_rust_cargo_clippy_options = '--allow clippy::too_many_arguments --allow clippy::single_component_path_imports --allow clippy::redundant_field_names --allow clippy::enum_variant_names --allow clippy::upper_case_acronyms'
 
-let g:ale_python_flake8_options = '--ignore=I201 --import-order-style edited'
-let g:ale_python_pylint_options = '--disable=C0103,C0114,C0115,C0116,C0123,C0302,R0201,R0902,R0904,R0911,R0912,R0913,R0914,R0915,R1702,R1710,W0212,W0511,W0603,W0621,W0703,W0706'
+let g:ale_python_flake8_options = '--ignore=I201,D103,D104,D100,D103,D105,D101,D102,D107 --import-order-style edited'
+let g:ale_python_pylint_options = '--disable=C0103,C0114,C0115,C0116,C0123,C0302,D101,D102,D103,D104,D107,R0201,R0902,R0904,R0911,R0912,R0913,R0914,R0915,R1702,R1710,W0212,W0511,W0603,W0621,W0703,W0706'
 let g:ale_python_auto_pipenv = 1
 let g:ale_python_bandit_auto_pipenv = 1
 let g:ale_python_black_auto_pipenv = 1
@@ -547,7 +564,7 @@ if has('python3')
         \ }))
 endif
 
-let g:WebDevIconsOS='Darwin'
+" let g:WebDevIconsOS='Darwin'
 let g:tagbar_show_tag_linenumbers = 1
 let g:tagbar_show_data_type = 1
 
@@ -619,6 +636,6 @@ else
     let g:buftabline_show = 2
     let g:buftabline_numbers = 2
     let g:tagbar_left = 1
-    let g:tagbar_width = 30
+    "let g:tagbar_width = 30
     let NERDTreeWinPos = "right"
 endif
