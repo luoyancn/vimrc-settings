@@ -103,6 +103,7 @@ elseif has("win32")
 endif
 
 " if using neovim, the init.vim should be placed under follows:
+" /usr/share/nvim/sysinit.vim
 " /etc/xdg/nvim/init.vim
 " ~/.config/nvim/init.vim
 
@@ -643,3 +644,10 @@ else
     "let g:tagbar_width = 30
     let NERDTreeWinPos = "right"
 endif
+
+" 增加ale的警告与错误提示颜色
+autocmd VimEnter *
+\ if g:colors_name == 'srcery' && exists('g:ale_enabled') |
+\   hi ALEWarning ctermfg=252 ctermbg=53 guifg=#eeeeee guibg=#8700af |
+\   hi ALEError ctermfg=15 ctermbg=1 guifg=White guibg=Red |
+\ endif
