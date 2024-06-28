@@ -109,8 +109,13 @@ endif
 
 filetype off
 if has('nvim')
-  set rtp+=/usr/share/vim/bundle/Vundle.vim
-  call vundle#begin('/usr/share/vim/bundle')
+  if has("win32")
+    set rtp+=C:\Vim\bundle\Vundle.vim
+    call vundle#begin('C:\Vim\bundle')
+  else
+    set rtp+=/usr/share/vim/bundle/Vundle.vim
+    call vundle#begin('/usr/share/vim/bundle')
+  endif
 else
   set rtp+=$VIM/bundle/Vundle.vim
   call vundle#begin('$VIM/bundle')
