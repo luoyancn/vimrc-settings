@@ -406,11 +406,12 @@ let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 
 " 只显示文件名，不显示路径内容
+"let g:airline_experimental = 1
+let g:airline_detect_modified=1
+let g:airline_detect_paste=1
+let g:airline_detect_crypt=1
+let g:airline_detect_spell=1
 let g:airline_section_c = '%t'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':p:t'
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#whitespace#symbol = '!'
 let g:airline_powerline_fonts = 1
 let g:Powerline_symbols="fancy"
 let g:airline_symbols = {}
@@ -420,9 +421,21 @@ let g:airline_symbols.linenr = ""
 let g:airline_symbols.colnr = ""
 let g:airline_symbols.maxlinenr= ""
 let g:airline_left_sep = ""
-let g:airline_left_alt_sep = ""
+"let g:airline_left_alt_sep = ""
+let g:airline_left_alt_sep = ""
 let g:airline_right_sep = ""
-let g:airline_right_alt_sep = ""
+"let g:airline_right_alt_sep = ""
+let g:airline_right_alt_sep = ""
+let g:airline#extensions#lsp#enabled = 1
+
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':p:t'
+
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#symbol = '!'
+
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#ale#error_symbol = ""
 let g:airline#extensions#ale#warning_symbol = ""
 
@@ -576,15 +589,20 @@ let g:tagbar_show_data_type = 1
 let g:rainbow_active = 1
 let NERDTreeWinSize = 25
 
+if has('nvim')
+  colorscheme PaperColor
+  let g:airline_theme="papercolor"
+else
+  colorscheme srcery
+  "let g:airline_theme = "srcery"
+  let g:airline_theme = "powerlineish"
+endif
+
 if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1
     "set guioptions-=m
     set background=dark
-    colorscheme srcery
-    "let g:airline_theme="papercolor"
-    let g:airline_theme = "srcery"
-    "let g:airline_theme = "powerlineish"
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>
     nnoremap <silent> <F3> :Startify<CR>
@@ -604,9 +622,12 @@ if has("gui_running")
     "set showtabline=2
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
-
     if has("unix")
-        set guifont=CodeNewRoman\ NF\ 16
+        if has('nvim')
+          set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
+        else
+          set guifont=CodeNewRoman\ Nerd\ Font\ Mono\ 16
+        endif
     elseif has("win32")
         "打开gui，自动最大化
         au GUIEnter * simalt ~x
@@ -622,13 +643,6 @@ else
     let g:srcery_inverse_matches = 1
     let g:srcery_inverse_match_paren = 1
     let g:srcery_italic_types = 1
-    colorscheme srcery
-    "colorscheme gruvbox
-    "colorscheme PaperColor
-    "let g:airline_theme="papercolor"
-    "let g:airline_theme = "powerlineish"
-    "let g:airline_theme = "gruvbox"
-    let g:airline_theme = "srcery"
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
     let g:jedi#goto_assignments_command = "<C-g>"
     let g:jedi#goto_command = "<C-d>"
