@@ -637,6 +637,10 @@ if has("gui_running")
         "打开gui，自动最大化
         au GUIEnter * simalt ~x
         set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
+        if exists('g:neovide')
+          set linespace=6
+          let g:neovide_scale_factor = 1.0
+        endif
     endif
 else
     set t_Co=256
