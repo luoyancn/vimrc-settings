@@ -147,7 +147,7 @@ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
 " Keyboard sound
 " Plugin 'skywind3000/vim-keysound'
-
+Plugin 'liuchengxu/vim-clap'
 " Python
 Plugin 'davidhalter/jedi-vim'
 Plugin 'luoyancn/pyflakes-vim'
@@ -667,6 +667,10 @@ else
     "let g:tagbar_width = 30
     let NERDTreeWinPos = "right"
 endif
+let g:clap_plugin_experimental = v:true
+let g:clap_start_server_on_startup=0
+let g:clap_provider_alias = {}
+nmap <C-k> :Clap<cr>
 
 " 增加ale的警告与错误提示颜色
 autocmd VimEnter *
