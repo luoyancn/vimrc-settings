@@ -597,6 +597,7 @@ let NERDTreeWinSize = 25
 if has('nvim')
   colorscheme PaperColor
   let g:airline_theme="papercolor"
+  set wildoptions=fuzzy
 else
   colorscheme srcery
   "let g:airline_theme = "srcery"
