@@ -223,17 +223,24 @@ augroup END
 set noswapfile nobackup nofoldenable noundofile noautoindent nocindent nosmartindent nowrap
 set colorcolumn=80,80 laststatus=2
 highlight ColorColumn guibg=#009ACD ctermbg=None
+set noshowmode
+set foldmethod=indent
+set foldlevelstart=99
+set fillchars=eob:\ ,vert:\│
+autocmd ColorScheme * highlight VertSplit cterm=bold ctermfg=232 ctermbg=None
+autocmd ColorScheme * highlight VertSplit guifg=#121212
 
 set tabstop=4 softtabstop=4 expandtab
 autocmd FileType html,javascript set tabstop=2 softtabstop=2 expandtab
 autocmd FileType python,tex,vim set tabstop=4 softtabstop=4 expandtab
 autocmd FileType c,h,go,cpp,make set tabstop=8 softtabstop=8 noexpandtab
+autocmd FileType lua set tabstop=8 softtabstop=8 expandtab
 filetype indent off
-set noshowmode
 
 set completeopt-=preview
 
-let g:indentLine_char='┆'
+"let g:indentLine_char='┆'
+let g:indentLine_char='│'
 let g:indentLine_enabled = 1
 
 " Tagbar
@@ -251,9 +258,10 @@ let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 " let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\~$']
 let NERDTreeShowBookmarks=1
 let g:NERDTreeCopyCmd= 'cp -r '
+let g:NERDTreeStatusline = 'Nerdtree'
 
 "startify
-let g:startify_files_number = 40
+let g:startify_files_number = 10
 
 noremap <C-Tab> <C-W>w
 inoremap <C-Tab> <C-O><C-W>w
@@ -436,6 +444,11 @@ let g:airline#extensions#lsp#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':p:t'
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type= 2
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#buffers_label = 'Buffers'
+let g:airline#extensions#tabline#tabs_label = 'TABS'
 
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
@@ -593,6 +606,7 @@ let g:tagbar_show_data_type = 1
 
 let g:rainbow_active = 1
 let NERDTreeWinSize = 25
+let g:tagbar_width = 25
 
 if has('nvim')
   colorscheme PaperColor
@@ -623,7 +637,7 @@ if has("gui_running")
     let g:jedi#goto_definitions_command = "<A-m>"
     let g:jedi#usages_command = "<A-r>"
     nmap <A-r> :LspReferences<cr>
-    nmap <A-d> :LspDeclaration<cr>
+    nmap <A-d> :LspDefinition<cr>
     nmap <S-F1> :LspCargoReload<cr>
     "set showtabline=2
     map  <silent> <S-Insert>  "+p
