@@ -1,0 +1,36 @@
+let g:webdevicons_enable = 1
+let g:webdevicons_enable_ctrlp = 1
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_startify = 1
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+let g:webdevicons_conceal_nerdtree_brackets = 1
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
+
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols = {}
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitignore'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitreview'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.gitconfig'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.git'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExactSymbols['.lock'] = ''
+
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['conf'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['cfg'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['yml'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['xml'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['go'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['py'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pdf'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rst'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['crt'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['key'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['dockerfile'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['proto'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['toml'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['pem'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rs'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['lock'] = ''
