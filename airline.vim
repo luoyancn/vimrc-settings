@@ -22,12 +22,34 @@ let g:airline_right_alt_sep = ""
 let g:airline#extensions#lsp#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':p:t'
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#tab_nr_type= 2
-let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#tabline#fnametruncate = 0
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_idx_format = {
+      \ '0': '0 ',
+      \ '1': '➊  ',
+      \ '2': '➋  ',
+      \ '3': '➌  ',
+      \ '4': '➍  ',
+      \ '5': '➎  ',
+      \ '6': '➏  ',
+      \ '7': '➐  ',
+      \ '8': '➑  ',
+      \ '9': '➒  ',
+      \ '10': '➓  '
+      \}
+
+let g:airline#extensions#tabline#buffer_nr_show = 0
+"let g:airline#extensions#tabline#buffer_nr_format= '%s '
+
+"let g:airline#extensions#tabline#show_tab_nr = 1
+"let g:airline#extensions#tabline#tab_nr_type= 2
+"let g:airline#extensions#tabline#show_tab_type = 1
+
 let g:airline#extensions#tabline#buffers_label = 'Buffers'
 let g:airline#extensions#tabline#tabs_label = 'TABS'
+
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#symbol = '!'
 let g:airline#extensions#ale#enabled = 1
