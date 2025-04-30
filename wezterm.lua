@@ -3,15 +3,18 @@ local wezterm = require 'wezterm'
 return {
         default_prog = {'wsl.exe', '--cd', '~', '--distribution', 'f36'},
         window_decorations = 'RESIZE',
-        font = wezterm.font('CodeNewRoman Nerd Font', { weight = 'Regular' }),
+        font = wezterm.font_with_fallback({
+                { family = 'CodeNewRoman Nerd Font Mono', weight = 'Regular' }, -- 英文 + 符号优先使用它
+                { family = 'Microsoft YaHei' }, -- 中文字体
+        }),
         font_size = 14,
-        --line_height = 1.2,
+        line_height = 1.2,
         allow_square_glyphs_to_overflow_width = 'Always',
         harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
         adjust_window_size_when_changing_font_size = false,
         freetype_load_flags = 'NO_HINTING',
         freetype_render_target = 'Normal',
-        window_background_image = 'C:\\Windows\\Web\\Wallpaper\\Anime\\100299297_p0.jpg',
+        window_background_image = "C:\\Windows\\Web\\Wallpaper\\Anime\\4.png",
         window_background_image_hsb = {
                 brightness = 0.05,
                 hue = 1.0,
@@ -29,13 +32,13 @@ return {
                 -- 水平分屏（上下）
                 {
                         key = 'h',
-                        mods = 'CTRL|SHIFT',
+                        mods = 'CTRL|ALT',
                         action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
                 },
                 -- 垂直分屏（左右）
                 {
                         key = 'j',
-                        mods = 'CTRL|SHIFT',
+                        mods = 'CTRL|ALT',
                         action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
                 },
                 -- 面板间导航
@@ -104,6 +107,11 @@ return {
                         key = '9',
                         mods = 'ALT',
                         action = wezterm.action.ActivateTab(8),
+                },
+                {
+                        key = "n",
+                        mods = "CTRL|SHIFT",
+                        action = wezterm.action.SpawnCommandInNewTab{args = {'cmd.exe'}}
                 },
         },
         colors = {
