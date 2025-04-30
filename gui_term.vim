@@ -22,6 +22,19 @@ if has("gui_running")
     "set showtabline=2
     map  <silent> <S-Insert>  "+p
     imap <silent> <S-Insert>  <Esc>"+pa
+    let g:airline#extensions#tabline#buffer_idx_format = {
+          \ '0': '0 ',
+          \ '1': '➊ ',
+          \ '2': '➋ ',
+          \ '3': '➌ ',
+          \ '4': '➍ ',
+          \ '5': '➎ ',
+          \ '6': '➏ ',
+          \ '7': '➐ ',
+          \ '8': '➑ ',
+          \ '9': '➒ ',
+          \ '10': '➓ '
+          \}
     if has("unix")
         if has('nvim')
           set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
@@ -61,4 +74,24 @@ else
     let g:tagbar_left = 1
     "let g:tagbar_width = 30
     let NERDTreeWinPos = "right"
+    let g:airline#extensions#tabline#buffer_idx_format = {
+          \ '0': '0 ',
+          \ '1': '➊  ',
+          \ '2': '➋  ',
+          \ '3': '➌  ',
+          \ '4': '➍  ',
+          \ '5': '➎  ',
+          \ '6': '➏  ',
+          \ '7': '➐  ',
+          \ '8': '➑  ',
+          \ '9': '➒  ',
+          \ '10': '➓  '
+          \}
+endif
+
+let s:colorschemes = ['gruvbox', 'srcery', 'papercolor']
+let s:random_index = rand() % len(s:colorschemes)
+execute 'colorscheme ' . s:colorschemes[s:random_index]
+if has("termguicolors")
+  let &t_SI = "\e[6 q"  " 插入模式：竖线光标
 endif

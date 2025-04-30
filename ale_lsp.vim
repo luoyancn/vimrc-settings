@@ -69,6 +69,9 @@ let g:lsp_settings = {
 \     'cargo': {
 \       'loadOutDirsFromCheck': v:true,
 \       'autoreload': v:true,
+\       'buildScripts': {
+\         'enable': v:true,
+\       },
 \     },
 \     'procMacro': {
 \       'enable': v:true,
@@ -109,6 +112,9 @@ let g:ale_close_preview_on_insert = 1
 " let g:ale_lsp_suggestions = 1
 
 let g:ale_linters = {'rust': ['cargo']}
+let g:ale_pattern_options = {
+\   '.*\.lua$': {'ale_enabled': 0},
+\}
 
 " For C/C++ projects, ALE cannot determine the self-defined header files.
 " To resolv this problem, a file named compile_commands.json is need.

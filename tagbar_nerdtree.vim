@@ -11,6 +11,7 @@ let g:tagbar_map_showproto = ''
 let g:tagbar_show_tag_linenumbers = 1
 let g:tagbar_show_data_type = 1
 let g:tagbar_width = 25
+let g:tagbar_iconchars = ['▸', '▾']
 
 " Nerd Tree
 let NERDChristmasTree=0
@@ -19,6 +20,8 @@ let NERDTreeChDirMode=2
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
+let NERDTreeDirArrowExpandable="▸"
+let NERDTreeDirArrowCollapsible="▾"
 let g:NERDTreeCopyCmd= 'cp -r '
 let g:NERDTreeStatusline = 'Nerdtree'
 let g:NERDTreeExtensionHighlightColor = {}

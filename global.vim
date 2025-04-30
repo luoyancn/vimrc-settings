@@ -171,3 +171,12 @@ let g:lightGreen = "31B53E"
 let g:white = "FFFFFF"
 let g:rspec_red = 'FE405F'
 let g:git_orange = 'F54D27'
+autocmd BufWritePre * %s/\s\+$//e
+
+augroup ChangeCursorShape
+    autocmd!
+    " 插入模式：线型光标（竖线）
+    autocmd InsertEnter * silent execute "!echo -ne '\e[5 q'"
+    " 普通模式：方块光标
+    autocmd InsertLeave * silent execute "!echo -ne '\e[1 q'"
+augroup END

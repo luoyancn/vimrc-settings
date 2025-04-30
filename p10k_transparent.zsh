@@ -126,8 +126,8 @@
   # Don't show remote branch, current tag or stashes.
   #typeset -g POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-untracked git-aheadbehind)
   # Don't show the branch icon.
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='%40F '
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='%200F'
+  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='%40F  '
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='%200F '
 
   function my_git_formatter() {
     emulate -L zsh
@@ -157,36 +157,36 @@
         ]]; then
       local tag=${(V)VCS_STATUS_TAG}
       (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
-      res+="${clean} ${clean}${tag//\%/%%}"
+      res+="${clean}  ${clean}${tag//\%/%%}"
     fi
 
     [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&  # <-- this line
-      res+="${clean} ${clean}${VCS_STATUS_COMMIT[1,8]}"
+      res+="${clean}  ${clean}${VCS_STATUS_COMMIT[1,8]}"
 
     if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
       res+="${clean}${clean}${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
     fi
 
     if [[ $VCS_STATUS_COMMIT_SUMMARY == (|*[^[:alnum:]])(wip|WIP)(|[^[:alnum:]]*) ]]; then
-      res+=" ${modified}"
+      res+=" ${modified} "
     fi
 
-    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}${VCS_STATUS_COMMITS_BEHIND}"
+    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean} ${VCS_STATUS_COMMITS_BEHIND}"
     (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
-    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}${VCS_STATUS_COMMITS_AHEAD}"
-    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean} ${VCS_STATUS_COMMITS_AHEAD}"
+    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean} ${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}${VCS_STATUS_PUSH_COMMITS_AHEAD}"
+    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean} ${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=""
     #(( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}${VCS_STATUS_COMMITS_AHEAD}"
-    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean} ${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}${VCS_STATUS_PUSH_COMMITS_AHEAD}"
+    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean} ${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     (( VCS_STATUS_STASHES        )) && res+=" ${clean}*${VCS_STATUS_STASHES}"
     [[ -n $VCS_STATUS_ACTION     ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
     (( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
-    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}${VCS_STATUS_NUM_STAGED}"
-    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}${VCS_STATUS_NUM_UNSTAGED}"
+    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified} ${VCS_STATUS_NUM_STAGED}"
+    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified} ${VCS_STATUS_NUM_UNSTAGED}"
     (( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
     (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}─"
     typeset -g my_git_format=$res
@@ -207,10 +207,10 @@
   typeset -g POWERLEVEL9K_VCS_PREFIX=''
   typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
 
-  typeset -g POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION='%092F [${CONDA_DEFAULT_ENV}]${P9K_ANACONDA_PYTHON_VERSION}'
+  typeset -g POWERLEVEL9K_ANACONDA_CONTENT_EXPANSION='%092F [${CONDA_DEFAULT_ENV}]${P9K_ANACONDA_PYTHON_VERSION}'
   typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=160
   typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
-  typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='%160F'
+  typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='%160F '
 
   typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
   typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off

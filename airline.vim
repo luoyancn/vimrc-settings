@@ -26,19 +26,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#fnamecollapse = 1
 let g:airline#extensions#tabline#fnametruncate = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#buffer_idx_format = {
-      \ '0': '0 ',
-      \ '1': '➊  ',
-      \ '2': '➋  ',
-      \ '3': '➌  ',
-      \ '4': '➍  ',
-      \ '5': '➎  ',
-      \ '6': '➏  ',
-      \ '7': '➐  ',
-      \ '8': '➑  ',
-      \ '9': '➒  ',
-      \ '10': '➓  '
-      \}
 
 let g:airline#extensions#tabline#buffer_nr_show = 0
 "let g:airline#extensions#tabline#buffer_nr_format= '%s '
