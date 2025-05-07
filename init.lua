@@ -18,6 +18,7 @@ local is_nvim_011_or_newer = (nvim_version.major > 0)
 local function lsp_config()
         if is_nvim_011_or_newer then
                 -- 这里是 rust-analyzer 示例，其他语言按需加
+                vim.lsp.set_log_level("OFF")
                 vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'clangd', 'lua_ls'})
                 vim.lsp.config('rust_analyzer',
                         {
@@ -60,8 +61,18 @@ local function lsp_config()
                                 },
                         },
                 })
-
                 lspconfig.pylsp.setup({
+                        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+                })
+                lspconfig.lua_ls.setup({
+                        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+                        settings = {
+                                Lua = {
+                                        diagnostics = { enable = false },
+                                },
+                        },
+                })
+                lspconfig.taplo.setup({
                         capabilities = require('cmp_nvim_lsp').default_capabilities(),
                 })
         end
@@ -91,7 +102,7 @@ local function airline_config()
           paste = 'PASTE',
           spell = 'SPELL',
           space = ' ',
-          dirty = '!',
+          dirty = '',
           keymap= 'Keymap:',
           crypt = '🔒',
           notexists = 'Ɇ'
@@ -253,6 +264,28 @@ require('lazy').setup({
                                                         { name = 'nvim_lsp' },
                                                         { name = 'luasnip' },
                                                 }),
+                                                window = {
+                                                        completion = {
+                                                                col_offset = -3,  -- 控制浮窗偏移量，负数更靠近光标
+                                                                side_padding = 1, -- 左右留白
+                                                                --winhighlight = "Normal:Normal,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
+                                                                border = "single",
+                                                        },
+                                                        documentation = {
+                                                                max_width = 50,   -- 控制右侧文档提示的最大宽度
+                                                                border = "single"
+                                                        },
+                                                },
+                                                formatting = {
+                                                        format = function(entry, vim_item)
+                                                                vim_item.menu = ({
+                                                                        --nvim_lsp = "[LSP]",
+                                                                        --buffer = "[BUF]",
+                                                                        --path = "[PATH]",
+                                                                })[entry.source.name]
+                                                                return vim_item
+                                                        end
+                                                }
                                         })
                                 end,
                         }
@@ -513,4 +546,3 @@ vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
 if vim.g.neovide then
         vim.g.neovide_cursor_vfx_mode = 'torpedo'
 end
-

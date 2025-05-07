@@ -1,3 +1,6 @@
+let s:colorschemes = ['gruvbox', 'srcery', 'papercolor']
+let s:random_index = rand() % len(s:colorschemes)
+execute 'colorscheme ' . s:colorschemes[s:random_index]
 if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1
@@ -51,7 +54,8 @@ if has("gui_running")
         endif
     endif
 else
-    set t_Co=256
+    "set t_Co=256
+    set termguicolors
     set background=dark
     let g:srcery_bg_passthrough=1
     let g:srcery_hard_black_terminal_bg=1
@@ -88,10 +92,7 @@ else
           \ '10': '➓  '
           \}
 endif
-
-let s:colorschemes = ['gruvbox', 'srcery', 'papercolor']
-let s:random_index = rand() % len(s:colorschemes)
-execute 'colorscheme ' . s:colorschemes[s:random_index]
 if has("termguicolors")
   let &t_SI = "\e[6 q"  " 插入模式：竖线光标
 endif
+
