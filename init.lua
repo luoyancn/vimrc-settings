@@ -6,7 +6,7 @@ if vim.fn.has('gui_running') == 0 then
 end
 
 if vim.fn.has('win32') == 1 then
-        plug_root_path = 'C:\\Vim\\bundle'
+        plug_root_path = 'D:\\github.com\\bundle'
 end
 
 -- 获取当前neovim的版本
@@ -19,7 +19,8 @@ local function lsp_config()
         if is_nvim_011_or_newer then
                 -- 这里是 rust-analyzer 示例，其他语言按需加
                 vim.lsp.set_log_level("OFF")
-                vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'clangd', 'lua_ls'})
+                --vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'clangd', 'lua_ls'})
+                vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'lua_ls'})
                 vim.lsp.config('rust_analyzer',
                         {
                                 settings = {
@@ -37,6 +38,16 @@ local function lsp_config()
                                                 procMacro = {
                                                         enable = true,
                                                 },
+                                        },
+                                },
+                                capabilities = require('cmp_nvim_lsp').default_capabilities(),
+                        }
+                )
+                vim.lsp.config('lua_ls',
+                        {
+                                settings = {
+                                        Lua = {
+                                                diagnostics = { enable = false },
                                         },
                                 },
                                 capabilities = require('cmp_nvim_lsp').default_capabilities(),
@@ -129,18 +140,24 @@ local function airline_config()
         vim.g['airline#extensions#ale#error_symbol'] = ''
         vim.g['airline#extensions#ale#warning_symbol'] = ''
         vim.g['airline#extensions#tabline#buffer_idx_format'] = {
-                ['0'] = '0 ',
-                ['1'] = '➊ ',
-                ['2'] = '➋ ',
-                ['3'] = '➌ ',
-                ['4'] = '➍ ',
-                ['5'] = '➎ ',
-                ['6'] = '➏ ',
-                ['7'] = '➐ ',
-                ['8'] = '➑ ',
-                ['9'] = '➒ ',
-                ['10'] = '➓ ',
+                ['0'] = '󰎡 ',
+                ['1'] = '󰎤 ',
+                ['2'] = '󰎧 ',
+                ['3'] = '󰎪 ',
+                ['4'] = '󰎭 ',
+                ['5'] = '󰎱 ',
+                ['6'] = '󰎳 ',
+                ['7'] = '󰎶 ',
+                ['8'] = '󰎹 ',
+                ['9'] = '󰎼 ',
+                ['10'] = '󰽽 ',
         }
+end
+
+local function gruvbox_init()
+        vim.g.gruvbox_material_background = 'medium'
+        vim.g.gruvbox_material_enable_italic = 1
+        vim.g.gruvbox_material_disable_italic_comment = 1
 end
 
 local function webdevicon_init()
@@ -201,7 +218,9 @@ require('lazy').setup({
                         }
                 },
                 {'NLKNguyen/papercolor-theme'},
-                {'morhetz/gruvbox'},
+                --{'morhetz/gruvbox'},
+                {'ellisonleao/gruvbox.nvim'},
+                {'sainnhe/gruvbox-material', init = gruvbox_init},
                 {'srcery-colors/srcery-vim'},
                 {'majutsushi/tagbar'},
                 {'Yggdroot/indentLine', },
@@ -298,10 +317,11 @@ vim.opt.mouse = 'a'
 -- 设置终端编码
 -- vim.opt.termencoding = 'utf-8'
 -- 文件格式为 UNIX
-vim.opt.fileformat = 'unix'
+--vim.opt.fileformat = 'unix'
 -- 文件编码为 UTF-8
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencodings = { 'ucs-bom', 'utf-8', 'cp936', 'gb18030', 'big5', 'euc-jp', 'euc-kr', 'latin1' }
+--vim.opt.encoding = 'utf-8'
+--vim.opt.fileencoding = 'utf-8'
+--vim.opt.fileencodings = { 'ucs-bom', 'utf-8', 'cp936', 'gb18030', 'big5', 'euc-jp', 'euc-kr', 'latin1' }
 -- 设置中文菜单
 vim.opt.langmenu = 'zh_CN'
 -- 设置语言环境
@@ -483,13 +503,16 @@ vim.g.ale_python_pylint_change_directory = true
 vim.g.ale_python_pylint_auto_poetry = true
 
 local opts = { noremap=true, silent=true }
-vim.opt.background = 'dark'
 if vim.fn.has('gui_running') == 1 then
         vim.opt.guioptions:remove('T')
         vim.g.Tb_MoreThanOne = 1
+        vim.opt.guifont = 'CodeNewRoman Nerd Font,Microsoft YaHei:h16'
         vim.keymap.set('n', '<A-d>', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', '<A-r>', vim.lsp.buf.references, opts)
         vim.keymap.set('n', '<C-h>', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', '<F1>', ':enew<CR>',     { silent = true })
+        vim.keymap.set('n', '<F2>', ':bdelete!<CR>', { silent = true })
+        vim.keymap.set('n', '<F3>', ':Startify<CR>', { silent = true })
 else
         -- 终端模式设置
         -- 更推荐设置为 true，而不是旧的 t_Co
@@ -517,12 +540,13 @@ else
         vim.keymap.set('n', '<S-f>', vim.lsp.buf.references, opts)
         vim.keymap.set('n', '<C-h>', vim.lsp.buf.hover, opts)
 end
-
+vim.opt.background = 'dark'
 local colorschemes = {}
+
 if is_nvim_011_or_newer then
-        colorschemes = {'papercolor', 'srcery'}
+        colorschemes = {'PaperColor', 'srcery', 'gruvbox'}
 else
-        colorschemes = {'PaperColor', 'srcery'}
+        colorschemes = {'PaperColor', 'srcery', 'gruvbox'}
 end
 
 math.randomseed(os.time())
@@ -537,6 +561,18 @@ vim.api.nvim_create_autocmd('ColorScheme', {
         end,
 })
 
+-- 从上次文件关闭的位置打开
+vim.api.nvim_create_autocmd('BufReadPost', {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+
+vim.opt.clipboard = 'unnamedplus'
 vim.keymap.set('n', '<S-Insert>', '"+p', { silent = true })
 -- 插入模式下，Shift+Insert 粘贴剪贴板内容
 vim.keymap.set('i', '<S-Insert>', '<Esc>"+pa', { silent = true })
