@@ -63,8 +63,16 @@ let g:pyflakes_use_quickfix = 0
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_check_on_wq = 0
 
+" 指定rust-analyzer路径，新版本的存在bug，不能在vim当中自动补齐
+" BUG: https://github.com/rust-lang/rust-analyzer/issues/19401
+if has("win32") || has("win64")
+    let g:rust_analyzer_path = expand('$VIM/rust-analyzer-2024-12-02-v0.3.2204.exe')
+else
+    let g:rust_analyzer_path = '/usr/local/bin/rust-analyzer-2024-12-02-v0.3.2204'
+endif
 let g:lsp_settings = {
 \  'rust-analyzer': {
+\   'cmd': [g:rust_analyzer_path],
 \   'initialization_options': {
 \     'cargo': {
 \       'loadOutDirsFromCheck': v:true,
@@ -72,6 +80,10 @@ let g:lsp_settings = {
 \       'buildScripts': {
 \         'enable': v:true,
 \       },
+\     },
+\     'completion': {
+\       'autoimport': {'enable': v:true},
+\       'postfix': {'enable': v:true},
 \     },
 \     'procMacro': {
 \       'enable': v:true,

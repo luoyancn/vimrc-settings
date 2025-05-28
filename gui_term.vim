@@ -4,7 +4,7 @@ execute 'colorscheme ' . s:colorschemes[s:random_index]
 if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1
-    "set guioptions-=m
+    set guioptions-=m
     set background=dark
     nnoremap <silent> <F1> :enew<CR>
     nnoremap <silent> <F2> :bdelete!<CR>

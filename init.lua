@@ -15,6 +15,14 @@ local nvim_version = vim.version()
 local is_nvim_011_or_newer = (nvim_version.major > 0)
     or (nvim_version.major == 0 and nvim_version.minor >= 11)
 
+local rust_analyzer_path
+
+if vim.fn.has('win32') or vim.fn.has('win64') then
+        rust_analyzer_path = 'C:\\Vim\\rust-analyzer.exe'
+else
+        rust_analyzer_path = '/usr/local/bin/rust-analyzer'
+end
+
 local function lsp_config()
         if is_nvim_011_or_newer then
                 -- 这里是 rust-analyzer 示例，其他语言按需加
@@ -23,6 +31,7 @@ local function lsp_config()
                 vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'lua_ls'})
                 vim.lsp.config('rust_analyzer',
                         {
+                                cmd = {rust_analyzer_path},
                                 settings = {
                                         ['rust-analyzer'] = {
                                                 cargo = {
@@ -54,7 +63,10 @@ local function lsp_config()
                         }
                 )
                 vim.diagnostic.config({
-                        signs = false
+                        virtual_text = false,
+                        signs = false,
+                        underline = false,
+                        update_in_insert = false,
                 })
         else
                 local lspconfig = require('lspconfig')
@@ -281,30 +293,14 @@ require('lazy').setup({
                                                 }),
                                                 sources = cmp.config.sources({
                                                         { name = 'nvim_lsp' },
-                                                        { name = 'luasnip' },
+                                                        --{ name = 'luasnip' },
                                                 }),
-                                                window = {
-                                                        completion = {
-                                                                col_offset = -3,  -- 控制浮窗偏移量，负数更靠近光标
-                                                                side_padding = 1, -- 左右留白
-                                                                --winhighlight = "Normal:Normal,FloatBorder:CmpBorder,CursorLine:PmenuSel,Search:None",
-                                                                border = "single",
-                                                        },
-                                                        documentation = {
-                                                                max_width = 50,   -- 控制右侧文档提示的最大宽度
-                                                                border = "single"
-                                                        },
-                                                },
                                                 formatting = {
-                                                        format = function(entry, vim_item)
-                                                                vim_item.menu = ({
-                                                                        --nvim_lsp = "[LSP]",
-                                                                        --buffer = "[BUF]",
-                                                                        --path = "[PATH]",
-                                                                })[entry.source.name]
-                                                                return vim_item
-                                                        end
-                                                }
+                                                        fields = { 'abbr', 'menu' },
+                                                        --format = function(entry, vim_item)
+                                                        --        return vim_item
+                                                        --end,
+                                                },
                                         })
                                 end,
                         }
