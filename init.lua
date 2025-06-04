@@ -1,12 +1,19 @@
-local lazypath = vim.env.VIM .. '/lazy/lazy.nvim'
-vim.opt.rtp:prepend(lazypath)
+local lazypath = vim.env.VIM .. '/lazy.nvim'
 local plug_root_path = vim.env.VIM .. '/bundle'
+local rust_analyzer_path
+-- 目前neovim对文件夹的快捷方式支持可能不是很好，
+-- 最好使用全路径
+-- 但vim可以支持快捷方式
+if vim.fn.has('win32') or vim.fn.has('win64') then
+        lazypath = 'D:\\github.com\\bundle\\lazy.nvim'
+        plug_root_path = 'D:\\github.com\\bundle'
+        rust_analyzer_path = 'C:\\Vim\\rust-analyzer.exe'
+else
+        rust_analyzer_path = '/usr/local/bin/rust-analyzer'
+end
+vim.opt.rtp:prepend(lazypath)
 if vim.fn.has('gui_running') == 0 then
         vim.g.tagbar_left = 1
-end
-
-if vim.fn.has('win32') == 1 then
-        plug_root_path = 'D:\\github.com\\bundle'
 end
 
 -- 获取当前neovim的版本
@@ -14,14 +21,6 @@ end
 local nvim_version = vim.version()
 local is_nvim_011_or_newer = (nvim_version.major > 0)
     or (nvim_version.major == 0 and nvim_version.minor >= 11)
-
-local rust_analyzer_path
-
-if vim.fn.has('win32') or vim.fn.has('win64') then
-        rust_analyzer_path = 'C:\\Vim\\rust-analyzer.exe'
-else
-        rust_analyzer_path = '/usr/local/bin/rust-analyzer'
-end
 
 local function lsp_config()
         if is_nvim_011_or_newer then
@@ -568,7 +567,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
-vim.opt.clipboard = 'unnamedplus'
 vim.keymap.set('n', '<S-Insert>', '"+p', { silent = true })
 -- 插入模式下，Shift+Insert 粘贴剪贴板内容
 vim.keymap.set('i', '<S-Insert>', '<Esc>"+pa', { silent = true })

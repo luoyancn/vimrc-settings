@@ -44,8 +44,6 @@ Plugin 'ryanoasis/vim-devicons'
 " Keyboard sound
 " Plugin 'skywind3000/vim-keysound'
 Plugin 'liuchengxu/vim-clap'
-" Python
-Plugin 'davidhalter/jedi-vim'
 Plugin 'luoyancn/pyflakes-vim'
 
 " Rust
@@ -61,6 +59,8 @@ Plugin 'mattn/vim-lsp-settings'
 "Plugin 'keremc/asyncomplete-racer.vim'
 
 if has('python3')
+    " Python
+    Plugin 'davidhalter/jedi-vim'
     Plugin 'SirVer/ultisnips'
     Plugin 'honza/vim-snippets'
     Plugin 'prabirshrestha/asyncomplete-ultisnips.vim'

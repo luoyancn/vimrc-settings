@@ -227,7 +227,7 @@ Plugin 'ryanoasis/vim-devicons'
 " Plugin 'skywind3000/vim-keysound'
 Plugin 'liuchengxu/vim-clap'
 " Python
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 Plugin 'luoyancn/pyflakes-vim'
 
 " Rust
@@ -465,11 +465,11 @@ let g:airline#extensions#tabline#buffer_idx_format = {
       \ '10': '󰽽 '
       \}
 
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = "<C-x><C-o>"
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = 1
-let g:jedi#smart_auto_mappings = 1
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#completions_command = "<C-x><C-o>"
+" let g:jedi#popup_select_first = 0
+" let g:jedi#show_call_signatures = 1
+" let g:jedi#smart_auto_mappings = 1
 let g:pyflakes_use_quickfix = 0
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_check_on_wq = 0
@@ -600,17 +600,6 @@ if has('python3')
         \ }))
 endif
 
-set background=dark
-" 增加ale的警告与错误提示颜色
-autocmd VimEnter *
-\ if g:colors_name == 'srcery' && exists('g:ale_enabled') |
-\   hi ALEWarning ctermfg=252 ctermbg=53 guifg=#eeeeee guibg=#8700af |
-\   hi ALEError ctermfg=15 ctermbg=1 guifg=White guibg=Red |
-\ endif
-let s:colorschemes = ['gruvbox', 'srcery', 'papercolor']
-let s:random_index = rand() % len(s:colorschemes)
-execute 'colorscheme ' . s:colorschemes[s:random_index]
-
 if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1
@@ -624,10 +613,10 @@ if has("gui_running")
     nnoremap <silent> <F11> :AV<CR>
     nnoremap <silent> <F12> :A<CR>
     "au FileType go nnoremap <silent> <F5> :GoInstall<CR>
-    let g:jedi#goto_assignments_command = "<A-g>"
-    let g:jedi#goto_command = "<A-d>"
-    let g:jedi#goto_definitions_command = "<A-m>"
-    let g:jedi#usages_command = "<A-r>"
+    " let g:jedi#goto_assignments_command = "<A-g>"
+    " let g:jedi#goto_command = "<A-d>"
+    " let g:jedi#goto_definitions_command = "<A-m>"
+    " let g:jedi#usages_command = "<A-r>"
     nmap <A-r> :LspReferences<cr>
     nmap <A-d> :LspDeclaration<cr>
     nmap <S-F1> :LspCargoReload<cr>
@@ -660,10 +649,10 @@ else
     let g:srcery_inverse_match_paren = 1
     let g:srcery_italic_types = 1
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
-    let g:jedi#goto_assignments_command = "<C-g>"
-    let g:jedi#goto_command = "<C-d>"
-    let g:jedi#goto_definitions_command = "<C-m>"
-    let g:jedi#usages_command = "<S-f>"
+    " let g:jedi#goto_assignments_command = "<C-g>"
+    " let g:jedi#goto_command = "<C-d>"
+    " let g:jedi#goto_definitions_command = "<C-m>"
+    " let g:jedi#usages_command = "<S-f>"
     nmap <S-f> :LspReferences<cr>
     nmap <C-d> :LspDefinition<cr>
     nmap <S-F1> :LspCargoReload<cr>
@@ -674,7 +663,16 @@ else
     "let g:tagbar_width = 30
     let NERDTreeWinPos = "right"
 endif
-
+set background=dark
+let s:colorschemes = ['gruvbox', 'srcery', 'papercolor']
+let s:random_index = rand() % len(s:colorschemes)
+execute 'colorscheme ' . s:colorschemes[s:random_index]
+" 增加ale的警告与错误提示颜色
+autocmd VimEnter *
+\ if g:colors_name == 'srcery' && exists('g:ale_enabled') |
+\   hi ALEWarning ctermfg=252 ctermbg=53 guifg=#eeeeee guibg=#8700af |
+\   hi ALEError ctermfg=15 ctermbg=1 guifg=White guibg=Red |
+\ endif
 if has("termguicolors")
   let &t_SI = "\e[6 q"  " 插入模式：竖线光标
 endif
