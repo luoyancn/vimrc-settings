@@ -4,7 +4,7 @@ local rust_analyzer_path
 -- 目前neovim对文件夹的快捷方式支持可能不是很好，
 -- 最好使用全路径
 -- 但vim可以支持快捷方式
-if vim.fn.has('win32') or vim.fn.has('win64') then
+if vim.fn.has('win32') ==1 or vim.fn.has('win64') == 1 then
         lazypath = 'D:\\github.com\\bundle\\lazy.nvim'
         plug_root_path = 'D:\\github.com\\bundle'
         rust_analyzer_path = 'C:\\Vim\\rust-analyzer.exe'
