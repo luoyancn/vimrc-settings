@@ -1,15 +1,21 @@
 local lazypath = vim.env.VIM .. '/lazy.nvim'
 local plug_root_path = vim.env.VIM .. '/bundle'
 local rust_analyzer_path
+local tagbar_ctags_bin
+local taplo_path
 -- 目前neovim对文件夹的快捷方式支持可能不是很好，
 -- 最好使用全路径
 -- 但vim可以支持快捷方式
 if vim.fn.has('win32') ==1 or vim.fn.has('win64') == 1 then
         lazypath = 'D:\\github.com\\bundle\\lazy.nvim'
         plug_root_path = 'D:\\github.com\\bundle'
-        rust_analyzer_path = 'C:\\Vim\\rust-analyzer.exe'
+        rust_analyzer_path = 'D:\\github.com\\binary\\rust-analyzer.exe'
+        tagbar_ctags_bin = 'D:\\github.com\\binary\\ctags.exe'
+        taplo_path ='d:\\github.com\\binary\\taplo.exe'
 else
         rust_analyzer_path = '/usr/local/bin/rust-analyzer'
+        tagbar_ctags_bin = '/mnt/d/github.com/binary/ctags'
+        taplo_path ='/mnt/d/github.com/binary/taplo'
 end
 vim.opt.rtp:prepend(lazypath)
 if vim.fn.has('gui_running') == 0 then
@@ -426,7 +432,7 @@ vim.g.rainbow_active = true
 
 vim.g.indentLine_char='│'
 vim.g.indentLine_enabled = true
-
+vim.g.tagbar_ctags_bin = tagbar_ctags_bin
 vim.g.tagbar_width=40
 vim.g.tagbar_autofocus = true
 vim.g.tagbar_sort = false

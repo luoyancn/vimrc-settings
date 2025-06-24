@@ -65,10 +65,11 @@ let g:syntastic_check_on_wq = 0
 
 " 指定rust-analyzer路径，新版本的存在bug，不能在vim当中自动补齐
 " BUG: https://github.com/rust-lang/rust-analyzer/issues/19401
-if has("win32") || has("win64")
-    let g:rust_analyzer_path = expand('$VIM/rust-analyzer-2024-12-02-v0.3.2204.exe')
+if has("win32") ==1 || has("win64") == 1
+    "let g:rust_analyzer_path = expand('$VIM/rust-analyzer-2024-12-02-v0.3.2204.exe')
+    let g:rust_analyzer_path = 'd:\\github.com\\binary\\rust-analyzer-2024-12-02-v0.3.2204.exe'
 else
-    let g:rust_analyzer_path = '/usr/local/bin/rust-analyzer-2024-12-02-v0.3.2204'
+    let g:rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer-2024-12-02-v0.3.2204'
 endif
 let g:lsp_settings = {
 \  'rust-analyzer': {
@@ -100,7 +101,7 @@ let g:lsp_diagnostics_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 1
 let g:lsp_document_code_action_signs_enabled = 0
 " let g:lsp_log_verbose = 1
-" let g:lsp_log_file = 'vim-lsp.log'
+" let g:lsp_log_file = '/var/log/vim-lsp.log'
 
 if has('nvim')
   let g:ale_use_neovim_diagnostics_api = 0

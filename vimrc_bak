@@ -351,7 +351,19 @@ endif
 let g:indentLine_char='│'
 let g:indentLine_enabled = 1
 
-" Tagbar
+" 指定rust-analyzer路径，新版本的存在bug，不能在vim当中自动补齐
+" BUG: https://github.com/rust-lang/rust-analyzer/issues/19401
+if has('unix')
+    " Tagbar
+    let g:tagbar_ctags_bin = '/mnt/d/github.com/binary/ctags'
+    let g:rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer-2024-12-02-v0.3.2204'
+    let g:taplo_path = '/mnt/d/github.com/binary/taplo'
+else
+    let g:tagbar_ctags_bin = 'd:\\github.com\\binary\\ctags'
+    let g:rust_analyzer_path = expand('$VIM/rust-analyzer-2024-12-02-v0.3.2204.exe')
+    let g:taplo_path ='d:\\github.com\\binary\\taplo.exe'
+endif
+
 let g:tagbar_width=40
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
@@ -474,13 +486,6 @@ let g:pyflakes_use_quickfix = 0
 let g:syntastic_python_checkers = ['pyflakes']
 let g:syntastic_check_on_wq = 0
 
-" 指定rust-analyzer路径，新版本的存在bug，不能在vim当中自动补齐
-" BUG: https://github.com/rust-lang/rust-analyzer/issues/19401
-if has("win32") || has("win64")
-    let g:rust_analyzer_path = expand('$VIM/rust-analyzer-2024-12-02-v0.3.2204.exe')
-else
-    let g:rust_analyzer_path = '/usr/local/bin/rust-analyzer-2024-12-02-v0.3.2204'
-endif
 let g:lsp_settings = {
 \  'rust-analyzer': {
 \   'cmd': [g:rust_analyzer_path],
@@ -500,6 +505,9 @@ let g:lsp_settings = {
 \       'enable': v:true,
 \     },
 \   },
+\  },
+\  'taplo-lsp': {
+\   'cmd': [g:taplo_path],
 \  },
 \}
 
@@ -619,6 +627,7 @@ if has("gui_running")
     " let g:jedi#usages_command = "<A-r>"
     nmap <A-r> :LspReferences<cr>
     nmap <A-d> :LspDeclaration<cr>
+    nmap <C-h> :LspHover<cr>
     nmap <S-F1> :LspCargoReload<cr>
     "set showtabline=2
     map  <silent> <S-Insert>  "+p
@@ -655,6 +664,7 @@ else
     " let g:jedi#usages_command = "<S-f>"
     nmap <S-f> :LspReferences<cr>
     nmap <C-d> :LspDefinition<cr>
+    nmap <C-h> :LspHover<cr>
     nmap <S-F1> :LspCargoReload<cr>
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2

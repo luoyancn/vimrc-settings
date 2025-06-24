@@ -110,6 +110,7 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vi="/usr/libexec/vi"
 alias cp="rsync -ra --progress"
+alias yt-dlp="/mnt/d/github.com/binary/yt-dlp"
 
 source ~/.p10k_transparent.zsh
 
@@ -124,3 +125,7 @@ source ~/.p10k_transparent.zsh
 if [[ $TERM = screen ]]; then
     export TERM=xterm-256color
 fi
+
+export CARGO_HOME=/opt/cargo
+export RUSTUP_HOME=/opt/rustup/unix
+export PATH=/opt/cargo/bin:/opt/zig-x86_64-linux-0.14.1/:$PATH

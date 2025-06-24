@@ -3,6 +3,11 @@ let g:indentLine_char='│'
 let g:indentLine_enabled = 1
 
 " Tagbar
+if has('unix')
+    let g:tagbar_ctags_bin = '/mnt/d/github.com/binary/ctags'
+else
+    let g:tagbar_ctags_bin = 'd:\\github.com\\binary\\ctags'
+endif
 let g:tagbar_width=40
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0

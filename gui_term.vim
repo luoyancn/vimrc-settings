@@ -21,6 +21,7 @@ if has("gui_running")
     let g:jedi#usages_command = "<A-r>"
     nmap <A-r> :LspReferences<cr>
     nmap <A-d> :LspDeclaration<cr>
+    nmap <C-h> :LspHover<cr>
     nmap <S-F1> :LspCargoReload<cr>
     "set showtabline=2
     map  <silent> <S-Insert>  "+p
@@ -83,6 +84,7 @@ else
     let g:jedi#usages_command = "<S-f>"
     nmap <S-f> :LspReferences<cr>
     nmap <C-d> :LspDefinition<cr>
+    nmap <C-h> :LspHover<cr>
     nmap <S-F1> :LspCargoReload<cr>
     let g:ctrlp_types = ['buf', 'fil', 'mru']
     let g:buftabline_show = 2
