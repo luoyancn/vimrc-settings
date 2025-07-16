@@ -138,6 +138,7 @@ autocmd FileType html,javascript set tabstop=2 softtabstop=2 expandtab
 autocmd FileType python,tex,vim,rust set tabstop=4 softtabstop=4 expandtab
 autocmd FileType c,h,go,cpp,make set tabstop=8 softtabstop=8 noexpandtab
 autocmd FileType lua set tabstop=8 softtabstop=8 expandtab
+autocmd FileType rust set colorcolumn=90,90
 filetype indent off
 set completeopt-=preview
 

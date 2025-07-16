@@ -9,11 +9,11 @@ local taplo_path
 if vim.fn.has('win32') ==1 or vim.fn.has('win64') == 1 then
         lazypath = 'D:\\github.com\\bundle\\lazy.nvim'
         plug_root_path = 'D:\\github.com\\bundle'
-        rust_analyzer_path = 'D:\\github.com\\binary\\rust-analyzer.exe'
+        rust_analyzer_path = 'D:\\github.com\\binary\\rust-analyzer-luoyan.exe'
         tagbar_ctags_bin = 'D:\\github.com\\binary\\ctags.exe'
         taplo_path ='d:\\github.com\\binary\\taplo.exe'
 else
-        rust_analyzer_path = '/usr/local/bin/rust-analyzer'
+        rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer-luoyan'
         tagbar_ctags_bin = '/mnt/d/github.com/binary/ctags'
         taplo_path ='/mnt/d/github.com/binary/taplo'
 end
@@ -239,6 +239,7 @@ require('lazy').setup({
                 {'ellisonleao/gruvbox.nvim'},
                 {'sainnhe/gruvbox-material', init = gruvbox_init},
                 {'srcery-colors/srcery-vim'},
+                {'doums/darcula'},
                 {'majutsushi/tagbar'},
                 {'Yggdroot/indentLine', },
                 {'mhinz/vim-startify',
@@ -266,11 +267,6 @@ require('lazy').setup({
                         ft = { 'c', 'cpp', 'python', 'rust'},
                 },
                 {'rust-lang/rust.vim', ft = {'rust'}},
-                --{'prabirshrestha/vim-lsp'},
-                --{'prabirshrestha/async.vim'},
-                --{'prabirshrestha/asyncomplete.vim'},
-                --{'prabirshrestha/asyncomplete-lsp.vim'},
-                --{'mattn/vim-lsp-settings'},
                 {
                         'neovim/nvim-lspconfig',
                         config = lsp_config,
@@ -456,11 +452,6 @@ vim.g.NERDTreeStatusline = 'Nerdtree'
 
 vim.g.rustfmt_autosave = true
 vim.g.rustfmt_options = '--config max_width=80'
---vim.g.lsp_fold_enabled = false
---vim.g.lsp_diagnostics_enabled = false
---vim.g.lsp_diagnostics_signs_enabled = false
---vim.g.lsp_document_highlight_enabled = true
---vim.g.lsp_document_code_action_signs_enabled = false
 
 vim.g.ale_use_neovim_diagnostics_api = false
 vim.g.ale_linters = { rust = { 'cargo' } }
@@ -545,9 +536,9 @@ vim.opt.background = 'dark'
 local colorschemes = {}
 
 if is_nvim_011_or_newer then
-        colorschemes = {'PaperColor', 'srcery', 'gruvbox'}
+        colorschemes = {'PaperColor', 'srcery', 'gruvbox', 'darcula'}
 else
-        colorschemes = {'PaperColor', 'srcery', 'gruvbox'}
+        colorschemes = {'PaperColor', 'srcery', 'gruvbox', 'darcula'}
 end
 
 math.randomseed(os.time())

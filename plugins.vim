@@ -24,6 +24,12 @@ Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'kadekillary/subtle_solo'
 Plugin 'morhetz/gruvbox'
 Plugin 'srcery-colors/srcery-vim'
+Plugin '4513ECHO/vim-colors-hatsunemiku'
+Plugin 'doums/darcula'
+Plugin 'jcorbin/darkula'
+Plugin 'ku1ik/vim-monokai'
+Plugin 'Mcmartelle/vim-monokai-bold'
+
 Plugin 'frazrepo/vim-rainbow'
 Plugin 'vim-scripts/LargeFile'
 

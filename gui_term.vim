@@ -1,6 +1,9 @@
-let s:colorschemes = ['gruvbox', 'srcery', 'papercolor']
+let s:colorschemes = ['gruvbox', 'srcery', 'papercolor', 'darcula']
 let s:random_index = rand() % len(s:colorschemes)
 execute 'colorscheme ' . s:colorschemes[s:random_index]
+if g:colors_name == 'darcula'
+    highlight Cursor guibg=White
+endif
 if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1
@@ -120,4 +123,3 @@ endif
 if has("termguicolors")
   let &t_SI = "\e[6 q"  " 插入模式：竖线光标
 endif
-
