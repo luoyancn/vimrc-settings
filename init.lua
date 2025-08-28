@@ -3,19 +3,25 @@ local plug_root_path = vim.env.VIM .. '/bundle'
 local rust_analyzer_path
 local tagbar_ctags_bin
 local taplo_path
+local lua_exec_path
+local lua_main_path
 -- 目前neovim对文件夹的快捷方式支持可能不是很好，
 -- 最好使用全路径
 -- 但vim可以支持快捷方式
 if vim.fn.has('win32') ==1 or vim.fn.has('win64') == 1 then
         lazypath = 'D:\\github.com\\bundle\\lazy.nvim'
         plug_root_path = 'D:\\github.com\\bundle'
-        rust_analyzer_path = 'D:\\github.com\\binary\\rust-analyzer-luoyan.exe'
+        rust_analyzer_path = 'D:\\github.com\\binary\\rust-analyzer.exe'
         tagbar_ctags_bin = 'D:\\github.com\\binary\\ctags.exe'
         taplo_path ='d:\\github.com\\binary\\taplo.exe'
+        lua_exec_path ='d:\\github.com\\binary\\lua-language-server-3.15.0\\bin\\lua-language-server.exe'
+        lua_main_path ='d:\\github.com\\binary\\lua-language-server-3.15.0\\main.lua'
 else
-        rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer-luoyan'
+        rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer'
         tagbar_ctags_bin = '/mnt/d/github.com/binary/ctags'
         taplo_path ='/mnt/d/github.com/binary/taplo'
+        lua_exec_path ='/mnt/d/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server'
+        lua_main_path ='/mnt/d/github.com/binary/lua-language-server-3.15.0/main.lua'
 end
 vim.opt.rtp:prepend(lazypath)
 if vim.fn.has('gui_running') == 0 then
@@ -24,86 +30,55 @@ end
 
 -- 获取当前neovim的版本
 -- 是否是0.11以后的版本
-local nvim_version = vim.version()
-local is_nvim_011_or_newer = (nvim_version.major > 0)
-    or (nvim_version.major == 0 and nvim_version.minor >= 11)
+-- local nvim_version = vim.version()
+-- local is_nvim_011_or_newer = (nvim_version.major > 0)
+--     or (nvim_version.major == 0 and nvim_version.minor >= 11)
 
 local function lsp_config()
-        if is_nvim_011_or_newer then
-                -- 这里是 rust-analyzer 示例，其他语言按需加
-                vim.lsp.set_log_level("OFF")
-                --vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'clangd', 'lua_ls'})
-                vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'lua_ls'})
-                vim.lsp.config('rust_analyzer',
-                        {
-                                cmd = {rust_analyzer_path},
-                                settings = {
-                                        ['rust-analyzer'] = {
-                                                cargo = {
-                                                        loadOutDirsFromCheck = true,
-                                                        autoreload = true,
-                                                        buildScripts = {
-                                                                enable = true,
-                                                        },
-                                                },
-                                                diagnostics = {
-                                                        enable = false,
-                                                },
-                                                procMacro = {
-                                                        enable = true,
-                                                },
-                                        },
-                                },
-                                capabilities = require('cmp_nvim_lsp').default_capabilities(),
-                        }
-                )
-                vim.lsp.config('lua_ls',
-                        {
-                                settings = {
-                                        Lua = {
-                                                diagnostics = { enable = false },
-                                        },
-                                },
-                                capabilities = require('cmp_nvim_lsp').default_capabilities(),
-                        }
-                )
-                vim.diagnostic.config({
-                        virtual_text = false,
-                        signs = false,
-                        underline = false,
-                        update_in_insert = false,
-                })
-        else
-                local lspconfig = require('lspconfig')
-                lspconfig.rust_analyzer.setup({
-                        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        -- 这里是 rust-analyzer 示例，其他语言按需加
+        vim.lsp.set_log_level("OFF")
+        --vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'clangd', 'lua_ls'})
+        vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'lua_ls'})
+        vim.lsp.config('rust_analyzer',
+                {
+                        cmd = {rust_analyzer_path},
                         settings = {
                                 ['rust-analyzer'] = {
                                         cargo = {
                                                 loadOutDirsFromCheck = true,
                                                 autoreload = true,
-                                                buildScripts = { enable = true },
+                                                buildScripts = {
+                                                        enable = true,
+                                                },
                                         },
-                                        diagnostics = { enable = false },
-                                        procMacro = { enable = true },
+                                        diagnostics = {
+                                                enable = false,
+                                        },
+                                        procMacro = {
+                                                enable = true,
+                                        },
                                 },
                         },
-                })
-                lspconfig.pylsp.setup({
                         capabilities = require('cmp_nvim_lsp').default_capabilities(),
-                })
-                lspconfig.lua_ls.setup({
-                        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+                }
+        )
+        vim.lsp.config('lua_ls',
+                {
+                        cmd = {lua_exec_path},
                         settings = {
                                 Lua = {
-                                        diagnostics = { enable = false },
+                                        diagnostics = { enable = true},
                                 },
                         },
-                })
-                lspconfig.taplo.setup({
                         capabilities = require('cmp_nvim_lsp').default_capabilities(),
-                })
-        end
+                }
+        )
+        vim.diagnostic.config({
+                virtual_text = false,
+                signs = false,
+                underline = false,
+                update_in_insert = false,
+        })
 end
 
 local function airline_config()
@@ -422,7 +397,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.opt.guifont = 'CodeNewRoman Nerd Font:h16'
+vim.opt.guifont = 'CodeNewRoman Nerd Font:h13'
 vim.g.startify_files_number = 40
 vim.g.rainbow_active = true
 
@@ -535,12 +510,7 @@ end
 vim.opt.background = 'dark'
 local colorschemes = {}
 
-if is_nvim_011_or_newer then
-        colorschemes = {'PaperColor', 'srcery', 'gruvbox', 'darcula'}
-else
-        colorschemes = {'PaperColor', 'srcery', 'gruvbox', 'darcula'}
-end
-
+colorschemes = {'PaperColor', 'srcery', 'gruvbox', 'darcula'}
 math.randomseed(os.time())
 local random_index = math.random(1, #colorschemes)
 vim.cmd.colorscheme(colorschemes[random_index])
@@ -572,4 +542,5 @@ vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
 
 if vim.g.neovide then
         vim.g.neovide_cursor_vfx_mode = 'torpedo'
+	vim.opt.guifont = 'CodeNewRoman Nerd Font:h13'
 end

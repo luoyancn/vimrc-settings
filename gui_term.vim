@@ -23,7 +23,7 @@ if has("gui_running")
     let g:jedi#goto_definitions_command = "<A-m>"
     let g:jedi#usages_command = "<A-r>"
     nmap <A-r> :LspReferences<cr>
-    nmap <A-d> :LspDeclaration<cr>
+    nmap <A-d> :LspDefinition<cr>
     nmap <C-h> :LspHover<cr>
     nmap <S-F1> :LspCargoReload<cr>
     "set showtabline=2
@@ -56,14 +56,14 @@ if has("gui_running")
 "          \}
     if has("unix")
         if has('nvim')
-          set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
+          set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h14
         else
-          set guifont=CodeNewRoman\ Nerd\ Font\ Mono\ 16
+          set guifont=CodeNewRoman\ Nerd\ Font\ Mono\ 14
         endif
     elseif has("win32")
         "打开gui，自动最大化
         au GUIEnter * simalt ~x
-        set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h16
+        set guifont=CodeNewRoman\ Nerd\ Font\ Mono:h14
         if exists('g:neovide')
           set linespace=6
           let g:neovide_scale_factor = 1.0
