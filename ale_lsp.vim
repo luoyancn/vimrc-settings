@@ -66,12 +66,11 @@ let g:syntastic_check_on_wq = 0
 " 指定rust-analyzer路径，新版本的存在bug，不能在vim当中自动补齐
 " BUG: https://github.com/rust-lang/rust-analyzer/issues/19401
 if has("win32") ==1 || has("win64") == 1
-    "let g:rust_analyzer_path = expand('d:/github.com/binary/rust-analyzer.exe')
-    let g:rust_analyzer_path = expand('d:/github.com/binary/rust-analyzer-luoyan.exe')
+    let g:rust_analyzer_path = expand('d:/github.com/binary/rust-analyzer.exe')
     let g:lua_path = expand('d:/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server.exe')
     let g:lua_main_path = expand('d:/github.com/binary/lua-language-server-3.15.0/main.lua')
 else
-    let g:rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer-luoyan'
+    let g:rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer'
     let g:lua_path = '/mnt/d/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server'
     let g:lua_main_path = '/mnt/d/github.com/binary/lua-language-server-3.15.0/main.lua'
 endif
@@ -131,12 +130,13 @@ endif
 let g:ale_virtualtext_cursor = '0'
 let g:ale_virtualtext_prefix = ' '
 let g:ale_sign_error = ""
-let g:ale_sign_warning = ""
+let g:ale_sign_warning = ""
 let g:ale_sign_style_error = ""
-let g:ale_sign_style_warning = ""
+let g:ale_sign_style_warning = ""
 let g:ale_echo_msg_format = '%severity% - %s'
 let g:ale_echo_msg_error_str = ''
-let g:ale_echo_msg_warning_str = ''
+"let g:ale_echo_msg_warning_str = ''
+let g:ale_echo_msg_warning_str = ''
 let g:ale_echo_cursor = 0
 let g:ale_detail_to_floating_preview = 1
 let g:ale_cursor_detail = 1
@@ -145,9 +145,7 @@ let g:ale_close_preview_on_insert = 1
 " let g:ale_lsp_suggestions = 1
 
 let g:ale_linters = {'rust': ['cargo']}
-let g:ale_pattern_options = {
-\   '.*\.lua$': {'ale_enabled': 0},
-\}
+let g:ale_lua_language_server_executable = g:lua_path
 
 " For C/C++ projects, ALE cannot determine the self-defined header files.
 " To resolv this problem, a file named compile_commands.json is need.

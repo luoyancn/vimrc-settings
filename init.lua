@@ -28,6 +28,23 @@ if vim.fn.has('gui_running') == 0 then
         vim.g.tagbar_left = 1
 end
 
+-- local signs = {
+--         --Error = " ", -- nf-fa-times_circle
+--         --Warn  = " ", -- nf-fa-warning
+--         --Hint  = " ", -- nf-fa-lightbulb
+--         --Info  = " ", -- nf-fa-info_circle
+--         Error = " ", -- nf-fa-times_circle
+--         Warn  = " ", -- nf-fa-warning
+--         Hint  = " ", -- nf-fa-lightbulb
+--         Info  = " ", -- nf-fa-info_circle
+-- }
+-- 
+-- for type, icon in pairs(signs) do
+--   local hl = "DiagnosticSign" .. type
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+-- end
+
+
 -- 获取当前neovim的版本
 -- 是否是0.11以后的版本
 -- local nvim_version = vim.version()
@@ -52,7 +69,7 @@ local function lsp_config()
                                                 },
                                         },
                                         diagnostics = {
-                                                enable = false,
+                                                enable = true,
                                         },
                                         procMacro = {
                                                 enable = true,
@@ -75,9 +92,23 @@ local function lsp_config()
         )
         vim.diagnostic.config({
                 virtual_text = false,
-                signs = false,
+                signs = {
+                        text = {
+                                [vim.diagnostic.severity.ERROR] = ' ',
+                                [vim.diagnostic.severity.WARN] = ' ',
+                                [vim.diagnostic.severity.HINT] = ' ',
+                                [vim.diagnostic.severity.INFO] = ' '
+                        },
+                        numhl = {
+                        },
+                },
                 underline = false,
                 update_in_insert = false,
+                float = {
+                       border = "rounded", -- "single", "double", "rounded", "solid", "shadow"
+                       source = "always",  -- 总是显示诊断来源（LSP 名称）
+                       header = "Diagnostics",
+                },
         })
 end
 
@@ -238,9 +269,9 @@ require('lazy').setup({
                 {'tiagofumo/vim-nerdtree-syntax-highlight'},
                 {'liuchengxu/vim-clap'},
                 {'davidhalter/jedi-vim', ft='python'},
-                {'dense-analysis/ale',
-                        ft = { 'c', 'cpp', 'python', 'rust'},
-                },
+                --{'dense-analysis/ale',
+                --        ft = { 'c', 'cpp', 'python', 'rust'},
+                --},
                 {'rust-lang/rust.vim', ft = {'rust'}},
                 {
                         'neovim/nvim-lspconfig',
@@ -289,11 +320,11 @@ vim.opt.mouse = 'a'
 -- 设置终端编码
 -- vim.opt.termencoding = 'utf-8'
 -- 文件格式为 UNIX
---vim.opt.fileformat = 'unix'
+vim.opt.fileformat = 'unix'
 -- 文件编码为 UTF-8
---vim.opt.encoding = 'utf-8'
---vim.opt.fileencoding = 'utf-8'
---vim.opt.fileencodings = { 'ucs-bom', 'utf-8', 'cp936', 'gb18030', 'big5', 'euc-jp', 'euc-kr', 'latin1' }
+vim.opt.encoding = 'utf-8'
+vim.opt.fileencoding = 'utf-8'
+vim.opt.fileencodings = { 'ucs-bom', 'utf-8', 'cp936', 'gb18030', 'big5', 'euc-jp', 'euc-kr', 'latin1' }
 -- 设置中文菜单
 vim.opt.langmenu = 'zh_CN'
 -- 设置语言环境
@@ -430,6 +461,7 @@ vim.g.rustfmt_options = '--config max_width=80'
 
 vim.g.ale_use_neovim_diagnostics_api = false
 vim.g.ale_linters = { rust = { 'cargo' } }
+--vim.g.ale_lua_language_server_executable = lua_exec_path
 vim.g.ale_virtualtext_cursor = '0'
 vim.g.ale_virtualtext_prefix = ' '
 vim.g.ale_sign_error = ''
@@ -521,6 +553,14 @@ vim.api.nvim_create_autocmd('ColorScheme', {
                 vim.api.nvim_set_hl(0, 'VertSplit', { cterm = { bold = true }, ctermfg = 232 })
                 vim.api.nvim_set_hl(0, 'VertSplit', { fg = '#121212' })
         end,
+})
+
+-- 显示diagnostics提示浮窗
+vim.o.updatetime = 100
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
 })
 
 -- 从上次文件关闭的位置打开
