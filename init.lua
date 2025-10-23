@@ -84,6 +84,7 @@ local function lsp_config()
                                 },
                         },
                         capabilities = require('cmp_nvim_lsp').default_capabilities(),
+                        filetypes = {'rust'},
                 }
         )
         vim.lsp.config('lua_ls',
@@ -95,6 +96,7 @@ local function lsp_config()
                                 },
                         },
                         capabilities = require('cmp_nvim_lsp').default_capabilities(),
+                        filetypes = {'lua'},
                 }
         )
         vim.diagnostic.config({
@@ -281,7 +283,8 @@ require('lazy').setup({
                 },
                 {'rust-lang/rust.vim', ft = {'rust'}},
                 {
-                        'neovim/nvim-lspconfig',
+                        'buildin-lsp',
+                        virtual = true,
                         config = lsp_config,
                         ft = { 'c', 'cpp', 'lua', 'python', 'rust'},
                         lazy = true,
