@@ -5,6 +5,7 @@ local tagbar_ctags_bin
 local taplo_path
 local lua_exec_path
 local lua_main_path
+local ra_target
 -- 目前neovim对文件夹的快捷方式支持可能不是很好，
 -- 最好使用全路径
 -- 但vim可以支持快捷方式
@@ -16,12 +17,14 @@ if vim.fn.has('win32') ==1 or vim.fn.has('win64') == 1 then
         taplo_path ='d:\\github.com\\binary\\taplo.exe'
         lua_exec_path ='d:\\github.com\\binary\\lua-language-server-3.15.0\\bin\\lua-language-server.exe'
         lua_main_path ='d:\\github.com\\binary\\lua-language-server-3.15.0\\main.lua'
+        ra_target = 'd:\\rust-build-target'
 else
         rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer'
         tagbar_ctags_bin = '/mnt/d/github.com/binary/ctags'
         taplo_path ='/mnt/d/github.com/binary/taplo'
         lua_exec_path ='/mnt/d/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server'
         lua_main_path ='/mnt/d/github.com/binary/lua-language-server-3.15.0/main.lua'
+        ra_target = '/mnt/d/rust-build-target'
 end
 vim.opt.rtp:prepend(lazypath)
 if vim.fn.has('gui_running') == 0 then
@@ -38,7 +41,7 @@ end
 --         Hint  = " ", -- nf-fa-lightbulb
 --         Info  = " ", -- nf-fa-info_circle
 -- }
--- 
+--
 -- for type, icon in pairs(signs) do
 --   local hl = "DiagnosticSign" .. type
 --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -64,12 +67,16 @@ local function lsp_config()
                                         cargo = {
                                                 loadOutDirsFromCheck = true,
                                                 autoreload = true,
+                                                targetDir = ra_target,
                                                 buildScripts = {
                                                         enable = true,
                                                 },
                                         },
+                                        checkOnSave = {
+                                                enable = false,
+                                        },
                                         diagnostics = {
-                                                enable = true,
+                                                enable = false,
                                         },
                                         procMacro = {
                                                 enable = true,
@@ -269,9 +276,9 @@ require('lazy').setup({
                 {'tiagofumo/vim-nerdtree-syntax-highlight'},
                 {'liuchengxu/vim-clap'},
                 {'davidhalter/jedi-vim', ft='python'},
-                --{'dense-analysis/ale',
-                --        ft = { 'c', 'cpp', 'python', 'rust'},
-                --},
+                {'dense-analysis/ale',
+                        ft = { 'c', 'cpp', 'python', 'rust'},
+                },
                 {'rust-lang/rust.vim', ft = {'rust'}},
                 {
                         'neovim/nvim-lspconfig',
@@ -457,7 +464,7 @@ vim.g.NERDTreeCopyCmd= 'cp -r '
 vim.g.NERDTreeStatusline = 'Nerdtree'
 
 vim.g.rustfmt_autosave = true
-vim.g.rustfmt_options = '--config max_width=80'
+vim.g.rustfmt_options = '--config max_width=120'
 
 vim.g.ale_use_neovim_diagnostics_api = false
 vim.g.ale_linters = { rust = { 'cargo' } }
@@ -508,7 +515,7 @@ if vim.fn.has('gui_running') == 1 then
         vim.opt.guifont = 'CodeNewRoman Nerd Font,Microsoft YaHei:h16'
         vim.keymap.set('n', '<A-d>', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', '<A-r>', vim.lsp.buf.references, opts)
-        vim.keymap.set('n', '<C-h>', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', '<A-h>', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', '<F1>', ':enew<CR>',     { silent = true })
         vim.keymap.set('n', '<F2>', ':bdelete!<CR>', { silent = true })
         vim.keymap.set('n', '<F3>', ':Startify<CR>', { silent = true })

@@ -24,7 +24,7 @@ if has("gui_running")
     let g:jedi#usages_command = "<A-r>"
     nmap <A-r> :LspReferences<cr>
     nmap <A-d> :LspDefinition<cr>
-    nmap <C-h> :LspHover<cr>
+    nmap <A-h> :LspHover<cr>
     nmap <S-F1> :LspCargoReload<cr>
     "set showtabline=2
     map  <silent> <S-Insert>  "+p

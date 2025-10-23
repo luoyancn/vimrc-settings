@@ -69,10 +69,12 @@ if has("win32") ==1 || has("win64") == 1
     let g:rust_analyzer_path = expand('d:/github.com/binary/rust-analyzer.exe')
     let g:lua_path = expand('d:/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server.exe')
     let g:lua_main_path = expand('d:/github.com/binary/lua-language-server-3.15.0/main.lua')
+    let g:ra_target = expand('d:/rust-build-target')
 else
     let g:rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer'
     let g:lua_path = '/mnt/d/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server'
     let g:lua_main_path = '/mnt/d/github.com/binary/lua-language-server-3.15.0/main.lua'
+    let g:ra_target = '/mnt/d/rust-build-target'
 endif
 let g:lsp_settings = {
 \  'rust-analyzer': {
@@ -82,6 +84,7 @@ let g:lsp_settings = {
 \       'loadOutDirsFromCheck': v:true,
 \       'allFeatures': v:true,
 \       'autoreload': v:true,
+\       'targetDir': g:ra_target,
 \       'buildScripts': {
 \         'enable': v:true,
 \       },
