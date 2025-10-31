@@ -6,6 +6,7 @@ local taplo_path
 local lua_exec_path
 local lua_main_path
 local ra_target
+local ty_path
 -- 目前neovim对文件夹的快捷方式支持可能不是很好，
 -- 最好使用全路径
 -- 但vim可以支持快捷方式
@@ -17,6 +18,7 @@ if vim.fn.has('win32') ==1 or vim.fn.has('win64') == 1 then
         taplo_path ='d:\\github.com\\binary\\taplo.exe'
         lua_exec_path ='d:\\github.com\\binary\\lua-language-server-3.15.0\\bin\\lua-language-server.exe'
         lua_main_path ='d:\\github.com\\binary\\lua-language-server-3.15.0\\main.lua'
+        ty_path ='d:\\github.com\\binary\\ty.exe'
         ra_target = 'd:\\rust-build-target'
 else
         rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer'
@@ -24,6 +26,7 @@ else
         taplo_path ='/mnt/d/github.com/binary/taplo'
         lua_exec_path ='/mnt/d/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server'
         lua_main_path ='/mnt/d/github.com/binary/lua-language-server-3.15.0/main.lua'
+        ty_path ='/mnt/d/github.com/binary/ty'
         ra_target = '/mnt/d/rust-build-target'
 end
 vim.opt.rtp:prepend(lazypath)
@@ -58,7 +61,7 @@ local function lsp_config()
         -- 这里是 rust-analyzer 示例，其他语言按需加
         vim.lsp.set_log_level("OFF")
         --vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'clangd', 'lua_ls'})
-        vim.lsp.enable({'rust_analyzer', 'pylsp', 'taplo', 'lua_ls'})
+        vim.lsp.enable({'rust_analyzer', 'ty', 'taplo', 'lua_ls'})
         vim.lsp.config('rust_analyzer',
                 {
                         cmd = {rust_analyzer_path},
@@ -99,6 +102,13 @@ local function lsp_config()
                         filetypes = {'lua'},
                 }
         )
+        vim.lsp.config('ty',
+                {
+                        cmd = {ty_path, 'server'},
+                        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+                        filetypes = {'py', 'python'},
+                }
+        )
         vim.diagnostic.config({
                 virtual_text = false,
                 signs = {
@@ -119,6 +129,7 @@ local function lsp_config()
                        header = "Diagnostics",
                 },
         })
+        vim.api.nvim_create_user_command('LspInfo', ':checkhealth vim.lsp', { desc = 'Alias to `:checkhealth vim.lsp`' })
 end
 
 local function airline_config()
@@ -277,7 +288,7 @@ require('lazy').setup({
                 {'Raimondi/delimitMate'},
                 {'tiagofumo/vim-nerdtree-syntax-highlight'},
                 {'liuchengxu/vim-clap'},
-                {'davidhalter/jedi-vim', ft='python'},
+                --{'davidhalter/jedi-vim', ft='python'},
                 {'dense-analysis/ale',
                         ft = { 'c', 'cpp', 'python', 'rust'},
                 },

@@ -473,11 +473,13 @@ if has("win32") == 1|| has("win64") == 1
     let g:lua_path = expand('d:/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server.exe')
     let g:lua_main_path = expand('d:/github.com/binary/lua-language-server-3.15.0/main.lua')
     let g:ra_target = expand('d:/rust-build-target')
+    let g:ty_path = expand('d:/github.com/binary/ty.exe')
 else
     let g:rust_analyzer_path = '/usr/local/bin/rust-analyzer-2024-12-02-v0.3.2204'
     let g:lua_path = '/mnt/d/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server'
     let g:lua_main_path = '/mnt/d/github.com/binary/lua-language-server-3.15.0/main.lua'
     let g:ra_target = '/mnt/d/rust-build-target'
+    let g:ty_path = '/mnt/d/github.com/binary/ty'
 endif
 let g:lsp_settings = {
 \  'rust-analyzer': {
@@ -499,6 +501,9 @@ let g:lsp_settings = {
 \       'enable': v:true,
 \     },
 \   },
+\  },
+\  'ty': {
+\    'cmd': [g:ty_path, 'server'],
 \  },
 \  'sumneko-lua-language-server': {
 \    'cmd': [g:lua_path, '-E', '-e', 'LANG=en', g:lua_main_path, '$*']

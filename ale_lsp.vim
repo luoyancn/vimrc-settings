@@ -70,11 +70,13 @@ if has("win32") ==1 || has("win64") == 1
     let g:lua_path = expand('d:/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server.exe')
     let g:lua_main_path = expand('d:/github.com/binary/lua-language-server-3.15.0/main.lua')
     let g:ra_target = expand('d:/rust-build-target')
+    let g:ty_path = expand('d:/github.com/binary/ty.exe')
 else
     let g:rust_analyzer_path = '/mnt/d/github.com/binary/rust-analyzer'
     let g:lua_path = '/mnt/d/github.com/binary/lua-language-server-3.15.0/bin/lua-language-server'
     let g:lua_main_path = '/mnt/d/github.com/binary/lua-language-server-3.15.0/main.lua'
     let g:ra_target = '/mnt/d/rust-build-target'
+    let g:ty_path = '/mnt/d/github.com/binary/ty'
 endif
 let g:lsp_settings = {
 \  'rust-analyzer': {
@@ -98,6 +100,9 @@ let g:lsp_settings = {
 \     },
 \   },
 \  },
+\  'ty': {
+\    'cmd': [g:ty_path, 'server'],
+\  },
 \  'sumneko-lua-language-server': {
 \    'cmd': [g:lua_path, '-E', '-e', 'LANG=en', g:lua_main_path, '$*']
 \  }
@@ -116,7 +121,7 @@ endfunction
 let g:lsp_get_supported_capabilities = [function('s:RustCapabilities')]
 
 let g:rustfmt_autosave = 1
-let g:rustfmt_options = '--config max_width=80,use_small_heuristics="Max",where_single_line=true'
+let g:rustfmt_options = '--config max_width=120,use_small_heuristics="Max",where_single_line=true'
 let g:lsp_fold_enabled = 0
 let g:lsp_diagnostics_enabled = 0
 let g:lsp_diagnostics_signs_enabled = 0
