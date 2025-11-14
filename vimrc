@@ -481,6 +481,21 @@ else
     let g:ra_target = '/mnt/d/rust-build-target'
     let g:ty_path = '/mnt/d/github.com/binary/ty'
 endif
+
+let g:lsp_fold_enabled = 0
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_float_delay = 200
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_signs_enabled = 1
+let g:lsp_document_highlight_enabled = 1
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_signs_error = {'text': ''}
+let g:lsp_diagnostics_signs_warning = {'text': ''}
+let g:lsp_diagnostics_signs_information = {'text': ''}
+let g:lsp_diagnostics_signs_hint = {'text': ''}
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = '/var/log/vim-lsp.log'
+
 let g:lsp_settings = {
 \  'rust-analyzer': {
 \   'cmd': [g:rust_analyzer_path],
@@ -500,13 +515,16 @@ let g:lsp_settings = {
 \     'procMacro': {
 \       'enable': v:true,
 \     },
+\   'config': {'diagnostics': v:false},
 \   },
 \  },
 \  'ty': {
 \    'cmd': [g:ty_path, 'server'],
+\   'config': {'diagnostics': v:false},
 \  },
 \  'sumneko-lua-language-server': {
-\    'cmd': [g:lua_path, '-E', '-e', 'LANG=en', g:lua_main_path, '$*']
+\   'cmd': [g:lua_path, '-E', '-e', 'LANG=en', g:lua_main_path, '$*']
+\   'config': {'diagnostics': v:true},
 \  }
 \}
 
@@ -523,16 +541,32 @@ function! s:RustCapabilities(server_info) abort
 endfunction
 let g:lsp_get_supported_capabilities = [function('s:RustCapabilities')]
 
+" windows下，ty与其他的python lsp会依赖于
+" python，但实际测试完全不需要
+" 因此，可以通过下面代码，将vim-lsp-settings中的
+" settings.json中相对应的requires重置为空
+" 即可以不依赖于python，单独运行
+if has("win32") ==1 || has("win64") == 1
+  function! DisableLspSettingsRequires() abort
+    augroup DisableRequires
+      autocmd!
+      autocmd User lsp_setup call s:disable_requires_internal()
+    augroup END
+  endfunction
+  function! s:disable_requires_internal() abort
+    let l:servers = g:lsp_settings#settings()['python']
+    for l:conf in l:servers
+      if l:conf.command == 'ty'
+        let l:conf.requires = []
+      end
+    endfor
+  endfunction
+
+  call DisableLspSettingsRequires()
+endif
+
 let g:rustfmt_autosave = 1
 let g:rustfmt_options = '--config max_width=80'
-let g:lsp_fold_enabled = 0
-let g:lsp_diagnostics_enabled = 0
-let g:lsp_diagnostics_signs_enabled = 0
-let g:lsp_document_highlight_enabled = 1
-let g:lsp_document_code_action_signs_enabled = 0
-" let g:lsp_log_verbose = 1
-" let g:lsp_log_file = '/var/log/vim-lsp.log'
-
 if has('nvim')
   let g:ale_use_neovim_diagnostics_api = 0
 endif

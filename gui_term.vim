@@ -4,6 +4,11 @@ execute 'colorscheme ' . s:colorschemes[s:random_index]
 if g:colors_name == 'darcula'
     highlight Cursor guibg=White
 endif
+" 设置ESC映射到F12（F12为键号）键
+inoremap <F12> <Esc>
+cnoremap <F12> <C-C>
+nnoremap <F12> <Esc>
+vnoremap <F12> <Esc>
 if has("gui_running")
     set guioptions-=T
     let g:Tb_MoreThanOne = 1

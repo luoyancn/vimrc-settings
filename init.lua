@@ -523,6 +523,8 @@ vim.g.ale_python_pylint_change_directory = true
 vim.g.ale_python_pylint_auto_poetry = true
 
 local opts = { noremap=true, silent=true }
+vim.keymap.set({'n', 'i', 'v'}, '<F12>', '<Esc>')
+vim.keymap.set('c', '<F12>', '<C-C>')
 if vim.fn.has('gui_running') == 1 then
         vim.opt.guioptions:remove('T')
         vim.g.Tb_MoreThanOne = 1
@@ -563,7 +565,7 @@ end
 vim.opt.background = 'dark'
 local colorschemes = {}
 
-colorschemes = {'PaperColor', 'srcery', 'gruvbox', 'darcula'}
+colorschemes = {'PaperColor', 'srcery', 'gruvbox'}
 math.randomseed(os.time())
 local random_index = math.random(1, #colorschemes)
 vim.cmd.colorscheme(colorschemes[random_index])

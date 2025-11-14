@@ -1,68 +1,3 @@
-" Go tags
-"let g:go_autodetect_gopath = 1
-"let g:tagbar_type_go = {
-"    \ 'ctagstype' : 'go',
-"    \ 'kinds'     : [
-"        \ 'p:package',
-"        \ 'i:imports:1',
-"        \ 'c:constants',
-"        \ 'v:variables',
-"        \ 't:types',
-"        \ 'n:interfaces',
-"        \ 'w:fields',
-"        \ 'e:embedded',
-"        \ 'm:methods',
-"        \ 'r:constructor',
-"        \ 'f:functions'
-"    \ ],
-"    \ 'sro' : '.',
-"    \ 'kind2scope' : {
-"        \ 't' : 'ctype',
-"        \ 'n' : 'ntype'
-"    \ },
-"    \ 'scope2kind' : {
-"        \ 'ctype' : 't',
-"        \ 'ntype' : 'n'
-"    \ },
-"    \ 'ctagsbin'  : 'gotags',
-"    \ 'ctagsargs' : '-sort -silent'
-"\ }
-"
-"let g:go_fmt_command = "goimports"
-"let g:go_highlight_functions = 1
-"let g:go_highlight_methods = 1
-"let g:go_highlight_structs = 1
-"let g:go_highlight_interfaces = 1
-"let g:go_highlight_operators = 1
-"let g:go_highlight_build_constraints = 1
-"let g:go_highlight_types = 1
-"let g:go_highlight_extra_types = 1
-"let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'gocode']
-"let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck', 'gocode']
-"" Must be go >= 1.12
-"let g:go_auto_type_info = 1
-"let g:go_info_mode = 'gopls'
-"
-"if has("win32")
-"    let g:go_gocode_socket_type = 'tcp'
-"endif
-"let g:go_gocode_autobuild = 1
-"let g:go_gocode_propose_builtins = 1
-"let g:go_gocode_unimported_packages = 1
-"
-"let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter', 'gocode']
-"au FileType go nmap <A-r> :GoDef<cr>
-"au FileType go nmap <A-n> :GoReferrers<cr>
-"
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = "<C-x><C-o>"
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = 1
-let g:jedi#smart_auto_mappings = 1
-let g:pyflakes_use_quickfix = 0
-let g:syntastic_python_checkers = ['pyflakes']
-let g:syntastic_check_on_wq = 0
-
 " 指定rust-analyzer路径，新版本的存在bug，不能在vim当中自动补齐
 " BUG: https://github.com/rust-lang/rust-analyzer/issues/19401
 if has("win32") ==1 || has("win64") == 1
@@ -78,6 +13,22 @@ else
     let g:ra_target = '/mnt/d/rust-build-target'
     let g:ty_path = '/mnt/d/github.com/binary/ty'
 endif
+
+let g:lsp_fold_enabled = 0
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_float_delay = 200
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_signs_enabled = 1
+let g:lsp_document_highlight_enabled = 1
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_signs_error = {'text': ''}
+let g:lsp_diagnostics_signs_warning = {'text': ''}
+let g:lsp_diagnostics_signs_information = {'text': ''}
+let g:lsp_diagnostics_signs_hint = {'text': ''}
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = 'vim-lsp.log'
+
 let g:lsp_settings = {
 \  'rust-analyzer': {
 \   'cmd': [g:rust_analyzer_path],
@@ -98,13 +49,16 @@ let g:lsp_settings = {
 \     'procMacro': {
 \       'enable': v:true,
 \     },
+\   'config': {'diagnostics': v:false},
 \   },
 \  },
 \  'ty': {
 \    'cmd': [g:ty_path, 'server'],
+\    'config': {'diagnostics': v:false},
 \  },
 \  'sumneko-lua-language-server': {
-\    'cmd': [g:lua_path, '-E', '-e', 'LANG=en', g:lua_main_path, '$*']
+\    'cmd': [g:lua_path, '-E', '-e', 'LANG=en', g:lua_main_path, '$*'],
+\    'config': {'diagnostics': v:true},
 \  }
 \}
 function! s:RustCapabilities(server_info) abort
@@ -120,15 +74,32 @@ function! s:RustCapabilities(server_info) abort
 endfunction
 let g:lsp_get_supported_capabilities = [function('s:RustCapabilities')]
 
+" windows下，ty与其他的python lsp会依赖于
+" python，但实际测试完全不需要
+" 因此，可以通过下面代码，将vim-lsp-settings中的
+" settings.json中相对应的requires重置为空
+" 即可以不依赖于python，单独运行
+if has("win32") ==1 || has("win64") == 1
+  function! DisableLspSettingsRequires() abort
+    augroup DisableRequires
+      autocmd!
+      autocmd User lsp_setup call s:disable_requires_internal()
+    augroup END
+  endfunction
+  function! s:disable_requires_internal() abort
+    let l:servers = g:lsp_settings#settings()['python']
+    for l:conf in l:servers
+      if l:conf.command == 'ty'
+        let l:conf.requires = []
+      end
+    endfor
+  endfunction
+
+  call DisableLspSettingsRequires()
+endif
+
 let g:rustfmt_autosave = 1
 let g:rustfmt_options = '--config max_width=120,use_small_heuristics="Max",where_single_line=true'
-let g:lsp_fold_enabled = 0
-let g:lsp_diagnostics_enabled = 0
-let g:lsp_diagnostics_signs_enabled = 0
-let g:lsp_document_highlight_enabled = 1
-let g:lsp_document_code_action_signs_enabled = 0
-"let g:lsp_log_verbose = 1
-"let g:lsp_log_file = 'vim-lsp.log'
 
 if has('nvim')
   let g:ale_use_neovim_diagnostics_api = 0
@@ -153,7 +124,6 @@ let g:ale_close_preview_on_insert = 1
 " let g:ale_lsp_suggestions = 1
 
 let g:ale_linters = {'rust': ['cargo']}
-let g:ale_lua_language_server_executable = g:lua_path
 
 " For C/C++ projects, ALE cannot determine the self-defined header files.
 " To resolv this problem, a file named compile_commands.json is need.
